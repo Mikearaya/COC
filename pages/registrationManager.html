@@ -3,22 +3,18 @@
 
         <ul class="nav nav-tabs  nav-fill">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#nav-home">Basic Info</a>
+                  <a class="nav-link active btn btn-link" data-toggle="tab" data-target="#basic-info">Basic Info</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-item" href="#nav-profile">Education History</a>
+                  <a class="nav-link nav-item btn btn-link" data-toggle="tab"  data-target="#education" >Education History</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-item" href="#">Assessment</a>
-                </li>
-                <li class="nav-item nav-item">
-                  <a class="nav-link disabled" href="#">Done</a>
+                  <a class="nav-link nav-item btn btn-link" data-toggle="tab" data-toggle="assessment">Assessment</a>
                 </li>
               </ul>
               <form name="registrationForm" ng-submit="register()">
-                <div class="tab-content" id="nav-tabContent">
-                  
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-content" id="nav-tabContent">                  
+                    <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="nav-home-tab">
                       <div class="form-row">
                         <div class="form-group col col-xs-12">                          
                           <label for="firstName"></label>
@@ -193,8 +189,8 @@
                           </div>
                         </div>                        
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                    <div class="tab-pane fade" id="education" role="tabpanel" >...</div>
+                    <div class="tab-pane fade" id="assessment" role="tabpanel" >...</div>
                     
                   </div>
                 </form>
