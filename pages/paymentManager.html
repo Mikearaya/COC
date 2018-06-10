@@ -1,0 +1,90 @@
+<section 
+        ng-controller="paymentController"
+        >
+    <div class="container">
+    <div class="row">
+ 
+            <table class="table table-striped bg-white  table-sm">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Occupation</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="payment in assessmentPayments">
+                    <th scope="row">{{$index}}</th>
+                    <td ng-bind="payment.firstName"></td>
+                    <td ng-bind="payment.lastName"></td>
+                    <td ng-bind="payment.occupation"></td>
+                    <td ng-bind="payment.price"></td>
+                  </tr>
+                </tbody>
+              </table>
+       
+      
+    </div>
+</div>
+<div class="container ">
+        <form class="needs-validation"  ng-submit="submitPayment" class="jumbotron form-inline" name="paymentForm" novalidate>
+            <div class="row">
+            <div class="col">
+                <input 
+                        type="text"
+                        name="invoice"
+                        placeholder="Invoice Number"
+                        id="invoice"
+                        class="form-control"
+                        required="required"
+                        ng-model="payemt.invoiceNo"
+                        />
+                        <div class="invalid-feedback">
+                                Please choose a username.
+                              </div>
+            </div>
+            <div class="col">
+                <input
+                        type="date"
+                        name="paymentDate"
+                        ng-model="payment.date"
+                        placeholder="Payment Date"
+                        class="form-control"
+                        id="paymentdate"
+                        required="required"
+                        />
+            </div>
+            <div class="col">
+                <input type="submit" 
+                        class="btn btn-primary btn-sm"
+                        disabled="paymentForm.invalid"
+                        />
+            </div>
+        </div>
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </form>
+    </div>
+</section>
+
+<script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+        </script>
