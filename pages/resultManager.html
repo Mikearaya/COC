@@ -1,15 +1,35 @@
 <section 
         ng-controller="resultController">
-    <div class="row">
-        <div class="col">
-
-        </div>
-        <div class="col jumbotron">
-            Result Manager
-        </div>
-        <div class="col">
-
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col">            
+                    <table class="table table-striped bg-white  table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Group ID</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Exam Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Occupation</th>  
+                            <th scope="col-1">Print</th>                   
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="schedule in assessmentResults">
+                            <th scope="row">{{$index}}</th>                        
+                            <td ng-bind="schedule.groupId"></td>
+                            <td ng-bind="schedule.location"></td>
+                            <td ng-bind="schedule.date"></td>
+                            <td ng-bind="schedule.time"></td>
+                            <td ng-bind="schedule.occupation"></td>
+                            <th scope="col-1"><button type="button" class="btn btn-sm btn-info" href="#">Print</button> </th> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-
 </section>

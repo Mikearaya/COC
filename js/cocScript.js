@@ -32,6 +32,80 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 //registration page controller
 app.controller("registrationController", ["$scope", function($scope){
 
+  $scope.candidate = {
+    id: '',
+    reg_no: '',
+    full_name: '',
+    sex: '',
+    age: '',
+    nationality: '',
+    sub_city: '',
+    wereda: '',
+    home_phone: '',
+    office_phone: '',
+    cell_phone: '',
+    martial_status: '',
+    disablity: '',
+    disablity_nature: '',
+    institute_type: '',
+    institute_name: '',
+    region: '',
+    city: '',
+    training_start: '',
+    training_end: '',
+    mode_of_training: '',
+    type_of_training: '',
+    occupation_trained_on: '',
+    education_background: '',
+    cooprative_training_center: '',
+    status_of_cooperative_center: '',
+    employment_condition: '',
+    status_of_company: '',
+    company_type: '',
+    company_name: '',
+    service_year: '',
+    field_of_employment: '',
+    full_name_am: '',
+    email: '', 
+    current_level: '',
+    graduated_level: '',
+    assessment: {
+      can_regno: '',
+      exam_id: '',
+      occ_code: '',
+      re_assessment: '',
+      practice_result: '',
+      knowledge_result: '',
+      amount_paid: '',
+      payment_status: '',
+      invoice_no: '',
+      registration_date: '',
+      apply_for_uc: '',
+      application_status: '',
+      branch_code: '',
+      excuse_payment: '',
+      graduated_status: '',
+      applied_for: '',
+      application: '',
+      registered_by: '',
+      assessment_rate: '',
+      applied_by: '',
+      center_code: '',
+      paid: ''
+
+    }
+
+
+  };
+
+  $scope.REGIONS = ["Addis Ababa", "Oromian", "South", "Afar", "Amhara", "Tigray"];
+  
+  $scope.INISTITUTE_TYPES = ['Private', 'Government'];
+
+  $scope.register = function() {
+    console.log(this.candidate);
+  }
+
 }]);
 
 //home page controller
@@ -66,9 +140,7 @@ app.controller("paymentController", ["$scope", function($scope){
 //admission card printing page controller
 app.controller("admissionController", ["$scope", function($scope){
 
-  $scope.REGIONS = ["Addis Ababa", "Oromian", "South", "Afar", "Amhara", "Tigray"];
-  
-  $scope.INISTITUTE_TYPES = ['Private', 'Government'];
+x
 
 
 }]);
@@ -103,6 +175,23 @@ app.controller("scheduleController", ["$scope", function($scope){
 
 //result viewing page controller
 app.controller("resultController", ["$scope", function($scope){
+
+
+  $scope.assessmentResults = [{
+    groupId: "G-001",
+    location: "Vision College",
+    occupation: "OCC-938",
+    date: "1-13-2018",
+    time: "09:00 ETC"
+  },
+  {
+    groupId: "G-002",
+    location: "Vision College",
+    occupation: "OCC-977",
+    date: "1-13-2018",
+    time: "09:00 ETC"
+  }];
+
 
 }]);
 
