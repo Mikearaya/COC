@@ -66,6 +66,11 @@ app.controller("paymentController", ["$scope", function($scope){
 //admission card printing page controller
 app.controller("admissionController", ["$scope", function($scope){
 
+  $scope.REGIONS = ["Addis Ababa", "Oromian", "South", "Afar", "Amhara", "Tigray"];
+  
+  $scope.INISTITUTE_TYPES = ['Private', 'Government'];
+
+
 }]);
 
 

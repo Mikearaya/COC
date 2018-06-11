@@ -6,10 +6,16 @@
                   <a class="nav-link active btn btn-link" data-toggle="tab" data-target="#basic-info">Basic Info</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link nav-item btn btn-link" data-toggle="tab"  data-target="#address" >Education History</a>
+                  </li>
+                <li class="nav-item">
                   <a class="nav-link nav-item btn btn-link" data-toggle="tab"  data-target="#education" >Education History</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-item btn btn-link" data-toggle="tab" data-toggle="assessment">Assessment</a>
+                    <a class="nav-link nav-item btn btn-link" data-toggle="tab"  data-target="#employment" >Education History</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-item btn btn-link" data-toggle="tab" data-toggle="#assessment">Assessment</a>
                 </li>
               </ul>
               <form name="registrationForm" ng-submit="register()">
@@ -82,6 +88,36 @@
                           </div>
                         </div>             
                         </fieldset>
+                        <fieldset class="col">
+                          <caption>Martial Status</caption>  
+                          <div class="form-group col">                        
+                            <div class="form-check-inline form-check col">
+                              <input 
+                                    type="radio"
+                                    value="married"
+                                    name="maritialStatus"
+                                    id="married"
+                                    ng-model="candidate.maritialStatus"
+                                    required
+                                    class="form-check-input"
+                              >
+                              <label for="married">Married</label>
+                            </div>                
+                          <div class="form-check-inline form-check col">
+                            <input 
+                                  type="radio"
+                                  value="single"
+                                  name="maritialStatus"
+                                  id="single"
+                                  value="single"
+                                  ng-model="candidate.maritialStatus"
+                                  required
+                                  class="form-check-input"
+                            >
+                            <label for="single">Single</label>
+                          </div>
+                        </div>
+                        </fieldset>
                         <div class="form-group col">
                           <label for="birthdate">Birthdate</label>
                           <input 
@@ -96,103 +132,480 @@
                         </div>
                       </div>
                       <div class="form-row">
+                      <fieldset class="col" >
+                        <caption>Disabled</caption>
                         <div class="form-group col">
-                          <label for="mobile">Mobile Number</label>
+                          <div class="form-check form-check-inline">
+                            <input
+                                  type="radio"
+                                  name="disablity"
+                                  ng-model="candidate.isDisabled"
+                                  id="isDisabled"
+                                  value="yes"
+                                  class="form-check-input"
+                            >
+                            <label for="isDisabled">Yes</label>                                  
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                                  type="radio"
+                                  name="disablity"
+                                  ng-model="candidate.isDisabled"
+                                  id="notDisabled"
+                                  value="no"
+                                  class="form-check-input"
+                            >
+                            <label for="notDisabled"> No </label>
+                          </div>
+                        </div>
+                      </fieldset>
+                      <div class="form-group col" ng-if="candidate.isDisabled == 'yes'">
+                        <label for="disablityNature">Disablity Nature</label>
+                        <textarea 
+                                  class="form-control" 
+                                  name="disablityNature"
+                                  id="disablityNature" 
+                                  rows="3" 
+                                  ng-model="candidate.disablityNature">
+
+                        </textarea>
+                      </div>
+                    </div>
+
+                                           
+                    </div>
+                    <div class="tab-pane fade" id="address" role="tabpanel">
+                      <div class="form-row">
+                          <div class="form-group col">
+                              <label for="nationality">Nationality</label>
+                              <select 
+                                    type="text"
+                                    ng-model="candidate.nationality"
+                                    name="nationality"
+                                    id="nationality"
+                                    placeholder="nationality"
+                                    required="required"
+                                    class="form-control"
+                              >
+                              <option ng-repeat="region in REGIONS" value="{{region}}">{{region}}</option>
+                              </select>
+                            </div>
+                            <div class="form-group col">
+                                <label for="region">Region</label>
+                                <input 
+                                      type="text"
+                                      ng-model="candidate.region"
+                                      name="region"
+                                      id="region"
+                                      placeholder="Region"
+                                      required="required"
+                                      class="form-control"
+                                >
+                              </div>    
+                        <div class="form-group col">
+                          <label for="zone">Zone</label>
                           <input 
                                 type="text"
-                                pattern="[0-9]{10}"
-                                required
-                                ng-model="candidate.mobile"
-                                name="mobile"
-                                id="mobile"
+                                ng-model="candidate.zone"
+                                name="zone"
+                                id="zone"
+                                placeholder="Zone"
+                                required="required"
                                 class="form-control"
-                                placeholder="Mobile Number"
+                          >
+                        </div>                        
+                        <div class="form-group col">
+                          <label for="city">City</label>
+                          <input 
+                                type="text"
+                                required
+                                ng-model="candidate.city"
+                                name="city"
+                                id="city"
+                                placeholder="City"
+                                class="form-control"
+                          >
+                        </div>
+                        
+                      </div>
+                      <div class="form-row">
+                          <div class="form-group col-8">
+                              <label for="subCity">Sub-City</label>
+                              <input
+                                    type="text"
+                                    required
+                                    ng-model="candidate.subCity"
+                                    id="subCity"
+                                    name="subCity"
+                                    placeholder="Sub-City"
+                                    class="form-control"
+                              >
+                            </div>
+                        <div class="form-group col">
+                          <label for="wereda">Wereda</label>
+                          <input
+                                type="text"
+                                required
+                                ng-model="candidate.wereda"
+                                id="wereda"
+                                name="wereda"
+                                placeholder="Wereda"
+                                class="form-control"
                           >
                         </div>
                         <div class="form-group col">
-                          <label for="otherPhone">Other Phone</label>
+                          <label for="houseNo"> House No.</label>
                           <input
                                 type="text"
-                                pattern="[0-9]{10}"
                                 required
-                                ng-model="candidate.otherPhone"
-                                name="otherPhone"
-                                id="otherPhone"
-                                placeholder="Other Phone Number"
+                                ng-model="candidate.houseNo"
+                                id="houseNo"
+                                name="houseNo"
+                                placeholder="House Number"
                                 class="form-control"
                           >
                         </div>
                       </div>
-                        <div class="form-row">
+                      <div class="form-row">
                           <div class="form-group col">
-                            <label for="zone">Zone</label>
+                            <label for="mobile">Mobile Number</label>
                             <input 
                                   type="text"
-                                  ng-model="candidate.zone"
-                                  name="zone"
-                                  id="zone"
-                                  placeholder="Zone"
-                                  required="required"
-                                  class="form-control"
-                            >
-                          </div>
-                          <div class="form-group col">
-                            <label for="city">City</label>
-                            <input 
-                                  type="text"
+                                  pattern="[0-9]{10}"
                                   required
-                                  ng-model="candidate.city"
-                                  name="city"
-                                  id="city"
-                                  placeholder="City"
+                                  ng-model="candidate.mobile"
+                                  name="mobile"
+                                  id="mobile"
+                                  class="form-control"
+                                  placeholder="Mobile Number"
+                            >
+                          </div>
+                          <div class="form-group col">
+                            <label for="officePhone">Office Phone</label>
+                            <input
+                                  type="text"
+                                  pattern="[0-9]{10}"                                  
+                                  ng-model="candidate.officePhone"
+                                  name="officePhone"
+                                  id="officePhone"
+                                  placeholder="Office Phone Number"
                                   class="form-control"
                             >
                           </div>
-                          
+                          <div class="form-group col">
+                              <label for="homePhone">Home Phone</label>
+                              <input
+                                    type="text"
+                                    pattern="[0-9]{10}"                                  
+                                    ng-model="candidate.homePhone"
+                                    name="homePhone"
+                                    id="homePhone"
+                                    placeholder="Home Phone Number"
+                                    class="form-control"
+                              >
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="tab-pane fade" id="education" role="tabpanel" >
+                      <div class="form-row">
+                        <div class="form-group col">
+                          <label for="eduacationBackground">Education Background</label>
+                          <input 
+                                type="text"
+                                name="eduacationBackground"
+                                id="eduacationBackground"
+                                class="form-control"
+                                required
+                                ng-model="candidate.education_background"
+                                placeholder="Education Background"
+                          > 
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-8">
-                                <label for="subCity">Sub-City</label>
-                                <input
-                                      type="text"
-                                      required
-                                      ng-model="candidate.subCity"
-                                      id="subCity"
-                                      name="subCity"
-                                      placeholder="Sub-City"
+                        <div class="form-group col">
+                          <label for="trainingType"> Training Type</label>
+                          <input 
+                                type="text"
+                                ng-model="candidate.type_of_training"
+                                required
+                                name="trainingType"
+                                id="trainingType"
+                                required
+                                class="form-control"
+                                placeholder="Training Type"
+                          >
+                        </div>
+                        <div class="form-group col">
+                          <label for="trainingMode">Mode of Training</label>
+                          <input
+                                type="text"
+                                required
+                                ng-model="candidate.mode_of_training"
+                                name="trainingMode"
+                                id="trainingMode"
+                                placeholder="Mode of Training"
+                                class="form-control"
+                          >
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-4">
+                          <label for="inistituteType">Inistitute Type</label>
+                          <select 
+                                name="inistituteType"
+                                ng-model="candidate.inistitute_type"
+                                required
+                                id="inistituteType"
+                                aria-placeholder="Inistitute Type"                                
+                                class="form-control"
+                          >
+                          <option 
+                                  ng-repeat="inistitute in INISTITUTE_TYPES" 
+                                  value="{{inistitute}}"
+                          >{{inistitute}}</option>
+                          </select>
+                                
+                        </div>
+                        <div class="form-group col">
+                          <label for="inistituteName">Inistitute Name</label>
+                          <input
+                                type="text"
+                                ng-model="candidate.inistitute_name"
+                                required
+                                name="inistituteName"
+                                id="inistituteName"
+                                class="form-control"
+                                placeholder="Inistitute Name"
+                          >
+                        </div>
+                        <div class="form-group col-2 col-xs-6">
+                          <label for="trainingStart">Training Start</label>
+                          <input
+                                type="date"
+                                ng-model="candidate.training_start"
+                                required
+                                name="trainingStart"
+                                id="trainingStart"
+                                placeholder="Training Start"
+                                class="form-control"                          
+                          >
+                        </div>
+                        <div class="form-group col-2 col-xs-6">
+                          <label for="trainingEnd">Training End</label>
+                          <input
+                                type="date"
+                                ng-model="candidate.training_end"
+                                required
+                                name="trainingEnd"
+                                id="trainingEnd"
+                                placeholder="trainingEnd"
+                                class="form-control"
+                          >
+                      </div>
+                      </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="employment" role="tabpanel" >
+                      <div class="form-row">
+                        <div class="form-group col">
+                          <label for="fieldOfEmplyeement">Field of Employment</label>
+                          <input 
+                                type="text"
+                                ng-model="candidate.field_of_employment"
+                                name="fieldOfEmplyeement"
+                                id="fieldOfEmplyeement"
+                                class="form-control"
+                                placeholder="Field of Employment"
+                          >
+                        </div>
+                        <div class="form-group col">
+                          <label for="employmentCondition"> Employment Condition </label>
+                          <input 
+                                type="text"
+                                ng-model="candidate.employment_condition"
+                                name="employmentCondition"
+                                id="employmentCondition"
+                                class="form-control"
+                                placeholder="Employment Condition"
+                          >
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col">
+                          <label for="companyName">Company Name</label>
+                          <input 
+                                type="text"
+                                id="companyName"
+                                ng-model="candidate.companyName"
+                                class="form-control"
+                                name="companyName"
+                                placeholder="Company Name"
+                          >
+                        </div>
+                        <div class="form-group col">
+                            <label for="companyType">Company Type</label>
+                            <input 
+                                  type="text"
+                                  id="companyType"
+                                  ng-model="candidate.company_type"
+                                  class="form-control"
+                                  name="companyType"
+                                  placeholder="Company Type"
+                            >
+                        </div>
+                        <div class="form-group col-2">
+                          <label for="serviceYear"> Service Year</label>
+                          <input 
+                                  type="number"
+                                  name="serviceYear"
+                                  ng-model="candidate.service_year"
+                                  id="serviceYear"
+                                  placeholder="Service Year"
+                                  class="form-control"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="assessment" role="tabpanel" >
+                      <div class="form-row">
+                        <fieldset class="col">
+                          <caption>Excuse Payment</caption>
+                        <div class="form-check form-check-inline col">                          
+                          <input 
+                                type="radio"
+                                name="excusePayment"
+                                ng-model="candidate.excuse_payment"
+                                id="excusePayment_yes"
+                                class="form-check-input"
+                                value="yes"
+                                selected
+                                required
+                          >
+                          <label for="excusePayment_yes">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                          <input 
+                                type="radio"
+                                name="excusePayment"
+                                ng-model="candidate.excuse_payment"
+                                id="excusePayment_no"
+                                class="form-check-input"
+                                required
+                                value="no"
+                          >
+                          <label for="excusePayment_no"> No</label>
+                        </div>
+                      </fieldset>
+                      <fieldset class="col">
+                          <caption>Register UC</caption>
+                        <div class="form-check form-check-inline col">                          
+                          <input 
+                                type="radio"
+                                name="ucRegister"
+                                ng-model="candidate.apply_for_uc"
+                                id="ucRegister_yes"
+                                class="form-check-input"
+                                value="yes"                              
+                                required
+                          >
+                          <label for="ucRegister_yes">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                          <input 
+                                type="radio"
+                                name="ucRegister"
+                                ng-model="candidate.apply_for_uc"
+                                id="ucRegister_no"
+                                class="form-check-input"
+                                required
+                                value="no"
+                          >
+                          <label for="ucRegister_no"> No</label>
+                        </div>
+                      </fieldset>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col">
+                          <label for="registeredBy"> Registered By</label>
+                          <input
+                                readonly
+                                type="text"
+                                ng-model="focalperson"
+                                id="registeredBy"
+                                name="registeredBy"
+                                class="form-control"                                
+                          >
+                        </div>
+                        <div class="form-group col">
+                          <label for="applicationFee">Application Fee</label>
+                          <input type="text"
+                                  readonly
+                                  ng-model="candidate.application_fee"
+                                  id="applicationFee"
+                                  name="applicationFee"
+                                  class="form-control"
+                          >
+                          </div>
+                          <div class="form-group col">
+                              <label for="centerCode">Center Code</label>
+                              <input type="text"
+                                      readonly
+                                      ng-model="candidate.center_code"
+                                      id="centerCode"
+                                      name="centerCode"
                                       class="form-control"
-                                >
+                              >
                               </div>
                           <div class="form-group col">
-                            <label for="wereda">Wereda</label>
-                            <input
-                                  type="text"
-                                  required
-                                  ng-model="candidate.wereda"
-                                  id="wereda"
-                                  name="wereda"
-                                  placeholder="Wereda"
-                                  class="form-control"
+                            <label for="appliedBy">Applied By</label>
+                            <input type="text"
+                                    ng-model="candidate.appied_by"
+                                    placeholder="Applied By"
+                                    name="appliedBy"
+                                    id="appliedBy"
+                                    class="form-group"
+                                    required
                             >
-                          </div>
+                          </div> 
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="branchCode">Branch Code</label>
+                          <input type="text"
+                                      readonly
+                                      ng-model="candidate.branch_code"
+                                      id="branchCode"
+                                      name="branchCode"
+                                      class="form-control"
+                              >
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col">
+                          <label for="application">Application</label>
+                          <input type="text"
+                                placeholder="Application"
+                                name="application"
+                                id="application"
+                                ng-model="candidate.application"
+                                required
+                                class="form-control"
+                          >
+                        </div>
+                        <div class="form-check col">
                           <div class="form-group col">
-                            <label for="houseNo"> House No.</label>
-                            <input
-                                  type="text"
-                                  required
-                                  ng-model="candidate.houseNo"
-                                  id="houseNo"
-                                  name="houseNo"
-                                  placeholder="House Number"
-                                  class="form-control"
+                            <input type="checkbox"
+                                    name="paid"
+                                    ng-model="candidate.paid"
+                                    class="form-control"
+                                    id="paid"
+                                    required
                             >
+                            <label for="paid">Paid</label>
                           </div>
-                        </div>                        
-                    </div>
-                    <div class="tab-pane fade" id="education" role="tabpanel" >...</div>
-                    <div class="tab-pane fade" id="assessment" role="tabpanel" >...</div>
+                        </div>
+                      </div>
                     
-                  </div>
-                </form>
-  </div>
+             </div>
+             </div>
+             </form>
+        </div>
 </section>
