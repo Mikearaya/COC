@@ -34,67 +34,65 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
       function($scope, $http, $httpParamSerializerJQLike){
 
   $scope.candidate = {
-    id: '',
-    reg_no: '',
-    full_name: '',
-    gender: '',
-    date_of_birth: '',
-    nationality: '',
-    sub_city: '',
-    wereda: '',
-    home_phone: '',
-    office_phone: '',
-    cell_phone: '',
-    martial_status: '',
-    disablity: '',
-    disablity_nature: '',
-    institute_type: '',
-    institute_name: '',
-    region: '',
-    city: '',
-    training_start: '',
-    training_end: '',
-    mode_of_training: '',
-    type_of_training: '',
-    occupation_trained_on: '',
-    education_background: '',
-    cooprative_training_center: '',
-    status_of_cooperative_center: '',
-    employment_condition: '',
-    status_of_company: '',
-    company_type: '',
-    company_name: '',
-    service_year: '',
-    field_of_employment: '',
-    full_name_am: '',
-    email: '', 
-    current_level: '',
-    graduated_level: '',
-    assessment: {
-      can_regno: '',
-      exam_id: '',
-      occ_code: '',
-      re_assessment: '',
-      practice_result: '',
-      knowledge_result: '',
-      amount_paid: '',
-      payment_status: '',
-      invoice_no: '',
-      registration_date: '',
-      apply_for_uc: '',
-      application_status: '',
-      branch_code: '',
-      excuse_payment: '',
-      graduated_status: '',
-      applied_for: '',
-      application: '',
-      registered_by: '',
-      assessment_rate: '',
-      applied_by: '',
-      center_code: '',
-      paid: ''
+                        id: '',
+                        reg_no: '',
+                        full_name: '',
+                        gender: '',
+                        date_of_birth: '',
+                        nationality: '',
+                        wereda: '',
+                        home_phone: '',
+                        office_phone: '',
+                        cell_phone: '',
+                        martial_status: '',
+                        disablity: '',
+                        disablity_nature: '',
+                        institute_type: '',
+                        institute_name: '',
+                        region: '',
+                        city: '',
+                        training_start: '',
+                        training_end: '',
+                        mode_of_training: '',
+                        type_of_training: '',
+                        occupation_trained_on: '',
+                        education_background: '',
+                        cooprative_training_center: '',
+                        status_of_cooperative_center: '',
+                        employment_condition: '',
+                        status_of_company: '',
+                        company_type: '',
+                        company_name: '',
+                        service_year: '',
+                        field_of_employment: '',
+                        full_name_am: '',
+                        email: '', 
+                        current_level: '',
+                        graduated_level: '',
+                        assessment: {
+                          can_regno: '',
+                          exam_id: '',
+                          occ_code: '',
+                          re_assessment: '',
+                          practice_result: '',
+                          knowledge_result: '',
+                          amount_paid: '',
+                          payment_status: '',
+                          invoice_no: '',
+                          registration_date: '',
+                          apply_for_uc: '',
+                          application_status: '',
+                          branch_code: '',
+                          excuse_payment: '',
+                          graduated_status: '',
+                          applied_for: '',
+                          application: '',
+                          registered_by: '',
+                          assessment_rate: '',
+                          center_code: '',
+                          paid: ''
 
-    }
+                    }
 
 
   };
@@ -105,10 +103,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                   method : "POST",
                   url : "backend/index.php/api/candidate/",
                   data :$httpParamSerializerJQLike($scope.candidate),
-                  headers: {
-                    'Content-Type':'application/x-www-form-urlencoded' 
-                    // or  'Content-Type':'application/json'
-                  }
+                  headers: {'Content-Type':'application/x-www-form-urlencoded'}
           })
           .then(function(response){
             console.log(response);
@@ -119,8 +114,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                       "Oromian", 
                       "South", "Afar", "Amhara", "Tigray"];
   
-  $scope.INISTITUTE_TYPES = ['Private', 'Government'];
-
+  $scope.INISTITUTE_TYPES = ['Private', 'Government', 'NGO'];
 
 }]);
 
@@ -132,32 +126,48 @@ app.controller("homeController", ["$scope", function($scope){
 
 //payment managment page controller
 app.controller("paymentController", ["$scope", function($scope){
-  $scope.assessmentPayments = [{
-    firstName : "Mikael",
-    lastName: "Araya",
-    occupation: "Computer Scientist",
-    price: 300
-  },
-  {
-    firstName : "Dani",
-    lastName: "Belay",
-    occupation: "Accountant",
-    price: 300
-  }];
+  
+      $scope.payment = {
+        invoice_no: '',
+        date: '',
+        amount: '',
+        center_code: ''
+      }
 
-  $scope.payment = {
-    invoiceNo: "",
-    date: ""
-  }
+    $scope.assessmentPayments = [{
+        firstName : "Mikael",
+        lastName: "Araya",
+        occupation: "Computer Scientist",
+        price: 300
+      },
+      {
+        firstName : "Dani",
+        lastName: "Belay",
+        occupation: "Accountant",
+        price: 300
+      }];
+
+      $scope.payment = {
+        invoiceNo: "",
+        date: ""
+      }
+
+      $scope.changePassword = function() { 
+
+        return $http({
+                     method : "POST",
+                     url : "backend/index.php/api/focal/confirm_payment/",
+                     data :$httpParamSerializerJQLike($scope.password),
+                     headers: { 'Content-Type':'application/x-www-form-urlencoded' }
+                    });
+            }
+
 
 }]);
 
 
 //admission card printing page controller
 app.controller("admissionController", ["$scope", function($scope){
-
-x
-
 
 }]);
 
@@ -213,8 +223,24 @@ app.controller("resultController", ["$scope", function($scope){
 
 
 //password reset controller
-app.controller("passwordController", ["$scope", function($scope){
+app.controller("passwordController", ["$scope", "$http", "$httpParamSerializerJQLike",
+               function($scope, $http, $httpParamSerializerJQLike){
 
+      $scope.password = {
+        current: '',
+        new: '',
+        newRepeated: ''
+      }
+
+      $scope.changePassword = function() { 
+
+        return $http({
+                    method : "POST",
+                    url : "backend/index.php/api/focal/password_change/",
+                    data :$httpParamSerializerJQLike($scope.password),
+                    headers: { 'Content-Type':'application/x-www-form-urlencoded' }
+                    });
+            }
 }]);
 
 
@@ -286,4 +312,3 @@ app.controller('logInController', ["$scope", "$http", "$httpParamSerializerJQLik
                       };
 
 }]);
-//log in Controller
