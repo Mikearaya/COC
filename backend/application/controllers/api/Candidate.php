@@ -23,10 +23,10 @@ function index_post($id = NULL) {
     $result['success'] = false;
 
     $this->form_validation->set_rules("full_name", "Full Name", "required");
-    
     if($this->form_validation->run() === FALSE ) {
         $this->response($this->validation_errors(), API::HTTP_OK);
     } else {
+
         $data = array(
             'id' => $id,
             'full_name' => $this->input->post('full_name'),
@@ -60,8 +60,7 @@ function index_post($id = NULL) {
             'company_name' => $this->input->post('company_name'),
             'service_year' => $this->input->post('service_year'),
             'field_of_employment' => $this->input->post('field_of_employment'),
-            'date_of_registration' => $this->input->post('date_of_registration'),
-            'password' => $this->input->post('password'),
+            'password' => $this->input->post('cell_phone'),
             'email' => $this->input->post('email'),
             'current_level' => $this->input->post('current_level'),
             'graduated_level' => $this->input->post('graduated_level'),

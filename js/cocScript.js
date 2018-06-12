@@ -37,7 +37,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
     id: '',
     reg_no: '',
     full_name: '',
-    sex: '',
+    gender: '',
     date_of_birth: '',
     nationality: '',
     sub_city: '',
@@ -103,8 +103,8 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
 
      return $http({
                   method : "POST",
-                  url : "includes/systemController.php",
-                  data :$scope.candidate,
+                  url : "backend/index.php/api/candidate/",
+                  data :$httpParamSerializerJQLike($scope.candidate),
                   headers: {
                     'Content-Type':'application/x-www-form-urlencoded' 
                     // or  'Content-Type':'application/json'
