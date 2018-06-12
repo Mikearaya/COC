@@ -30,14 +30,15 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 }]);
 
 //registration page controller
-app.controller("registrationController", ["$scope", function($scope){
+app.controller("registrationController", ["$scope", "$http", "$httpParamSerializerJQLike", 
+      function($scope, $http, $httpParamSerializerJQLike){
 
   $scope.candidate = {
     id: '',
     reg_no: '',
     full_name: '',
-    sex: '',
-    age: '',
+    gender: '',
+    date_of_birth: '',
     nationality: '',
     sub_city: '',
     wereda: '',
@@ -98,13 +99,28 @@ app.controller("registrationController", ["$scope", function($scope){
 
   };
 
-  $scope.REGIONS = ["Addis Ababa", "Oromian", "South", "Afar", "Amhara", "Tigray"];
+  $scope.register = function() { 
+
+     return $http({
+                  method : "POST",
+                  url : "backend/index.php/api/candidate/",
+                  data :$httpParamSerializerJQLike($scope.candidate),
+                  headers: {
+                    'Content-Type':'application/x-www-form-urlencoded' 
+                    // or  'Content-Type':'application/json'
+                  }
+          })
+          .then(function(response){
+            console.log(response);
+          });
+        };
+  $scope.REGIONS = [
+                      "Addis Ababa", 
+                      "Oromian", 
+                      "South", "Afar", "Amhara", "Tigray"];
   
   $scope.INISTITUTE_TYPES = ['Private', 'Government'];
 
-  $scope.register = function() {
-    console.log(this.candidate);
-  }
 
 }]);
 

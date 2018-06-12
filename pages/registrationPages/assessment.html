@@ -61,7 +61,7 @@
       </div>
       <div class="form-row">
         <div class="form-group col">
-          <label for="sector">Sector</label>
+          <label for="sector" >Sector </label>
           <select
                   name="sector"
                   aria-placeholder="Sector"
@@ -70,7 +70,7 @@
                   required
                   class="form-control"
           >
-          <option value=""></option>
+          <option value="tessdt">test</option>
           </select>
         </div>
         <div class="form-group col">
@@ -83,7 +83,7 @@
                     required
                     class="form-control"
             >
-            <option value=""></option>
+            <option value="test">test</option>
             </select>
           </div>
           <div class="form-group col" ng-if="candidate.assessment.apply_for_uc === 'yes'">
@@ -96,7 +96,7 @@
                       required
                       class="form-control"
               >
-              <option value=""></option>
+              <option value="sdsd">UNN</option>
               </select>
             </div>
       </div>
@@ -131,30 +131,17 @@
                       name="centerCode"
                       class="form-control"
               >
-              </div>
+          </div>    
           <div class="form-group col">
-            <label for="appliedBy">Applied By</label>
+            <label for="branchCode">Branch Code</label>
             <input type="text"
-                    ng-model="candidate.assessment.appied_by"
-                    placeholder="Applied By"
-                    name="appliedBy"
-                    id="appliedBy"
-                    class="form-group"
-                    required
-            >
-          </div> 
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="branchCode">Branch Code</label>
-          <input type="text"
-                      readonly
-                      ng-model="candidate.assessment.branch_code"
-                      id="branchCode"
-                      name="branchCode"
-                      class="form-control"
-              >
-        </div>
+                        readonly
+                        ng-model="candidate.assessment.branch_code"
+                        id="branchCode"
+                        name="branchCode"
+                        class="form-control"
+                >
+          </div>     
       </div>
       <div class="form-row">
         <div class="form-group col">
@@ -170,11 +157,11 @@
         </div>
        
           <div class="form-group col">
-              <div class="form-check col">
+              <div class="form-check form-check-inline col">
             <input type="checkbox"
                     name="paid"
                     ng-model="candidate.assessment.paid"
-                    class="form-control"
+                    class="form-check-input"
                     id="paid"
                     required
             >
