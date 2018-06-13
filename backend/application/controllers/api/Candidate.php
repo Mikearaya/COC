@@ -67,6 +67,17 @@ function index_post($id = NULL) {
             
 
              );
+             
+             // $this->db->insert('', $data);
+            // $last_id = $this->db->insert_id();
+
+           // $this-load->model('candidate_model');
+            if($this->candidate_model->check_candidate_exist($data['cell_phone'])){
+            redirect('.Assessment/index_post');
+
+            } else{
+                $this->candidte_model->save_candidate($data);
+            }
     }
         $result['success'] = ($this->candidate_model->save_candidate($data)) ? true : false;
         $this->response($result, API::HTTP_OK);
