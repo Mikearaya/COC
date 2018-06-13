@@ -97,6 +97,46 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
 
   };
 
+ this.message = function(text) {
+    console.log(text);
+
+  }
+/* 
+  $http({
+    method : "GET",
+    url : "backend/index.php/api/data/occupation",
+    data :$httpParamSerializerJQLike($scope.candidate),
+})
+.then(function(response){
+console.log(response);
+});
+
+$http({
+  method : "GET",
+  url : "backend/index.php/api/data/uc",
+  data :$httpParamSerializerJQLike($scope.candidate),
+})
+.then(function(response){
+console.log(response);
+});
+$http({
+  method : "GET",
+  url : "backend/index.php/api/data/sector",
+  data :$httpParamSerializerJQLike($scope.candidate)
+})
+.then(function(response){
+console.log(response);
+});
+$http({
+  method : "GET",
+  url : "backend/index.php/api/data/fees",
+  data :$httpParamSerializerJQLike($scope.candidate)
+})
+.then(function(response){
+console.log(response);
+});
+*/
+
   $scope.register = function() { 
 
      return $http({

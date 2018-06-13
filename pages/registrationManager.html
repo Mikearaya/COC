@@ -21,6 +21,7 @@
     <form name="registrationForm" ng-submit="register()">
       <div class="tab-content" id="nav-tabContent">                  
           <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="nav-home-tab">  
+              <input type="text" name="change" ng-model="change" ng-change="alert('changed');">
           <ng-include src="'pages/registrationPages/basics.html'"></ng-include> 
                                   
           </div>
@@ -37,6 +38,7 @@
             <ng-include src="'pages/registrationPages/assessment.html'"></ng-include>          
       </div>
     </div>
+
     <button type="submit" class="btn btn-primary btn-md">Submit</button>
     </form>
         </div>
