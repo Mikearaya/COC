@@ -95,7 +95,7 @@
                 class="form-control"                          
           >
         </div>
-        <div class="form-group col">
+          <div class="form-group col">
             <label for="trainingEnd">Training End</label>
             <input
                   type="date"
@@ -106,33 +106,70 @@
                   placeholder="trainingEnd"
                   class="form-control"
             >
-        </div>
+          </div>
         </div>
     <div class="row">
-    <div class="form-group col">
-        <label for="trainingCenter">Cooperative Training Center</label>
-        <input
-              type="text"
-              required
-              ng-model="candidate.cooperative_training_center"
-              name="trainingCenter"
-              id="trainingCenter"
-              placeholder="Cooperative Training Center"
-              class="form-control"
-        >
-      </div>
       <div class="form-group col">
-          <label for="trainingCenterStatus">Cooperative Training Center Status</label>
+          <label for="trainingCenter">Cooperative Training Center</label>
           <input
                 type="text"
                 required
-                ng-model="candidate.cooperative_training_center_status"
-                name="trainingCenterStatus"
-                id="trainingCenterStatus"
-                placeholder="Cooperative Training Center Status"
+                ng-model="candidate.cooperative_training_center"
+                name="trainingCenter"
+                id="trainingCenter"
+                placeholder="Cooperative Training Center"
                 class="form-control"
           >
         </div>
+        <div class="form-group col">
+            <label for="trainingCenterStatus">Cooperative Training Center Status</label>
+            <input
+                  type="text"
+                  required
+                  ng-model="candidate.cooperative_training_center_status"
+                  name="trainingCenterStatus"
+                  id="trainingCenterStatus"
+                  placeholder="Cooperative Training Center Status"
+                  class="form-control"
+          >
+        </div>
       </div>
+      <div class="row">
+        <div class="form-group col">
+            <label for="currentLevel">Current Level</label>
+            <select 
+                  name="currentLevel"
+                  ng-model="candidate.current_level"
+                  required
+                  id="currentLevel"
+                  aria-placeholder="Current Level"                                
+                  class="form-control"
+            >
+            <option 
+                    ng-repeat="inist in INISTITUTE_TYPES" 
+                    value="{{inist}}"
+            >{{inist}}</option>
+            </select>
+                  
+          </div>
+            <div class="form-group col">
+              <label for="graduatedLevel">Graduated Level</label>
+              <select 
+                    name="graduatedLevel"
+                    ng-model="candidate.graduated_level"
+                    required
+                    id="graduatedLevel"
+                    aria-placeholder="Inistitute Type"                                
+                    class="form-control"
+              >
+              <option 
+                      ng-repeat="inist in graduated_levelS" 
+                      value="{{inist}}"
+              >{{inist}}</option>
+              </select>
+                    
+            </div>
+          </div>
+      
 
 </div>

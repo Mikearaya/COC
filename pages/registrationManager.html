@@ -44,4 +44,29 @@
             </div>
         </form>
     </div>
+    <div class="modal" tabindex="-1" id="phoneModal" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="close" ng-click="cancelRegistration()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form name="phoneSearch" ng-submit="searchPhone()">
+                        <div class="row">
+                            <div class="col form-group">
+                                <label for="candidatePhone">Candidate Phone</label>
+                                <input type="text" ng-model="phoneNumber" class="form-control" name="candidatePhone" id="candidatePhone" required>                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" ng-disabled="phoneSearch.$invalid" class="btn btn-primary">Search</button>
+                </div>
+              </div>
+            </div>
+          </div>
 </section>

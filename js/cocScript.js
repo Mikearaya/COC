@@ -32,7 +32,14 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 //registration page controller
 app.controller("registrationController", ["$scope", "$http", "$httpParamSerializerJQLike", 
       function($scope, $http, $httpParamSerializerJQLike){
-
+        $("#phoneModal").modal({
+          keyboard: false,
+          show: true,
+          backdrop: 'static'
+        });
+        $('#phoneModal').on('shown.bs.modal', function () {
+          $('#candidatePhone').trigger('focus')
+        })
   $scope.candidate = {
                         id: '',
                         reg_no: '',
