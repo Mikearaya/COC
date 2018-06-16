@@ -6,6 +6,10 @@
         $this->load->model('data_model');
     }
     function index_get($id = NULL) {
+        $os_type = $this->input->get('os_type');
+        $os_code = $this->input->get('os_code');
+        var_dump($os_type);
+        var_dump($os_code);
         $result['result'] = $this->data_model->get_sector($id);
         $result['columns'] = [];
 

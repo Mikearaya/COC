@@ -1,174 +1,99 @@
-<div class="form-row">
-        <fieldset class="col">
-          <caption>Excuse Payment</caption>
-        <div class="form-group col">
-        <div class="form-check form-check-inline">                          
-          <input 
-                type="radio"
-                name="excusePayment"
-                ng-model="candidate.excuse_payment"
-                id="excusePayment_yes"
-                class="form-check-input"
-                value="yes"
-                selected
-                required
-          >
-          <label for="excusePayment_yes">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input 
-                type="radio"
-                name="excusePayment"
-                ng-model="candidate.assessment.excuse_payment"
-                id="excusePayment_no"
-                class="form-check-input"
-                required
-                value="no"
-          >
-          <label for="excusePayment_no"> No</label>
-        </div>
-      </div>
-      </fieldset>
-      <fieldset class="col">
-          <caption>Register UC</caption>
-        <div class="form-group col">
-        <div class="form-check form-check-inline">                          
-          <input 
-                type="radio"
-                name="ucRegister"
-                ng-model="candidate.assessment.apply_for_uc"
-                id="ucRegister_yes"
-                class="form-check-input"
-                value="yes"                              
-                required
-          >
-          <label for="ucRegister_yes">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input 
-                type="radio"
-                name="ucRegister"
-                ng-model="candidate.assessment.apply_for_uc"
-                id="ucRegister_no"
-                class="form-check-input"
-                required
-                value="no"
-          >
-          <label for="ucRegister_no"> No</label>
-        </div>
-      </div>
-      </fieldset>
-      </div>
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="sector" >Sector </label>
-          <select
-                  name="sector"
-                  aria-placeholder="Sector"
-                  id="sector"
-                  ng-model="selectedSector"
-                  required
-                  ng-change="meassage('checked')"
-                  class="form-control"
-                  
-          >
-          <option value="dd">dfdshg</option>
-          <option value="ee">dfgdfg</option>
-          </select>
-        </div>
-        <div class="form-group col">
-            <label for="occupation">Occupation</label>
-            <select
-                    name="occupation"
-                    aria-placeholder="Occupation"
-                    id="occupation"
-                    ng-model="candidate.assessment.occ_code"
-                    required
-                    class="form-control"
-            >
-            <option value="hh">Hotel</option>
-            </select>
-          </div>
-          <div class="form-group col" ng-if="candidate.assessment.apply_for_uc === 'yes'">
-              <label for="uc">Unit of Competencies</label>
-              <select
-                      name="uc"
-                      aria-placeholder="Unit Of Competencies"
-                      id="uc"
-                      ng-model="selectedSector"
-                      required
-                      class="form-control"
-              >
-              <option value="sdsd">UNN</option>
-              </select>
-            </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="registeredBy"> Registered By</label>
-          <input
-                readonly
-                type="text"
-                ng-model="candidate.assessment.registered_by"
-                id="registeredBy"
-                name="registeredBy"
-                class="form-control"                                
-          >
-        </div>
-        <div class="form-group col">
-          <label for="applicationFee">Application Fee</label>
-          <input type="text"
-                  readonly
-                  ng-model="candidate.assessment.application_fee"
-                  id="applicationFee"
-                  name="applicationFee"
-                  class="form-control"
-          >
-          </div>
-          <div class="form-group col">
-              <label for="centerCode">Center Code</label>
-              <input type="text"
-                      readonly
-                      ng-model="candidate.assessment.center_code"
-                      id="centerCode"
-                      name="centerCode"
-                      class="form-control"
-              >
-          </div>    
-          <div class="form-group col">
-            <label for="branchCode">Branch Code</label>
-            <input type="text"
-                        readonly
-                        ng-model="candidate.assessment.branch_code"
-                        id="branchCode"
-                        name="branchCode"
-                        class="form-control"
-                >
-          </div>     
-      </div>
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="application">Application</label>
-          <input type="text"
-                placeholder="Application"
-                name="application"
-                id="application"
-                ng-model="candidate.assessment.application"
+<div class="shadow p-3 mb-5 bg-white rounded container">
+  <div class="row">
+    <div class="form-group col">
+      <label for="mainSector" >Sector </label>
+      <select
+              name="mainSector"
+              aria-placeholder="Sector"
+              id="mainSector"
+              ng-model="candidate.assessment.mainSector"
+              required
+              class="form-control"
+      >
+      <option value="tessdt">test</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col">
+      <label for="subSector" > Sub-Sector </label>
+      <select
+              name="subSector"
+              aria-placeholder="subSector"
+              id="subSector"
+              ng-model="candidate.assessment.subSector"
+              required
+              class="form-control"
+      >
+      <option value="tessdt">test</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col">
+        <label for="occupation">Occupation</label>
+        <select
+                name="occupation"
+                aria-placeholder="Occupation"
+                id="occupation"
+                ng-model="candidate.assessment.occ_code"
                 required
                 class="form-control"
-          >
-        </div>
-       
-          <div class="form-group col">
-              <div class="form-check form-check-inline col">
-            <input type="checkbox"
-                    name="paid"
-                    ng-model="candidate.assessment.paid"
-                    class="form-check-input"
-                    id="paid"
-                    required
-            >
-            <label for="paid">Paid</label>
-          </div>
-        </div>
-      </div>
+        >
+        <option value="test">test</option>
+        </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-check form-check-inline"> 
+        <label for="ucRegister" class="form-check-label">Register For UC</label>
+        <input 
+              type="checkbox"
+              name="ucRegister"
+              ng-model="applyUc"
+              id="ucRegister_yes"
+              class="form-check-input"
+              value="yes"                              
+
+        >
+      </div>        
+  </div>
+  <div class="row">
+    <div class="form-group col" ng-if="applyUc">
+      <label for="uc">Unit of Competencies</label>
+      <select
+              name="uc"
+              aria-placeholder="Unit Of Competencies"
+              id="uc"
+              ng-model="candidate.ucs"
+              required
+              multiple
+              class="form-control"
+      >
+      <option value="sdsd">UNN</option>
+      </select>
+    </div>
+  </div>
+<div class="row">
+  <div class="form-group col">
+    <label for="applicationFee">Application Fee</label>
+    <input type="text"
+            readonly
+            ng-model="candidate.assessment.application_fee"
+            id="applicationFee"
+            name="applicationFee"
+            class="form-control"
+    >
+    </div>
+    <div class="form-check form-check-inline col">
+    <input type="checkbox"
+            name="paid"
+            ng-model="candidate.assessment.paid"
+            class="form-check-input"
+            id="paid"
+            required
+    >
+    <label for="paid" class="form-check-label">Paid</label>    
+  </div>
+</div>
+
