@@ -6,12 +6,9 @@
         parent::__construct($config);
         $this->load->model('os_model');
     }
-    function index_get($id = NULL) {
-        $os_type = $this->input->get('os_type');
-        $os_code = $this->input->get('os_code');
-        var_dump($os_type);
-        var_dump($os_code);
-        $result['result'] = $this->data_model->get_sector($id);
+    function index_get($os_type = NULL, $os_code = NULL) {
+     
+        $result['result'] = $this->os_model->get_os($os_type, $os_code);
 
         $result['columns'] = [];
 
