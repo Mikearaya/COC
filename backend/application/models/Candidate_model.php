@@ -30,5 +30,16 @@ public function update_candidate($candidate) {
       $this->db->where('id', $candidate['id']);
     return $this->db->update('candidate' , $candidate);
 }
+
+public function check_candidate_exist($cell_phone){
+    $this->db->where('cell_phone',$cell_phone);
+   $this->db->from('candidate');
+   $query = $this->db->get();
+   if($query->num_rows()>0){
+       return $query->result();
+    } else {
+   return $query->result();
+ }
+}
 }
 ?>
