@@ -1,5 +1,5 @@
 <?php
- class Data_model extends MY_Model {
+ class Os_model extends MY_Model {
     public function __construct() {
         parent::__construct();
         $this->load->database();

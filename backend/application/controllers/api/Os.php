@@ -1,9 +1,10 @@
 <?php
 
- class Data extends API {
+ class OS extends API {
+
     public function __construct($config = 'rest') {
         parent::__construct($config);
-        $this->load->model('data_model');
+        $this->load->model('os_model');
     }
     function index_get($id = NULL) {
         $os_type = $this->input->get('os_type');
@@ -11,6 +12,7 @@
         var_dump($os_type);
         var_dump($os_code);
         $result['result'] = $this->data_model->get_sector($id);
+
         $result['columns'] = [];
 
         if(count($result)>0) {
@@ -21,7 +23,7 @@
 }
 
 function occupation_get($id = NULL){
-    $result['result'] = $this->data_model->get_occupation($id);
+    $result['result'] = $this->os_model->get_occupation($id);
         $result['columns'] = [];
 
         if(count($result)>0) {
@@ -32,7 +34,7 @@ function occupation_get($id = NULL){
 }
 function unit_of_competency_get($id = NULL) {
 
-    $result['result'] = $this->data_model->get_unit_of_competency($id);
+    $result['result'] = $this->os_model->get_unit_of_competency($id);
         $result['columns'] = [];
 
         if(count($result)>0) {
@@ -44,7 +46,7 @@ function unit_of_competency_get($id = NULL) {
 }
 
 function assessment_price_get($id = NULL) {
-    $result['result'] = $this->data_model->get_assessment_price($id);
+    $result['result'] = $this->os_model->get_assessment_price($id);
         $result['columns'] = [];
 
         if(count($result)>0) {

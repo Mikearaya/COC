@@ -55,5 +55,6 @@ public function update_candidate($candidate) {
             return false;
         }
     }
+
 }
 ?>
