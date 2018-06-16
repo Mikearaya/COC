@@ -34,7 +34,8 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
       function($scope, $http, $httpParamSerializerJQLike){
 
   $scope.candidate = {
-                        id: '',
+                        basic_info:{
+                          id: '',
                         reg_no: '',
                         full_name: '',
                         gender: '',
@@ -69,6 +70,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                         email: '', 
                         current_level: '',
                         graduated_level: '',
+                        },
                         assessment: {
                           can_regno: '',
                           exam_id: '',

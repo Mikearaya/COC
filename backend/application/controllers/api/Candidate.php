@@ -15,72 +15,72 @@ class Candidate extends API {
             $result['columns']=array_keys((array)$first_record);
     }
     $this->response($result,API::HTTP_OK);
-}
+    }
 
-function index_post($id = NULL) {
 
-    $this->load->library('form_validation');
-    $result['success'] = false;
+    public function register_assessment($assessment, $candidateId) {
+        $this->load->library('form_validation');
+        $result['success'] = false;
 
-    $this->form_validation->set_rules("full_name", "Full Name", "required");
-    if($this->form_validation->run() === FALSE ) {
-        $this->response($this->validation_errors(), API::HTTP_OK);
-    } else {
+    
 
-        $data = array(
-            'id' => $id,
-            'full_name' => $this->input->post('full_name'),
-            'reg_no' => $this->input->post('reg_no'),
-            'gender' => $this->input->post('gender'),
-            'date_of_birth' => $this->input->post('date_of_birth'),
-            'nationality' => $this->input->post('nationality'),
-            'zone' => $this->input->post('zone'),
-            'wereda' => $this->input->post('wereda'),
-            'home_phone' => $this->input->post('home_phone'),
-            'office_phone' => $this->input->post('office_phone'),
-            'cell_phone' => $this->input->post('cell_phone'),
-            'marital_status' => $this->input->post('marital_status'),
-            'disablity' => $this->input->post('disablity'),
-            'disablity_nature' => $this->input->post('disablity_nature'),
-            'institute_type' => $this->input->post('institute_type'),
-            'institute_name' => $this->input->post('institute_name'),
-            'region' => $this->input->post('region'),
-            'city' => $this->input->post('city'),
-            'training_start' => $this->input->post('training_start'),
-            'training_end' => $this->input->post('training_end'),
-            'mode_of_training' => $this->input->post('mode_of_training'),
-            'type_of_training' => $this->input->post('type_of_training'),
-            'occupation_trained_on' => $this->input->post('occupation_trained_on'),
-            'education_background' => $this->input->post('education_background'),
-            'cooprative_training_center' => $this->input->post('cooprative_training_center'),
-            'status_of_cooprative_center' => $this->input->post('status_of_cooprative_center'),
-            'employment_condition' => $this->input->post('employment_condition'),
-            'status_of_company' => $this->input->post('status_of_company'),
-            'company_type' => $this->input->post('company_type'),
-            'company_name' => $this->input->post('company_name'),
-            'service_year' => $this->input->post('service_year'),
-            'field_of_employment' => $this->input->post('field_of_employment'),
-            'password' => $this->input->post('cell_phone'),
-            'email' => $this->input->post('email'),
-            'current_level' => $this->input->post('current_level'),
-            'graduated_level' => $this->input->post('graduated_level'),
-            
-
-             );
-             
-             // $this->db->insert('', $data);
-            // $last_id = $this->db->insert_id();
-
-           // $this-load->model('candidate_model');
-            if($this->candidate_model->check_candidate_exist($data['cell_phone'])){
-            redirect('.Assessment/index_post');
-
-            } else{
-                $this->candidte_model->save_candidate($data);
+        $data;
+        if($this->form_validation->run() === FALSE ) {
+            $this->response($this->validation_errors(), API::HTTP_OK);
+        } else {    
+            if($assessment['re_assessment'] == 'true' ) {
+                $assessment['re_assessment'] = true;
+                $assessment['can_regno'] = $candidateId;
             }
+
+        }
+            $result['success'] = ($this->candidate_model->save_assessment($assessment, $candidateId)) ? true : false;
+            $this->response($result, API::HTTP_OK);
+
     }
-        $result['success'] = ($this->candidate_model->save_candidate($data)) ? true : false;
-        $this->response($result, API::HTTP_OK);
+
+    function index_post($id = NULL) {
+
+        $this->load->library('form_validation');
+        $result['success'] = false;
+
+        $this->form_validation->set_rules("basic_info[full_name]", "Full Name", "required");
+        $this->form_validation->set_rules("assessment[amount_paid]", "Amount_paid", "required");
+        $this->form_validation->set_rules('assessment[apply_for_uc]', 'applied for UC', "required");
+        $this->form_validation->set_rules('assessment[center_code]', 'Center Code', "required");
+        $this->form_validation->set_rules('assessment[assessment_rate]', 'Assessment Rate', "required");
+        $this->form_validation->set_rules('assessment[registered_by]', 'Focal Person Name', "required");
+        $this->form_validation->set_rules('assessment[payment_status]', 'Payment Status', "required");
+
+    
+        if($this->form_validation->run() === FALSE ) {
+            $this->response($this->validation_errors(), API::HTTP_OK);
+        } else {
+                $data=$this->input->post();
+                $candidate_info = $data['basic_info'];
+                $assessment = $data['assessment']; 
+                
+            try {
+            
+            $candidate_id;
+            $candidate_id = $this->candidate_model->check_candidate_exist($candidate_info['cell_phone']);
+                
+                if($candidate_id){
+                    $assessment['re_assessment'] = 1;
+                
+                } else {                                        
+                    $assessment['re_assessment'] = 0;
+                    $candidate_id = $this->candidate_model->save_candidate($candidate_info);
+                    var_dump($candidate_id);
+                }
+                    $this->register_assessment($assessment, $candidate_id);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            $this->response($result, API::HTTP_OK);
+        }
     }
+
 }
+
 ?>

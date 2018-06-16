@@ -16,12 +16,9 @@ public function get_assessment($assessmentID = NULL) {
         }
       return $result;
     }  
-public function save_assessment($assessment) {
-    if(!is_null($candidate['id'])) {
-        return $this->update_candidate($assessment);
-    } else {
+public function save_assessment($assessment, $candidateId) {
+    $assessment['reg_no'] =$candidateId;
         $this->db->insert('assessment' , $assessment);
-    }
     return ($this->db->affected_rows()) ? true : false; 
 }
 
