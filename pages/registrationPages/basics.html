@@ -1,129 +1,87 @@
-
-        <div class="form-row">
-          <div class="form-group col col-xs-12">                          
-            <label for="fullName"></label>
-            <input type="text" 
-                    name="fullName" 
-                    id="fullName" 
-                    class="form-control" 
-                    ng-required="true"
-                    placeholder="First Name"
-                    ng-model="candidate.full_name"
-                    >                                                    
-          </div>                   
-        </div>
-        <div class="form-row">
-             
-          <fieldset class="col" >
-              <caption>Gender</caption>
-                   <div class="form-group col">
-            <div class="form-check form-check-inline">                          
-              <input 
-                    type="radio"
-                    ng-model="candidate.gender"
-                    value="male"
-                    name="gender"
-                    id="male"
-                    class="form-check-input"
-                    required
-              >
-              <label for="male" class="form-check-label">Male</label>
-              
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                    type="radio"
-                    ng-model="candidate.gender"
-                    value="female"
-                    id="female"
-                    name="gender"
-                    class="form-check-input"
-                    required
-              >
-              <label for="female" class="form-check-label">Female</label>
-            </div>
-          </div>             
-          </fieldset>
-          <fieldset class="col">
-            <caption>Martial Status</caption>  
-            <div class="form-group col">                        
-              <div class="form-check-inline form-check">
-                <input 
-                      type="radio"
-                      value="married"
-                      name="maritialStatus"
-                      id="married"
-                      ng-model="candidate.marital_status"
-                      required
-                      class="form-check-input"
-                >
-                <label for="married">Married</label>
-              </div>                
-            <div class="form-check-inline form-check">
-              <input 
-                    type="radio"
-                    value="single"
-                    name="maritialStatus"
-                    id="single"
-                    value="single"
-                    ng-model="candidate.maritial_status"
-                    required
-                    class="form-check-input"
-              >
-              <label for="single">Single</label>
-            </div>
-          </div>
-          </fieldset>
-          <div class="form-group col">
-            <label for="birthdate">Birthdate</label>
-            <input 
-                  type="date"
-                  required
-                  ng-model="candidate.birthdate"
-                  name="birthdate"
-                  id="birthdate"
-                  class="form-control"
-                  placeholder="Birthdate"
+<div class="shadow p-3 mb-5 bg-white rounded container">
+   <div class="row">
+      <div class="form-group col">                          
+         <label for="fullName"></label>
+         <input type="text" 
+               name="fullName" 
+               id="fullName" 
+               class="form-control" 
+               ng-required="true"
+               placeholder="Full Name"
+               ng-model="candidate.full_name"
+               >                                                    
+      </div>                   
+   </div>
+   <div class="row">
+      <div class="form-group col">
+         <label for="gender">Gender</label>
+         <select 
+               name="gender"
+               ng-model="candidate.sex"
+               required
+               id="gender"
+               aria-placeholder="Gender"                                
+               class="form-control"
             >
-          </div>
-        </div>
-        <div class="form-row">
-        <fieldset class="col-2" >
-          <caption>Has Disablity?</caption>
-          <div class="form-group col">
-            <div class="form-check form-check-inline">
-              <input
-                    type="radio"
-                    name="disablity"
-                    ng-model="candidate.disablity"
-                    id="isDisabled"
-                    value="yes"
-                    class="form-check-input"
-              >
-              <label for="isDisabled">Yes</label>                                  
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                    type="radio"
-                    name="disablity"
-                    ng-model="candidate.disablity"
-                    id="notDisabled"
-                    value="no"
-                    class="form-check-input"
-              >
-              <label for="notDisabled"> No </label>
-            </div>
-          </div>
-        </fieldset>
-        <div class="form-group col" ng-if="candidate.disablity == 'yes'">
-          <label for="disablityNature">Disablity Nature</label>
-          <textarea 
-                    class="form-control" 
-                    name="disablityNature"
-                    id="disablityNature" 
-                    rows="3" 
-                    ng-model="candidate.disablityNature">
-
-          </textarea>
-        </div>
+            <option  value="Male">Male</option>
+            <option  value="Female">Female</option>
+         </select>               
       </div>
+   </div>
+   <div class="row">
+      <div class="form-group col">
+         <label for="birthdate">Birthdate</label>
+         <input 
+               type="date"
+               required
+               ng-model="candidate.birthdate"
+               name="birthdate"
+               id="birthdate"
+               class="form-control"
+               placeholder="Birthdate"
+         >
+      </div>
+   </div> 
+   <div class="row">
+      <div class="form-group col">
+         <label for="maritalStatus">Marital Status</label>
+         <select 
+               name="maritalStatus"
+               ng-model="candidate.marital_status"
+               required
+               id="maritalStatus"
+               aria-placeholder="Marital Status"                                
+               class="form-control"
+            >
+            <option  value="Married">Married</option>
+            <option  value="Single">Single</option>
+         </select>               
+      </div>
+   </div>       
+   <div class="row">
+      <div class="form-check form-check-inline">
+         <label for="isDisabled">Has a Disablity</label>                                  
+         <input
+               type="checkbox"
+               name="disablity"
+               ng-model="candidate.disablity"
+               id="isDisabled"
+               value="yes"
+               class="form-check-input"
+             >
+      </div>
+   </div>
+   <div class="row">
+      <div class="form-group col" >
+         <label for="disablityNature">Disablity Nature</label>
+         <textarea ng-disabled="!candidate.disablity"
+                  class="form-control" 
+                  name="disablityNature"
+                  id="disablityNature" 
+                  rows="3" 
+                  ng-model="candidate.disablityNature">
+
+         </textarea>
+      </div>
+   </div>   
+</div>

@@ -1,4 +1,19 @@
-<div class="form-row">
+<div class="shadow p-3 mb-5 bg-white rounded container">
+<div class="row">
+    <div class="form-group col">
+        <label for="inistituteName">Inistitute Name</label>
+        <input
+              type="text"
+              ng-model="candidate.inistitute_name"
+              required
+              name="inistituteName"
+              id="inistituteName"
+              class="form-control"
+              placeholder="Inistitute Name"
+        >
+      </div>
+</div>
+<div class="row">
         <div class="form-group col">
           <label for="eduacationBackground">Education Background</label>
           <input 
@@ -12,33 +27,43 @@
           > 
         </div>
         <div class="form-group col">
-          <label for="trainingType"> Training Type</label>
-          <input 
-                type="text"
-                ng-model="candidate.type_of_training"
-                required
-                name="trainingType"
-                id="trainingType"
-                required
-                class="form-control"
-                placeholder="Training Type"
-          >
-        </div>
-        <div class="form-group col">
-          <label for="trainingMode">Mode of Training</label>
-          <input
-                type="text"
-                required
-                ng-model="candidate.mode_of_training"
-                name="trainingMode"
-                id="trainingMode"
-                placeholder="Mode of Training"
-                class="form-control"
-          >
-        </div>
+            <label for="trainingType">Type of Training</label>
+            <select 
+                  name="trainingType"
+                  ng-model="candidate.type_of_training"
+                  required
+                  id="trainingType"
+                  aria-placeholder="Training Type"                                
+                  class="form-control"
+            >
+            <option 
+                    ng-repeat="inist in INISTITUTE_TYPES" 
+                    value="{{inist}}"
+            >{{inist}}</option>
+            </select>
+                  
+          </div>
+
       </div>
-      <div class="form-row">
-        <div class="form-group col-4">
+      <div class="row">
+    <div class="form-group col">
+        <label for="trainingMode">Mode of Training</label>
+        <select 
+              name="trainingMode"
+              ng-model="candidate.mode_of_training"
+              required
+              id="trainingMode"
+              aria-placeholder="Mode of Training"                                
+              class="form-control"
+        >
+        <option 
+                ng-repeat="inist in INISTITUTE_TYPES" 
+                value="{{inist}}"
+        >{{inist}}</option>
+        </select>
+              
+      </div>
+        <div class="form-group col">
           <label for="inistituteType">Inistitute Type</label>
           <select 
                 name="inistituteType"
@@ -55,19 +80,10 @@
           </select>
                 
         </div>
-        <div class="form-group col">
-          <label for="inistituteName">Inistitute Name</label>
-          <input
-                type="text"
-                ng-model="candidate.inistitute_name"
-                required
-                name="inistituteName"
-                id="inistituteName"
-                class="form-control"
-                placeholder="Inistitute Name"
-          >
         </div>
-        <div class="form-group col-2 col-xs-6">
+      <div class="row">
+        
+        <div class="form-group col">
           <label for="trainingStart">Training Start</label>
           <input
                 type="date"
@@ -79,16 +95,81 @@
                 class="form-control"                          
           >
         </div>
-        <div class="form-group col-2 col-xs-6">
-          <label for="trainingEnd">Training End</label>
+          <div class="form-group col">
+            <label for="trainingEnd">Training End</label>
+            <input
+                  type="date"
+                  ng-model="candidate.training_end"
+                  required
+                  name="trainingEnd"
+                  id="trainingEnd"
+                  placeholder="trainingEnd"
+                  class="form-control"
+            >
+          </div>
+        </div>
+    <div class="row">
+      <div class="form-group col">
+          <label for="trainingCenter">Cooperative Training Center</label>
           <input
-                type="date"
-                ng-model="candidate.training_end"
+                type="text"
                 required
-                name="trainingEnd"
-                id="trainingEnd"
-                placeholder="trainingEnd"
+                ng-model="candidate.cooperative_training_center"
+                name="trainingCenter"
+                id="trainingCenter"
+                placeholder="Cooperative Training Center"
                 class="form-control"
           >
+        </div>
+        <div class="form-group col">
+            <label for="trainingCenterStatus">Cooperative Training Center Status</label>
+            <input
+                  type="text"
+                  required
+                  ng-model="candidate.cooperative_training_center_status"
+                  name="trainingCenterStatus"
+                  id="trainingCenterStatus"
+                  placeholder="Cooperative Training Center Status"
+                  class="form-control"
+          >
+        </div>
       </div>
-      </div>
+      <div class="row">
+        <div class="form-group col">
+            <label for="currentLevel">Current Level</label>
+            <select 
+                  name="currentLevel"
+                  ng-model="candidate.current_level"
+                  required
+                  id="currentLevel"
+                  aria-placeholder="Current Level"                                
+                  class="form-control"
+            >
+            <option 
+                    ng-repeat="inist in INISTITUTE_TYPES" 
+                    value="{{inist}}"
+            >{{inist}}</option>
+            </select>
+                  
+          </div>
+            <div class="form-group col">
+              <label for="graduatedLevel">Graduated Level</label>
+              <select 
+                    name="graduatedLevel"
+                    ng-model="candidate.graduated_level"
+                    required
+                    id="graduatedLevel"
+                    aria-placeholder="Inistitute Type"                                
+                    class="form-control"
+              >
+              <option 
+                      ng-repeat="inist in graduated_levelS" 
+                      value="{{inist}}"
+              >{{inist}}</option>
+              </select>
+                    
+            </div>
+          </div>
+      
+
+</div>

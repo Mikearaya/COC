@@ -1,45 +1,72 @@
 <section ng-controller="registrationController" style="margin-top: 10px;">
-  <div class="container">
-
-    <ul class="nav nav-tabs  nav-fill">
-      <li class="nav-item">
-        <a class="nav-link active btn btn-link" data-toggle="tab" data-target="#basic-info">Basic Info</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link nav-item btn btn-link" data-toggle="tab"  data-target="#address" >Address</a>
-        </li>
-      <li class="nav-item">
-        <a class="nav-link nav-item btn btn-link" data-toggle="tab"  data-target="#education" >Education History</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link nav-item btn btn-link" data-toggle="tab"  data-target="#employment" >Employment History</a>
-        </li>
-      <li class="nav-item">
-        <a class="nav-link nav-item btn btn-link" data-toggle="tab" data-target="#assessment">Assessment</a>
-      </li>
-    </ul>
-    <form name="registrationForm" ng-submit="register()">
-      <div class="tab-content" id="nav-tabContent">                  
-          <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="nav-home-tab">  
-              <input type="text" name="change" ng-model="change" ng-change="alert('changed');">
-          <ng-include src="'pages/registrationPages/basics.html'"></ng-include> 
-                                  
-          </div>
-          <div class="tab-pane fade" id="address" role="tabpanel">
-              <ng-include src="'pages/registrationPages/address.html'"></ng-include> 
-          </div>
-          <div class="tab-pane fade" id="education" role="tabpanel" >                      
-              <ng-include src="'pages/registrationPages/education.html'"></ng-include> 
-          </div>
-          <div class="tab-pane fade" id="employment" role="tabpanel" >
-              <ng-include src="'pages/registrationPages/employment.html'"></ng-include> 
-          </div>
-          <div class="tab-pane fade" id="assessment" role="tabpanel" >
-            <ng-include src="'pages/registrationPages/assessment.html'"></ng-include>          
-      </div>
+    <div class="shadow-sm p-3 mb-5 bg-white rounded container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" data-target="#basic-info">Basic Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-item " data-toggle="tab"  data-target="#address" >Address</a>
+                </li>
+            <li class="nav-item">
+                <a class="nav-link nav-item " data-toggle="tab"  data-target="#education" >Education History</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-item " data-toggle="tab"  data-target="#employment" >Employment History</a>
+                </li>
+            <li class="nav-item">
+                <a class="nav-link nav-item " data-toggle="tab" data-target="#assessment">Assessment</a>
+            </li>
+        </ul>
+        <form name="registrationForm" ng-submit="register()">
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary btn-md">Save</button>
+                    <button type="button" class="btn btn-danger btn-md">Cancel</button>
+                </div>
+            </div>
+            <div class="tab-content" id="nav-tabContent">                  
+                <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="nav-home-tab">  
+                <ng-include src="'pages/registrationPages/basics.html'"></ng-include> 
+                                        
+                </div>
+                <div class="tab-pane fade" id="address" role="tabpanel">
+                    <ng-include src="'pages/registrationPages/address.html'"></ng-include> 
+                </div>
+                <div class="tab-pane fade" id="education" role="tabpanel" >                      
+                    <ng-include src="'pages/registrationPages/education.html'"></ng-include> 
+                </div>
+                <div class="tab-pane fade" id="employment" role="tabpanel" >
+                    <ng-include src="'pages/registrationPages/employment.html'"></ng-include> 
+                </div>
+                <div class="tab-pane fade" id="assessment" role="tabpanel" >
+                    <ng-include src="'pages/registrationPages/assessment.html'"></ng-include>          
+                </div>
+            </div>
+        </form>
     </div>
-
-    <button type="submit" class="btn btn-primary btn-md">Submit</button>
-    </form>
-        </div>
+    <div class="modal" tabindex="-1" id="phoneModal" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="close" ng-click="cancelRegistration()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form name="phoneSearch" ng-submit="searchPhone()">
+                        <div class="row">
+                            <div class="col form-group">
+                                <label for="candidatePhone">Candidate Phone</label>
+                                <input type="text" ng-model="phoneNumber" class="form-control" name="candidatePhone" id="candidatePhone" required>                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" ng-disabled="phoneSearch.$invalid" class="btn btn-primary">Search</button>
+                </div>
+              </div>
+            </div>
+          </div>
 </section>
