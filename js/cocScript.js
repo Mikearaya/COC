@@ -32,9 +32,17 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 //registration page controller
 app.controller("registrationController", ["$scope", "$http", "$httpParamSerializerJQLike", 
       function($scope, $http, $httpParamSerializerJQLike){
-
+        $("#phoneModal").modal({
+          keyboard: false,
+          show: true,
+          backdrop: 'static'
+        });
+        $('#phoneModal').on('shown.bs.modal', function () {
+          $('#candidatePhone').trigger('focus')
+        })
   $scope.candidate = {
-                        id: '',
+                        basic_info:{
+                          id: '',
                         reg_no: '',
                         full_name: '',
                         gender: '',
@@ -69,6 +77,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                         email: '', 
                         current_level: '',
                         graduated_level: '',
+                        },
                         assessment: {
                           can_regno: '',
                           exam_id: '',
@@ -96,6 +105,46 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
 
 
   };
+
+ this.message = function(text) {
+    console.log(text);
+
+  }
+/* 
+  $http({
+    method : "GET",
+    url : "backend/index.php/api/data/occupation",
+    data :$httpParamSerializerJQLike($scope.candidate),
+})
+.then(function(response){
+console.log(response);
+});
+
+$http({
+  method : "GET",
+  url : "backend/index.php/api/data/uc",
+  data :$httpParamSerializerJQLike($scope.candidate),
+})
+.then(function(response){
+console.log(response);
+});
+$http({
+  method : "GET",
+  url : "backend/index.php/api/data/sector",
+  data :$httpParamSerializerJQLike($scope.candidate)
+})
+.then(function(response){
+console.log(response);
+});
+$http({
+  method : "GET",
+  url : "backend/index.php/api/data/fees",
+  data :$httpParamSerializerJQLike($scope.candidate)
+})
+.then(function(response){
+console.log(response);
+});
+*/
 
   $scope.register = function() { 
 

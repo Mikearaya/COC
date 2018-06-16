@@ -17,29 +17,44 @@ public function get_candidate($candidateID = NULL) {
       return $result;
     }  
 public function save_candidate($candidate) {
-    if(!is_null($candidate['id'])) {
+    echo 'save candidate';
+    if(!is_null($candidate['reg_no'])) {
+        echo 'update';
         return $this->update_candidate($candidate);
+      
     } else {
+        echo 'insert';
+        $candidate['reg_no'] = $candidate['cell_phone'];
         $this->db->insert('candidate' , $candidate);
+        
     }
-    return ($this->db->affected_rows()) ? true : false; 
+
+    var_dump($this->db->insert_id());
+    return ($this->db->affected_rows()) ? 7777 : false; 
 }
 
-public function update_candidate($candidate) {
-    
-      $this->db->where('id', $candidate['id']);
+public function save_assessment($assessment, $candidateId) {
+    $assessment['can_regno'] =$candidateId;
+
+    $this->db->insert('assessment' , $assessment);
+return ($this->db->affected_rows()) ? $candidateId : false; 
+}
+public function update_candidate($candidate) {    
+      $this->db->where('reg_no', $candidate['reg_no']);
     return $this->db->update('candidate' , $candidate);
 }
 
-public function check_candidate_exist($cell_phone){
-    $this->db->where('cell_phone',$cell_phone);
-   $this->db->from('candidate');
-   $query = $this->db->get();
-   if($query->num_rows()>0){
-       return $query->result();
-    } else {
-   return $query->result();
- }
-}
+
+    public function check_candidate_exist($cell) {
+        $this->db->where('cell_phone', $cell);
+        $this->db->select('reg_no', 'cell_phone');
+        $result = $this->db->get('candidate');
+        if($result->num_rows() > 0) {
+            return $result->row_array();
+        } else {
+            return false;
+        }
+    }
+
 }
 ?>

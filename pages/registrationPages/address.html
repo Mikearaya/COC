@@ -1,107 +1,136 @@
-<div class="form-row">
-        <div class="form-group col">
-            <label for="nationality">Nationality</label>
-            <input
+<div class="shadow p-3 mb-5 bg-white rounded container">
+   <div class="row">
+      <div class="col">
+         <div class="row">
+            <div class="form-group col">
+               <label for="nationality">Nationality</label>
+               <input
+                     type="text"
+                     ng-model="candidate.nationality"
+                     name="nationality"
+                     id="nationality"
+                     placeholder="Nationality"
+                     required="required"
+                     class="form-control"
+               >
+          </div>
+      </div>
+      <div class="row">
+         <div class="form-group col">
+            <label for="region">Region</label>
+            <select
                   type="text"
-                  ng-model="candidate.nationality"
-                  name="nationality"
-                  id="nationality"
-                  placeholder="Nationality"
+                  ng-model="candidate.region"
+                  name="region"
+                  id="region"
+                  placeholder="region"
                   required="required"
                   class="form-control"
             >
-          </div>
-          <div class="form-group col">
-                <label for="region">Region</label>
-                <select 
-                      type="text"
-                      ng-model="candidate.region"
-                      name="region"
-                      id="region"
-                      placeholder="region"
-                      required="required"
-                      class="form-control"
-                >
-                <option ng-repeat="region in REGIONS" value="{{region}}">{{region}}</option>
-                </select>
-            </div>    
-      <div class="form-group col">
-        <label for="zone">Zone</label>
-        <input 
-              type="text"
-              ng-model="candidate.zone"
-              name="zone"
-              id="zone"
-              placeholder="Zone"
-              required="required"
-              class="form-control"
-        >
-      </div>                        
-      
-      
-    </div>
-    <div class="form-row">
-        <div class="form-group col">
+            <option ng-repeat="region in REGIONS" value="{{region}}">{{region}}</option>
+            </select>
+         </div>
+      </div>
+      <div class="form-row">
+         <div class="form-group col">
             <label for="city">City</label>
-            <input 
-                    type="text"
-                    required
-                    ng-model="candidate.city"
-                    name="city"
-                    id="city"
-                    placeholder="City"
-                    class="form-control"
-            >
-        </div>
-      <div class="form-group col-2">
-        <label for="wereda">Wereda</label>
-        <input
-              type="text"
-              required
-              ng-model="candidate.wereda"
-              id="wereda"
-              name="wereda"
-              placeholder="Wereda"
-              class="form-control"
-        >
-      </div>                    
-    </div>
-    <div class="form-row">
-        <div class="form-group col">
-          <label for="mobile">Mobile Number</label>
-          <input 
-                type="text"
-                pattern="[0-9]{10}"
-                required
-                ng-model="candidate.cell_phone"
-                name="mobile"
-                id="mobile"
-                class="form-control"
-                placeholder="Mobile Number"
-          >
-        </div>
-        <div class="form-group col">
-          <label for="officePhone">Office Phone</label>
-          <input
-                type="text"
-                pattern="[0-9]{10}"                                  
-                ng-model="candidate.office_phone"
-                name="officePhone"
-                id="officePhone"
-                placeholder="Office Phone Number"
-                class="form-control"
-          >
-        </div>
-        <div class="form-group col">
-            <label for="homePhone">Home Phone</label>
             <input
                   type="text"
-                  pattern="[0-9]{10}"                                  
-                  ng-model="candidate.home_phone"
-                  name="homePhone"
-                  id="homePhone"
-                  placeholder="Home Phone Number"
+                  required
+                  ng-model="candidate.city"
+                  name="city"
+                  id="city"
+                  placeholder="City"
                   class="form-control"
             >
-          </div>
-      </div>   
+         </div>
+      </div>
+      <div class="row">
+         <div class="form-group col">
+            <label for="zone">Zone</label>
+            <input
+                  type="text"
+                  ng-model="candidate.zone"
+                  name="zone"
+                  id="zone"
+                  placeholder="Zone"
+                  required="required"
+                  class="form-control"
+            >
+         </div>
+      </div>
+      <div class="row">
+         <div class="form-group col-2">
+            <label for="wereda">Wereda</label>
+            <input
+                  type="text"
+                  required
+                  ng-model="candidate.wereda"
+                  id="wereda"
+                  name="wereda"
+                  placeholder="Wereda"
+                  class="form-control"
+            >
+         </div>
+      </div>
+   </div>
+      <div class="col">
+         <div class="row">
+            <div class="form-group col">
+               <label for="mobile">Mobile Number</label>
+               <input
+                     type="text"
+                     pattern="[0-9]{10}"
+                     required
+                     ng-model="candidate.cell_phone"
+                     name="mobile"
+                     id="mobile"
+                     class="form-control"
+                     placeholder="Mobile Number"
+               >
+            </div>
+         </div>
+         <div class="row">
+            <div class="form-group col">
+            <label for="officePhone">Office Phone</label>
+            <input
+                  type="text"
+                  pattern="[0-9]{10}"
+                  ng-model="candidate.office_phone"
+                  name="officePhone"
+                  id="officePhone"
+                  placeholder="Office Phone Number"
+                  class="form-control"
+            >
+            </div>
+         </div>
+         <div class="row">
+            <div class="form-group col">
+               <label for="homePhone">Home Phone</label>
+               <input
+                     type="text"
+                     pattern="[0-9]{10}"
+                     ng-model="candidate.home_phone"
+                     name="homePhone"
+                     id="homePhone"
+                     placeholder="Home Phone Number"
+                     class="form-control"
+               >
+            </div>
+         </div>
+         <div class="row">
+            <div class="form-group col">
+               <label for="email">E-mail Address</label>
+               <input
+                     type="email"                  
+                     ng-model="candidate.email"
+                     name="email"
+                     id="email"
+                     placeholder="Email Address"
+                     class="form-control"
+               >
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

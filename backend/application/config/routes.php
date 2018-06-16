@@ -53,3 +53,5 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 */
+
+$routes['candidate/register_assessment'] = 'assessment/register_assessment';

@@ -1,5 +1,7 @@
 <?php
+
  class OS extends API {
+
     public function __construct($config = 'rest') {
         parent::__construct($config);
         $this->load->model('os_model');
