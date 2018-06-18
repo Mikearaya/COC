@@ -60,8 +60,8 @@ public function changePassword()
             $data = array(
                            'password' => md5($npass)
                         );
-            $this->db->where('email', $this->session->userdata('admin_email'));
-            $this->db->update('users', $data); 
+            $this->db->where('contact_person', $this->session->userdata('contact_person'));
+            $this->db->update('center', $data); 
             return "true";
         }else{
             return "false";
