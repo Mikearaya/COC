@@ -25,7 +25,7 @@ public function save_candidate($candidate) {
     } else {
         echo 'insert';
         $candidate['reg_no'] = $candidate['cell_phone'];
-        $this->db->insert('candidate' , $candidate);
+        $this->db->insert('candidate' , $candidate['basic_info']);
         
     }
 

@@ -8,7 +8,7 @@
                class="form-control" 
                ng-required="true"
                placeholder="Full Name"
-               ng-model="candidate.full_name"
+               ng-model="candidate.basic_info.full_name"
                >                                                    
       </div>                   
    </div>
@@ -17,7 +17,7 @@
          <label for="gender">Gender</label>
          <select 
                name="gender"
-               ng-model="candidate.sex"
+               ng-model="candidate.basic_info.sex"
                required
                id="gender"
                aria-placeholder="Gender"                                
@@ -34,7 +34,7 @@
          <input 
                type="date"
                required
-               ng-model="candidate.birthdate"
+               ng-model="candidate.basic_info.birthdate"
                name="birthdate"
                id="birthdate"
                class="form-control"
@@ -47,7 +47,7 @@
          <label for="maritalStatus">Marital Status</label>
          <select 
                name="maritalStatus"
-               ng-model="candidate.marital_status"
+               ng-model="candidate.basic_info.marital_status"
                required
                id="maritalStatus"
                aria-placeholder="Marital Status"                                
@@ -64,7 +64,7 @@
          <input
                type="checkbox"
                name="disablity"
-               ng-model="candidate.disablity"
+               ng-model="candidate.basic_info.disablity"
                id="isDisabled"
                value="yes"
                class="form-check-input"
@@ -74,7 +74,7 @@
    <div class="row">
       <div class="form-group col" >
          <label for="disablityNature">Disablity Nature</label>
-         <textarea ng-disabled="!candidate.disablity"
+         <textarea ng-disabled="!candidate.basic_info.disablity"
                   class="form-control" 
                   name="disablityNature"
                   id="disablityNature" 

@@ -4,7 +4,7 @@
       <label for="fieldOfEmplyeement">Field of Employment</label>
       <input 
             type="text"
-            ng-model="candidate.field_of_employment"
+            ng-model="candidate.basic_info.field_of_employment"
             name="fieldOfEmplyeement"
             id="fieldOfEmplyeement"
             class="form-control"
@@ -17,7 +17,7 @@
       <label for="employmentCondition"> Employment Condition </label>
       <input 
             type="text"
-            ng-model="candidate.employment_condition"
+            ng-model="candidate.basic_info.employment_condition"
             name="employmentCondition"
             id="employmentCondition"
             class="form-control"
@@ -31,7 +31,7 @@
       <input 
             type="text"
             id="companyName"
-            ng-model="candidate.company_name"
+            ng-model="candidate.basic_info.company_name"
             class="form-control"
             name="companyName"
             placeholder="Company Name"
@@ -42,7 +42,7 @@
         <div class="form-group col">
           <label for="companyType"> Compay type</label>
           <select 
-                  ng-model="candidate.assessment.company_type"
+                  ng-model="candidate.basic_info.assessment.company_type"
                   id="companyType"
                   name="companyType"
                   class="form-control"
@@ -61,7 +61,7 @@
           <input 
                   type="number"
                   name="serviceYear"
-                  ng-model="candidate.assessment.service_year"
+                  ng-model="candidate.basic_info.assessment.service_year"
                   id="serviceYear"
                   placeholder="Service Year"
                   class="form-control"

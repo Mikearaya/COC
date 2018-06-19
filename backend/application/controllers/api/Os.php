@@ -54,4 +54,14 @@ function assessment_price_get($id = NULL) {
 
 
 }
+
+function sector_get($id = NULL) {
+    $result['result'] = $this->os_model->get_sector($id);
+    $result['columns'] = [];
+    if(count($result['result']) > 0) {
+        $first_record = (isset($result['result'][0])) ? $result['result'][0] : $result['result'];
+        $result['columns'] = array_keys((array)$first_record);
+    }
+    $this->response($result, API::HTTP_OK);
+}
 }

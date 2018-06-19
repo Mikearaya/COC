@@ -6,7 +6,7 @@
                   <label for="nationality">Nationality</label>
                   <input
                         type="text"
-                        ng-model="candidate.nationality"
+                        ng-model="candidate.basic_info.nationality"
                         name="nationality"
                         id="nationality"
                         placeholder="Nationality"
@@ -20,7 +20,7 @@
                <label for="region">Region</label>
                <select
                      type="text"
-                     ng-model="candidate.region"
+                     ng-model="candidate.basic_info.region"
                      name="region"
                      id="region"
                      placeholder="region"
@@ -37,7 +37,7 @@
                <input
                      type="text"
                      required
-                     ng-model="candidate.city"
+                     ng-model="candidate.basic_info.city"
                      name="city"
                      id="city"
                      placeholder="City"
@@ -50,7 +50,7 @@
                <label for="zone">Zone</label>
                <input
                      type="text"
-                     ng-model="candidate.zone"
+                     ng-model="candidate.basic_info.zone"
                      name="zone"
                      id="zone"
                      placeholder="Zone"
@@ -65,7 +65,7 @@
                <input
                      type="text"
                      required
-                     ng-model="candidate.wereda"
+                     ng-model="candidate.basic_info.wereda"
                      id="wereda"
                      name="wereda"
                      placeholder="Wereda"
@@ -82,7 +82,7 @@
                         type="text"
                         pattern="[0-9]{10}"
                         required
-                        ng-model="candidate.cell_phone"
+                        ng-model="candidate.basic_info.cell_phone"
                         name="mobile"
                         id="mobile"
                         class="form-control"
@@ -96,7 +96,7 @@
                <input
                      type="text"
                      pattern="[0-9]{10}"
-                     ng-model="candidate.office_phone"
+                     ng-model="candidate.basic_info.office_phone"
                      name="officePhone"
                      id="officePhone"
                      placeholder="Office Phone Number"
@@ -110,7 +110,7 @@
                   <input
                         type="text"
                         pattern="[0-9]{10}"
-                        ng-model="candidate.home_phone"
+                        ng-model="candidate.basic_info.home_phone"
                         name="homePhone"
                         id="homePhone"
                         placeholder="Home Phone Number"
@@ -123,7 +123,7 @@
                   <label for="email">E-mail Address</label>
                   <input
                         type="email"                  
-                        ng-model="candidate.email"
+                        ng-model="candidate.basic_info.email"
                         name="email"
                         id="email"
                         placeholder="Email Address"
