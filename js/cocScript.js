@@ -42,17 +42,18 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
         });
   $scope.candidate = {
                         basic_info:{
-                          id: '',
+
                         reg_no: '',
                         full_name: '',
-                        gender: '',
-                        date_of_birth: '',
+                        sex: '',
+                        age: '',
+                        sub_city: '',
                         nationality: '',
                         wereda: '',
                         home_phone: '',
                         office_phone: '',
                         cell_phone: '',
-                        martial_status: '',
+                        marital_status: '',
                         disablity: '',
                         disablity_nature: '',
                         institute_type: '',
@@ -66,7 +67,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                         occupation_trained_on: '',
                         education_background: '',
                         cooprative_training_center: '',
-                        status_of_cooperative_center: '',
+                        status_of_cooprative_center: '',
                         employment_condition: '',
                         status_of_company: '',
                         company_type: '',
@@ -83,8 +84,6 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                           exam_id: '',
                           occ_code: '',
                           re_assessment: '',
-                          practice_result: '',
-                          knowledge_result: '',
                           amount_paid: '',
                           payment_status: '',
                           invoice_no: '',
@@ -105,9 +104,6 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
   };
 
  
-
-
-  $scope.candidate = {basic_info:{},assessment: {}};
   $scope.PARENT_SECTORS = [];
   $scope.SECTORS = [];
   $scope.OCCUPATIONS = [];

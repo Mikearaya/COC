@@ -60,17 +60,9 @@ class Candidate extends API {
                 
             try {
             
-            $candidate_id;
-            $candidate_id = $this->candidate_model->check_candidate_exist($candidate_info['cell_phone']);
-                
-                if($candidate_id){
-                    $assessment['re_assessment'] = 1;
-                
-                } else {                                        
+
                     $assessment['re_assessment'] = 0;
                     $candidate_id = $this->candidate_model->save_candidate($candidate_info);
-                    var_dump($candidate_id);
-                }
                     $this->register_assessment($assessment, $candidate_id);
                 } catch (Exception $e) {
                     echo $e->getMessage();
