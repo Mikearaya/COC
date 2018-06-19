@@ -6,24 +6,23 @@ class Result_model extends MY_Model {
     parent::__construct();
     $this->load->database();
   }
-
+//get compitant candidate 
 public function get_result() {
     
-       $this->db->select('exam_id,can_regno,occ_code,practical_result,knowledge_result');
+       $this->db->select('candidate.full_name,candidate.reg_no, CONCAT(assessment.practical_result, assessment.practical_result) as result');
        $this->db->from('assessment');
-       $where = "practical_result='Satisfactory' AND knowledge_result >=20 ";
+       $where = "practical_result='Satisfactory' AND knowledge_result >=36";
        $this->db->where($where);
        $this->db->join('candidate','candidate.id=assessment.exam_id','left');
     
-      
-       //$query = $this->db->query("SELECT `exam_id`, `can_regno`, `occ_code`, `practical_result`, `knowledge_result` FROM assessment WHERE (`practical_result` = `Satisfactory` AND `knowledge_result` >= 50 FROM assessment ) AS COMPITANT");
         
-        //$this->db->get($query);
-      
-        // $this->db->orderd_by('registration_date','desc');
-       // $this->db->join('candidate','candidate.full_name = assessment.exam_id','left');
-        $query=$this->db->get();
-        return $query->result_array();
+        $query = $this->db->get(); 
+            if($query->num_rows() != 0){
+                return $query->result_array();
+            } else {    
+                return false;
+        }
+        
     }
 
    
