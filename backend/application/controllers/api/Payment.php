@@ -5,7 +5,7 @@ class Payment extends API {
         parent::__construct($config);
         $this->load->model('payment_model');
     }
-    
+    //get function for payment
     function index_get($id = NULL) {
 
         $result['result'] = $this->payment_model->get_payment($id);
@@ -17,7 +17,7 @@ class Payment extends API {
         }
         $this->response($result,API::HTTP_OK);
     }
-    
+    // post function for save invoice 
     function index_post($id = NULL) {
         $this->load->library('form_validation');
         $result['success'] = false;
