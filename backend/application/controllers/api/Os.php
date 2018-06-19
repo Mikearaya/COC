@@ -6,20 +6,9 @@
         parent::__construct($config);
         $this->load->model('os_model');
     }
-    function index_get($os_type = NULL, $os_code = NULL) {
-     
-        $result['result'] = $this->os_model->get_os($os_type, $os_code);
 
-        $result['columns'] = [];
-
-        if(count($result)>0) {
-            $first_record= isset($result['result'][0]) ? $result['result'][0] : $result['result'];                      
-            $result['columns']=array_keys((array)$first_record);
-    }
-    $this->response($result,API::HTTP_OK);
-}
-
-function occupation_get($id = NULL){
+function occupation_get($id = NULL) {
+	$id = ($id) ? urldecode($id) : NULL;
     $result['result'] = $this->os_model->get_occupation($id);
         $result['columns'] = [];
 
@@ -31,6 +20,7 @@ function occupation_get($id = NULL){
 }
 function unit_of_competency_get($id = NULL) {
 
+	$id = ($id) ? urldecode($id) : NULL;
     $result['result'] = $this->os_model->get_unit_of_competency($id);
         $result['columns'] = [];
 
@@ -43,6 +33,7 @@ function unit_of_competency_get($id = NULL) {
 }
 
 function assessment_price_get($id = NULL) {
+	$id = ($id) ? urldecode($id) : NULL;
     $result['result'] = $this->os_model->get_assessment_price($id);
         $result['columns'] = [];
 

@@ -69,7 +69,12 @@ class Candidate extends API {
                 }
             $this->response($result, API::HTTP_OK);
         }
-    }
+	}
+	
+	public function has_account_get($phoneNumber) {
+		$result = $this->candidate_model->candidate_has_account($phoneNumber);
+		$this->response($result, API::HTTP_OK);
+	}
 
 }
 

@@ -8,7 +8,7 @@
               id="mainSector"
               ng-model="sector"
               required
-              ng-change="loadSubSectors(sector)"
+              ng-change="loadSectors(sector)"
               class="form-control"
       >
       <option ng-repeat="parentSector in PARENT_SECTORS" value="{{parentSector.sector_code}}">{{parentSector.sector_name}}</option>
@@ -40,7 +40,7 @@
                 name="occupation"
                 aria-placeholder="Occupation"
                 id="occupation"
-                ng-change="loadUCs(candidate.assessment.occ_code); applicationFee(occupation)"
+                ng-change="loadUCs(candidate.assessment.occ_code)"
                 ng-model="candidate.assessment.occ_code"
                 required
                 class="form-control"
@@ -53,7 +53,6 @@
     <div class="form-check form-check-inline"> 
         <label for="ucRegister" class="form-check-label">Register For UC</label>
         <input 
-          ng-disabled="!candidate.assessment.occ_code"
               type="checkbox"
               name="ucRegister"
               ng-model="applyUc"
@@ -68,6 +67,7 @@
     <div class="form-group col" ng-if="applyUc">
       <label for="uc">Unit of Competencies</label>
       <select
+              ng-disabled="!candidate.assessment.occ_code"
               name="uc"
               aria-placeholder="Unit Of Competencies"
               id="uc"
@@ -81,9 +81,11 @@
     </div>
   </div>
 <div class="row">
-  <div class="form-group col">
+  <div class="form-group col alert-info">
     <label for="applicationFee">Application Fee</label>
     <input type="text"
+        
+            disabled
             ng-model="candidate.assessment.application_fee"
             id="applicationFee"
             value="APPLICATION_FEE"

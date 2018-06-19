@@ -37,6 +37,7 @@ public function save_assessment($assessment, $candidateId) {
 	$assessment['branch_code'] ='W';
 	$assessment['registered_by'] = 'addisu';
 	$assessment['center_code'] = '00';
+	$assessment['payment_status'] = 'PENDING';
 
     $this->db->insert('assessment' , $assessment);
 return ($this->db->affected_rows()) ? $candidateId : false; 
@@ -56,7 +57,16 @@ public function update_candidate($candidate) {
         } else {
             return false;
         }
-    }
+	}
+	
+	public function candidate_has_account($phoneNumber) {
+		$result = $this->db->get_where('candidate', array('cell_phone' => trim($phoneNumber)));
+				if($this->db->affected_rows() === 1) {
+						return $result->row_array();	
+				} else {
+					return false;
+				}
+	}
 
 }
 ?>
