@@ -18,6 +18,10 @@ class Candidate extends API {
     }
 
 
+    /**
+     * 
+     * 
+     */
     public function register_assessment($assessment, $candidateId) {
         $this->load->library('form_validation');
         $result['success'] = false;
@@ -45,12 +49,6 @@ class Candidate extends API {
         $result['success'] = false;
 
         $this->form_validation->set_rules("basic_info[full_name]", "Full Name", "required");
-        $this->form_validation->set_rules("assessment[amount_paid]", "Amount_paid", "required");
-        $this->form_validation->set_rules('assessment[apply_for_uc]', 'applied for UC', "required");
-        $this->form_validation->set_rules('assessment[center_code]', 'Center Code', "required");
-        $this->form_validation->set_rules('assessment[assessment_rate]', 'Assessment Rate', "required");
-        $this->form_validation->set_rules('assessment[registered_by]', 'Focal Person Name', "required");
-        $this->form_validation->set_rules('assessment[payment_status]', 'Payment Status', "required");
 
     
         if($this->form_validation->run() === FALSE ) {

@@ -6,7 +6,8 @@
     }
     // list candidate who are paid for assessment
     public function get_payment(){
-        $this->db->select('candidate.full_name, candidate.reg_no, assessment.paid,assessment.amount_paid ,assessment.registration_date,assessment.exam_id, invoice.id,invoice.invoice_no,invoice.date,invoice.amount,occupation.occ_name,occupation.level');
+        $this->db->select('candidate.full_name, candidate.reg_no, assessment.paid,assessment.amount_paid ,assessment.registration_date,assessment.exam_id,
+                         invoice.id,invoice.invoice_no,invoice.date,invoice.amount,occupation.occ_name,occupation.level');
         $this->db->from('assessment');
         $this->db->where('paid',1);
         $this->db->join('invoice','invoice.id=assessment.exam_id','left');

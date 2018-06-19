@@ -4,7 +4,7 @@
         <label for="inistituteName">Inistitute Name</label>
         <input
               type="text"
-              ng-model="candidate.inistitute_name"
+              ng-model="candidate.basic_info.inistitute_name"
               required
               name="inistituteName"
               id="inistituteName"
@@ -22,7 +22,7 @@
                 id="eduacationBackground"
                 class="form-control"
                 required
-                ng-model="candidate.education_background"
+                ng-model="candidate.basic_info.education_background"
                 placeholder="Education Background"
           > 
         </div>
@@ -30,7 +30,7 @@
             <label for="trainingType">Type of Training</label>
             <select 
                   name="trainingType"
-                  ng-model="candidate.type_of_training"
+                  ng-model="candidate.basic_info.type_of_training"
                   required
                   id="trainingType"
                   aria-placeholder="Training Type"                                
@@ -50,7 +50,7 @@
         <label for="trainingMode">Mode of Training</label>
         <select 
               name="trainingMode"
-              ng-model="candidate.mode_of_training"
+              ng-model="candidate.basic_info.mode_of_training"
               required
               id="trainingMode"
               aria-placeholder="Mode of Training"                                
@@ -67,7 +67,7 @@
           <label for="inistituteType">Inistitute Type</label>
           <select 
                 name="inistituteType"
-                ng-model="candidate.inistitute_type"
+                ng-model="candidate.basic_info.inistitute_type"
                 required
                 id="inistituteType"
                 aria-placeholder="Inistitute Type"                                
@@ -87,7 +87,7 @@
           <label for="trainingStart">Training Start</label>
           <input
                 type="date"
-                ng-model="candidate.training_start"
+                ng-model="candidate.basic_info.training_start"
                 required
                 name="trainingStart"
                 id="trainingStart"
@@ -99,7 +99,7 @@
             <label for="trainingEnd">Training End</label>
             <input
                   type="date"
-                  ng-model="candidate.training_end"
+                  ng-model="candidate.basic_info.training_end"
                   required
                   name="trainingEnd"
                   id="trainingEnd"
@@ -114,7 +114,7 @@
           <input
                 type="text"
                 required
-                ng-model="candidate.cooperative_training_center"
+                ng-model="candidate.basic_info.basic_info.cooperative_training_center"
                 name="trainingCenter"
                 id="trainingCenter"
                 placeholder="Cooperative Training Center"
@@ -126,7 +126,7 @@
             <input
                   type="text"
                   required
-                  ng-model="candidate.cooperative_training_center_status"
+                  ng-model="candidate.basic_info.cooperative_training_center_status"
                   name="trainingCenterStatus"
                   id="trainingCenterStatus"
                   placeholder="Cooperative Training Center Status"
@@ -139,7 +139,7 @@
             <label for="currentLevel">Current Level</label>
             <select 
                   name="currentLevel"
-                  ng-model="candidate.current_level"
+                  ng-model="candidate.basic_info.current_level"
                   required
                   id="currentLevel"
                   aria-placeholder="Current Level"                                
@@ -156,7 +156,7 @@
               <label for="graduatedLevel">Graduated Level</label>
               <select 
                     name="graduatedLevel"
-                    ng-model="candidate.graduated_level"
+                    ng-model="candidate.basic_info.graduated_level"
                     required
                     id="graduatedLevel"
                     aria-placeholder="Inistitute Type"                                

@@ -32,119 +32,67 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 //registration page controller
 app.controller("registrationController", ["$scope", "$http", "$httpParamSerializerJQLike", 
       function($scope, $http, $httpParamSerializerJQLike){
-        $("#phoneModal").modal({
-          keyboard: false,
-          show: true,
-          backdrop: 'static'
-        });
-        $('#phoneModal').on('shown.bs.modal', function () {
-          $('#candidatePhone').trigger('focus')
-        })
-  $scope.candidate = {
-                        basic_info:{
-                          id: '',
-                        reg_no: '',
-                        full_name: '',
-                        gender: '',
-                        date_of_birth: '',
-                        nationality: '',
-                        wereda: '',
-                        home_phone: '',
-                        office_phone: '',
-                        cell_phone: '',
-                        martial_status: '',
-                        disablity: '',
-                        disablity_nature: '',
-                        institute_type: '',
-                        institute_name: '',
-                        region: '',
-                        city: '',
-                        training_start: '',
-                        training_end: '',
-                        mode_of_training: '',
-                        type_of_training: '',
-                        occupation_trained_on: '',
-                        education_background: '',
-                        cooprative_training_center: '',
-                        status_of_cooperative_center: '',
-                        employment_condition: '',
-                        status_of_company: '',
-                        company_type: '',
-                        company_name: '',
-                        service_year: '',
-                        field_of_employment: '',
-                        full_name_am: '',
-                        email: '', 
-                        current_level: '',
-                        graduated_level: '',
-                        },
-                        assessment: {
-                          can_regno: '',
-                          exam_id: '',
-                          occ_code: '',
-                          re_assessment: '',
-                          practice_result: '',
-                          knowledge_result: '',
-                          amount_paid: '',
-                          payment_status: '',
-                          invoice_no: '',
-                          registration_date: '',
-                          apply_for_uc: '',
-                          application_status: '',
-                          branch_code: '',
-                          excuse_payment: '',
-                          graduated_status: '',
-                          applied_for: '',
-                          application: '',
-                          registered_by: '',
-                          assessment_rate: '',
-                          center_code: '',
-                          paid: ''
 
-                    }
+  $scope.candidate = {basic_info:{},assessment: {}};
+  $scope.PARENT_SECTORS = [];
+  $scope.SECTORS = [];
+  $scope.OCCUPATIONS = [];
+  $scope.UCS = [];
+  $scope.APPLICATION_FEE = 0;
 
-
-  };
-
- this.message = function(text) {
-    console.log(text);
-
-  }
-/* 
   $http({
     method : "GET",
-    url : "backend/index.php/api/data/occupation",
-    data :$httpParamSerializerJQLike($scope.candidate),
+    url : "backend/index.php/api/os/sector",
 })
 .then(function(response){
-console.log(response);
+$scope.PARENT_SECTORS = response.data.result;
 });
 
-$http({
-  method : "GET",
-  url : "backend/index.php/api/data/uc",
-  data :$httpParamSerializerJQLike($scope.candidate),
+$scope.parentSector = function(x) {
+  $http({
+    method : "GET",
+    url : "backend/index.php/api/os/sector",
 })
 .then(function(response){
-console.log(response);
+$scope.PARENT_SECTORS = response.data.result;
 });
-$http({
-  method : "GET",
-  url : "backend/index.php/api/data/sector",
-  data :$httpParamSerializerJQLike($scope.candidate)
-})
-.then(function(response){
-console.log(response);
-});
-$http({
-  method : "GET",
-  url : "backend/index.php/api/data/fees",
-  data :$httpParamSerializerJQLike($scope.candidate)
-})
-.then(function(response){
-console.log(response);
-});
-*/
+}
+
+
+$scope.applicationFee = function(fee) {
+  $scope.APPLICATION_FEE = fee;
+}
+
+  $scope.loadSubSectors = function(parentId) {
+    $http({
+      method : "GET",
+      url : "backend/index.php/api/os/sector/"+parentId,
+  })
+  .then(function(response){
+  $scope.SECTORS = response.data.result;
+  });
+  
+  } 
+  $scope.loadOccupations = function(sectorId) {
+    $http({
+      method : "GET",
+      url : "backend/index.php/api/os/occupation/"+sectorId,
+  })
+  .then(function(response){
+  $scope.OCCUPATIONS = response.data.result;
+  });
+  }
+
+
+  $scope.loadUCs = function(occupationId) {
+    $http({
+      method : "GET",
+      url : "backend/index.php/api/os/unit_of_competency/"+occupationId,
+  })
+  .then(function(response){
+  $scope.UCS = response.data.result;
+  });
+  }
 
   $scope.register = function() { 
 
@@ -155,7 +103,6 @@ console.log(response);
                   headers: {'Content-Type':'application/x-www-form-urlencoded'}
           })
           .then(function(response){
-            console.log(response);
           });
         };
   $scope.REGIONS = [
