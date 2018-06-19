@@ -6,9 +6,9 @@
               name="mainSector"
               aria-placeholder="Sector"
               id="mainSector"
-              ng-model="candidate.assessment.mainSector"
+              ng-model="sector"
               required
-              ng-change="loadSubSectors(candidate.assessment.mainSector)"
+              ng-change="loadSubSectors(sector)"
               class="form-control"
       >
       <option ng-repeat="parentSector in PARENT_SECTORS" value="{{parentSector.sector_code}}">{{parentSector.sector_name}}</option>
@@ -19,13 +19,13 @@
     <div class="form-group col">
       <label for="subSector" > Sub-Sector </label>
       <select
-              ng-disabled="!candidate.assessment.mainSector"
+              ng-disabled="!sector"
               name="subSector"
               aria-placeholder="subSector"
               id="subSector"
-              ng-model="candidate.assessment.subSector"
+              ng-model="subSector"
               required
-              ng-change="loadOccupations(candidate.assessment.subSector)"
+              ng-change="loadOccupations(subSector)"
               class="form-control"
       >
       <option ng-repeat="sector in SECTORS" value="{{sector.sector_code}}">{{sector.sector_name}}</option>
@@ -36,11 +36,11 @@
     <div class="form-group col">
         <label for="occupation">Occupation</label>
         <select
-                ng-disabled="!candidate.assessment.subSector"
+                ng-disabled="!subSector"
                 name="occupation"
                 aria-placeholder="Occupation"
                 id="occupation"
-                ng-change="loadUCs(candidate.assessment.occCode); applicationFee(occupation.)"
+                ng-change="loadUCs(candidate.assessment.occ_code); applicationFee(occupation)"
                 ng-model="candidate.assessment.occCode"
                 required
                 class="form-control"
@@ -53,7 +53,7 @@
     <div class="form-check form-check-inline"> 
         <label for="ucRegister" class="form-check-label">Register For UC</label>
         <input 
-          ng-disabled="!candidate.assessment.occCode"
+          ng-disabled="!candidate.assessment.occ_code"
               type="checkbox"
               name="ucRegister"
               ng-model="applyUc"
@@ -71,7 +71,7 @@
               name="uc"
               aria-placeholder="Unit Of Competencies"
               id="uc"
-              ng-model="candidate.assessment.ucs"
+              ng-model="candidate.assessment.uc_code"
               required    
               multiple
               class="form-control"
