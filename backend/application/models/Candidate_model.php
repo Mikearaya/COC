@@ -18,14 +18,11 @@ public function get_candidate($candidateID = NULL) {
     }  
 public function save_candidate($candidate) {
     if(false) {
-        echo 'update';
         return $this->update_candidate($candidate);
       
     } else {
-        echo 'insert';
         $candidate['reg_no'] = $candidate['cell_phone'];
-        $this->db->insert('candidate' , $candidate);
-        
+        $this->db->insert('candidate' , $candidate);        
     }
 
 

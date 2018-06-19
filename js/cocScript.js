@@ -47,24 +47,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                         id: '',
                         reg_no: '',                       
                         },
-                        assessment: {
-                          can_regno: '',
-                          exam_id: '',
-                          occ_code: '',
-                          re_assessment: '',
-                          amount_paid: '',
-                          payment_status: 'PAID',
-                          registration_date: '',
-                          apply_for_uc: '',
-                          application_status: '',
-                          branch_code: '',
-                          graduated_status: '',                          
-                          registered_by: '',
-                          assessment_rate: '',
-                          center_code: '',
-                          paid: 1
-
-                    }
+                        assessment: { }
   };
 
   $scope.searchPhone = function() {
@@ -103,7 +86,7 @@ initializeOS = function(type, id = null) {
 applicationFee = function(occ_code) {
 
     initializeOS('assessment_price', occ_code ).then(function(response){
-      $scope.candidate.assessment.application_fee = response.data.result.amount_for_level;
+      $scope.candidate.assessment.assessment_rate = response.data.result.amount_for_level;
     });
 };
 

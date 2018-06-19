@@ -86,9 +86,8 @@
     <input type="text"
         
             disabled
-            ng-model="candidate.assessment.application_fee"
+            ng-model="candidate.assessment.assessment_rate"
             id="applicationFee"
-            value="APPLICATION_FEE"
             name="applicationFee"
             class="form-control"
     >
@@ -96,6 +95,7 @@
     <div class="form-check form-check-inline col">
     <input type="checkbox"
             name="paid"
+            ng-change="candidate.assessment.amount_paid = candidate.assessment.assessment_rate"
             ng-model="candidate.assessment.paid"
             class="form-check-input"
             id="paid"
