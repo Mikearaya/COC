@@ -6,26 +6,20 @@
     }
     // list candidate who are paid for assessment
     public function get_payment(){
-        $this->db->select('exam_id,can_regno,amount_paid,payment_status,registration_date,paid');
+        $this->db->select('candidate.full_name, candidate.reg_no, assessment.paid,assessment.amount_paid ,assessment.registration_date,assessment.exam_id, invoice.id,invoice.invoice_no,invoice.date,invoice.amount,occupation.occ_name,occupation.level');
         $this->db->from('assessment');
         $this->db->where('paid',1);
         $this->db->join('invoice','invoice.id=assessment.exam_id','left');
-       
-        //$this->db->join('assessment on assessment.can_regno=candidate.reg_no');
-        //$this->db->join('join occupation on occupation.occ_code=assessment.occ_code');
-       // $this->db->join('candidate','candidate.id = assessment.exam_id');
-       // $this->db->join('occupation','occupation.id = invoice.id');
-        $this->db->order_by('assessment.exam_id','asc');         
+        $this->db->join('candidate','candidate.reg_no = assessment.can_regno');
+        $this->db->join('occupation','occupation.occ_code = assessment.occ_code');
+        $this->db->order_by('assessment.registration_date','desc');         
         $query = $this->db->get(); 
             if($query->num_rows() != 0){
                 return $query->result_array();
             } else {    
                 return false;
-}
-        //$this->db->orderd_by('registration_date','desc');
+        }
         
-        //$query=$this->db->get();
-        //return $query->result_array();
     }
     
     // save and update invoice number 
