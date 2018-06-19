@@ -102,15 +102,10 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                           paid: ''
 
                     }
-
-
   };
 
- this.message = function(text) {
-    console.log(text);
 
-  }
-/* 
+  /* 
   $http({
     method : "GET",
     url : "backend/index.php/api/data/occupation",
