@@ -31,15 +31,12 @@ class Candidate extends API {
         $data;
         if($this->form_validation->run() === FALSE ) {
             $this->response($this->validation_errors(), API::HTTP_OK);
-        } else {    
-            if($assessment['re_assessment'] == 'true' ) {
-                $assessment['re_assessment'] = true;
-                $assessment['can_regno'] = $candidateId;
-            }
+        } else {                
 
-        }
+        
             $result['success'] = ($this->candidate_model->save_assessment($assessment, $candidateId)) ? true : false;
-            $this->response($result, API::HTTP_OK);
+			$this->response($result, API::HTTP_OK);
+		}
 
     }
 
@@ -54,30 +51,27 @@ class Candidate extends API {
         if($this->form_validation->run() === FALSE ) {
             $this->response($this->validation_errors(), API::HTTP_OK);
         } else {
-                $data=$this->input->post();
-                $candidate_info = $data['basic_info'];
-                $assessment = $data['assessment']; 
-                
+                $candidate_info = $this->input->post('basic_info');
+                $assessment = $this->input->post('assessment'); 
+        
             try {
-            
-            $candidate_id;
-            $candidate_id = $this->candidate_model->check_candidate_exist($candidate_info['cell_phone']);
-                
-                if($candidate_id){
-                    $assessment['re_assessment'] = 1;
-                
-                } else {                                        
-                    $assessment['re_assessment'] = 0;
-                    $candidate_id = $this->candidate_model->save_candidate($candidate_info);
-                    var_dump($candidate_id);
-                }
-                    $this->register_assessment($assessment, $candidate_id);
+				$candidate_id = $candidate_info['reg_no'];
+					if(!trim($candidate_id)) { 
+                    	$candidate_id = $this->candidate_model->save_candidate($candidate_info);						
+					} 
+						$this->register_assessment($assessment, $candidate_id);
+					
                 } catch (Exception $e) {
                     echo $e->getMessage();
                 }
             $this->response($result, API::HTTP_OK);
         }
-    }
+	}
+	
+	public function has_account_get($phoneNumber) {
+		$result = $this->candidate_model->candidate_has_account($phoneNumber);
+		$this->response($result, API::HTTP_OK);
+	}
 
 }
 

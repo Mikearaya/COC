@@ -17,24 +17,24 @@ public function get_candidate($candidateID = NULL) {
       return $result;
     }  
 public function save_candidate($candidate) {
-    echo 'save candidate';
-    if(!is_null($candidate['reg_no'])) {
-        echo 'update';
+    if(false) {
         return $this->update_candidate($candidate);
       
     } else {
-        echo 'insert';
         $candidate['reg_no'] = $candidate['cell_phone'];
-        $this->db->insert('candidate' , $candidate['basic_info']);
-        
+        $this->db->insert('candidate' , $candidate);        
     }
 
-    var_dump($this->db->insert_id());
-    return ($this->db->affected_rows()) ? 7777 : false; 
+
+    return ($this->db->affected_rows()) ? $candidate['cell_phone'] : false; 
 }
 
 public function save_assessment($assessment, $candidateId) {
-    $assessment['can_regno'] =$candidateId;
+	$assessment['can_regno'] =$candidateId;
+	$assessment['branch_code'] ='W';
+	$assessment['registered_by'] = 'addisu';
+	$assessment['center_code'] = '00';
+	$assessment['payment_status'] = 'PENDING';
 
     $this->db->insert('assessment' , $assessment);
 return ($this->db->affected_rows()) ? $candidateId : false; 
@@ -54,7 +54,16 @@ public function update_candidate($candidate) {
         } else {
             return false;
         }
-    }
+	}
+	
+	public function candidate_has_account($phoneNumber) {
+		$result = $this->db->get_where('candidate', array('cell_phone' => trim($phoneNumber)));
+				if($this->db->affected_rows() === 1) {
+						return $result->row_array();	
+				} else {
+					return false;
+				}
+	}
 
 }
 ?>

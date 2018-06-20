@@ -32,66 +32,89 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 //registration page controller
 app.controller("registrationController", ["$scope", "$http", "$httpParamSerializerJQLike", 
       function($scope, $http, $httpParamSerializerJQLike){
+        $("#phoneModal").modal({
+          keyboard: false,
+          show: true,
+          backdrop: 'static'
+        });
+        $('#phoneModal').on('shown.bs.modal', function () {
+          $('#candidatePhone').trigger('focus');
+        });
 
-  $scope.candidate = {basic_info:{},assessment: {}};
+       
+  $scope.candidate = {
+                        basic_info:{
+                        id: '',
+                        reg_no: '',                       
+                        },
+                        assessment: { }
+  };
+
+  $scope.searchPhone = function() {
+    
+    $http({
+      method : "GET",
+      url : "backend/index.php/api/candidate/has_account/"+$scope.phoneNumber
+  }).then(function(response){
+    console.log(response.data);
+        if(response.data) {
+          $scope.candidate.basic_info = response.data;
+        }
+        $("#phoneModal").modal('hide');
+  });
+  }
+ 
   $scope.PARENT_SECTORS = [];
   $scope.SECTORS = [];
   $scope.OCCUPATIONS = [];
   $scope.UCS = [];
   $scope.APPLICATION_FEE = 0;
 
-  $http({
+
+
+initializeOS = function(type, id = null) {
+  osCode = (id) ? id : '';
+  URL = (id) ? "backend/index.php/api/os/"+type+"/"+id : "backend/index.php/api/os/"+type;
+  return $http({
     method : "GET",
-    url : "backend/index.php/api/os/sector",
-})
-.then(function(response){
-$scope.PARENT_SECTORS = response.data.result;
+    url : URL
 });
-
-$scope.parentSector = function(x) {
-  $http({
-    method : "GET",
-    url : "backend/index.php/api/os/sector",
-})
-.then(function(response){
-$scope.PARENT_SECTORS = response.data.result;
-});
-}
+};
 
 
-$scope.applicationFee = function(fee) {
-  $scope.APPLICATION_FEE = fee;
-}
 
-  $scope.loadSubSectors = function(parentId) {
-    $http({
-      method : "GET",
-      url : "backend/index.php/api/os/sector/"+parentId,
-  })
-  .then(function(response){
-  $scope.SECTORS = response.data.result;
+applicationFee = function(occ_code) {
+
+    initializeOS('assessment_price', occ_code ).then(function(response){
+      $scope.candidate.assessment.assessment_rate = response.data.result.amount_for_level;
+    });
+};
+
+  $scope.loadSectors = function(parentId = null) {
+    initializeOS('sector', parentId).then(function(response){
+      if(parentId) {
+        $scope.SECTORS = response.data.result;
+      } else {
+        $scope.PARENT_SECTORS = response.data.result;
+      }
   });
   
-  } 
+  };
+ $scope.loadSectors(); 
   $scope.loadOccupations = function(sectorId) {
-    $http({
-      method : "GET",
-      url : "backend/index.php/api/os/occupation/"+sectorId,
-  })
-  .then(function(response){
-  $scope.OCCUPATIONS = response.data.result;
-  });
+    initializeOS('occupation', sectorId).then(function(response){
+          $scope.OCCUPATIONS = response.data.result;
+      });
+
+      
   }
 
 
   $scope.loadUCs = function(occupationId) {
-    $http({
-      method : "GET",
-      url : "backend/index.php/api/os/unit_of_competency/"+occupationId,
-  })
-  .then(function(response){
-  $scope.UCS = response.data.result;
-  });
+    applicationFee(occupationId);
+   initializeOS('unit_of_competency', occupationId).then(function(response){
+        $scope.UCS = response.data.result;
+    });
   }
 
   $scope.register = function() { 

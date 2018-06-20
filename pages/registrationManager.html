@@ -53,19 +53,21 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+                <form name="phoneSearch" ng-submit="searchPhone()">
                 <div class="modal-body">
-                    <form name="phoneSearch" ng-submit="searchPhone()">
+                    
                         <div class="row">
                             <div class="col form-group">
-                                <label for="candidatePhone">Candidate Phone</label>
+                                <label for="candidatePhone">Candidate Phone </label>
                                 <input type="text" ng-model="phoneNumber" class="form-control" name="candidatePhone" id="candidatePhone" required>                                
                             </div>
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
                   <button type="submit" ng-disabled="phoneSearch.$invalid" class="btn btn-primary">Search</button>
                 </div>
+            </form>
               </div>
             </div>
           </div>

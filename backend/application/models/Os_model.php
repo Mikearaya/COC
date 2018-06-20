@@ -4,7 +4,7 @@
         parent::__construct();
         $this->load->database();
     }
-  
+
     public function get_occupation($sector_id = NULL) {
             $result = NULL;
                 if(!is_null($sector_id)) {
