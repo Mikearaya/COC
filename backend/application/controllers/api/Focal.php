@@ -17,7 +17,7 @@ function index_post(){
             $result = array('success' => false);
         }
         else{
-            $this->session->set_userdata('center_id',$focal['center_id']);
+            $this->session->set_userdata('center_code',$focal['center_code']);
             $this->session->set_userdata('center_name',$focal['center_name']);
             $this->session->set_userdata('contact_person',$focal['contact_person']);
             $result = array('success' => true);

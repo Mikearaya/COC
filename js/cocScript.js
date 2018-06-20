@@ -190,29 +190,18 @@ app.controller("admissionController", ["$scope", function($scope){
 
 
 //schedule page controller
-app.controller("scheduleController", ["$scope", function($scope){
+app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQLike",  function($scope, $http, $httpParamSerializerJQLike){
 
-  $scope.assessmentSchedules = [{
-        scheduleId : "SCH-001",
-        groupId: "G-001",
-        location: "Vision College",
-        occupation: "OCC-938",
-        date: "1-13-2018",
-        time: "09:00 ETC"
-      },
-      {
-        scheduleId : "SCH-002",
-        groupId: "G-002",
-        location: "Vision College",
-        occupation: "OCC-977",
-        date: "1-13-2018",
-        time: "09:00 ETC"
-      }];
+          $scope.AVAILABLE_SCHEDULES = [];
 
-      $scope.payment = {
-        invoiceNo: "",
-        date: ""
-      }
+          $http({
+            method: 'GET',
+            url: 'backend/index.php/api/schedule'
+          }).then(function(response){
+                  if(response) {
+                    $scope.AVAILABLE_SCHEDULES = response.data.result;
+                  }
+          });
 }]);
 
 
@@ -303,7 +292,7 @@ app.controller('logInController', ["$scope", "$http", "$httpParamSerializerJQLik
                   contact_person: ""
 
               };
-      
+      $scope.result = '';
 
       $scope.Submit = function(){
                         return $http({
@@ -313,9 +302,12 @@ app.controller('logInController', ["$scope", "$http", "$httpParamSerializerJQLik
                                           headers: { 'Content-Type':'application/x-www-form-urlencoded' }
                                   })
                                   .then(function(response){
-                                    console.log(response);
-  
-                                  });
+                                    if(response.success == 'true'){
+                                    alert('welcome');
+                                    } else {
+                                      $scope.result = 'Username or Password Incorrect';
+                                    }
+                                    });
                                 
                       };
 
