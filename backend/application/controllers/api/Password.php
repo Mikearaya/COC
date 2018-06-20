@@ -9,7 +9,7 @@ class Password extends API {
 
 }  
 // password change function
-function index_post($centerId = NULL){
+function change_post($centerId = NULL){
     $this->load->library('form_validation');
    
 

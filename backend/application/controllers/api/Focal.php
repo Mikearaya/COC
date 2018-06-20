@@ -23,18 +23,11 @@ function index_post(){
             $result = array('success' => true);
            
         }
-<<<<<<< HEAD
-    }
-
-    //echo 'not found';
-=======
-   
     $this->response($result, API::HTTP_OK);
->>>>>>> 3168544dfb72033cbd3941ed32f5695c9fcedae3
+
+
 }
 
 }
-
-
 
 ?>

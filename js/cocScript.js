@@ -222,18 +222,14 @@ app.controller("resultController", ["$scope", "$http", function($scope, $http){
 app.controller("passwordController", ["$scope", "$http", "$httpParamSerializerJQLike",
                function($scope, $http, $httpParamSerializerJQLike){
 
-      $scope.password = {
-        current: '',
-        new: '',
-        newRepeated: ''
-      }
+      $scope.account= { };
 
       $scope.changePassword = function() { 
 
         return $http({
                     method : "POST",
-                    url : "backend/index.php/api/focal/password_change/",
-                    data :$httpParamSerializerJQLike($scope.password),
+                    url : "backend/index.php/api/password/change/",
+                    data :$httpParamSerializerJQLike($scope.account),
                     headers: { 'Content-Type':'application/x-www-form-urlencoded' }
                     });
             }
