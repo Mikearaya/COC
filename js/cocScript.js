@@ -298,34 +298,25 @@ app.controller('logInController', ["$scope", "$http", "$httpParamSerializerJQLik
                             function($scope, $http, $httpParamSerializerJQLike){
     var self = this;
 
-    self.user = {
+    $scope.user = {
                   password: "",
-                  email: ""
+                  contact_person: ""
 
               };
-      self.hide = function() {
-        $mdDialog.hide();
-      };
-      self.cancel = function() {
-        $mdDialog.cancel();
-      };
-      self.answer = function(answer) {
-        $mdDialog.hide(answer);
-      };
+      
 
-      self.Submit = function(){
-        console.log('loged in');
-                      /*    return $http({
+      $scope.Submit = function(){
+                        return $http({
                                           method : "POST",
-                                          url : "includes/systemController.php",
-                                          data : $httpParamSerializerJQLike({form : "log_in", data : self.user })
+                                          url : "backend/index.php/api/focal",
+                                          data : $httpParamSerializerJQLike($scope.user),
+                                          headers: { 'Content-Type':'application/x-www-form-urlencoded' }
                                   })
                                   .then(function(response){
                                     console.log(response);
-                                    session.create(response.data.organizerId, response.data.organizerName);
-                                    self.hide();
+  
                                   });
-                                  */
+                                
                       };
 
 }]);
