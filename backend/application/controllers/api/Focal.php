@@ -24,7 +24,7 @@ function index_post(){
         }
     }
 
-    echo 'not found';
+    //echo 'not found';
 }
 
 }

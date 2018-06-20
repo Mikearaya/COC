@@ -14,8 +14,6 @@ class Focal_model extends MY_Model {
         return $query->first_row('array');
     }
  
-   
-    
 
 }
 ?>
