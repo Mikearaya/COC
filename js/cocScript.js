@@ -144,46 +144,44 @@ app.controller("homeController", ["$scope", function($scope){
 
 
 //payment managment page controller
-app.controller("paymentController", ["$scope", function($scope){
+app.controller("paymentController", ["$scope", "$http","$httpParamSerializerJQLike", function($scope, $http, $httpParamSerializerJQLike){
   
       $scope.payment = {
         invoice_no: '',
         date: '',
-        amount: '',
-        center_code: ''
+        totalAmount: 0.0,
+        center_code: '',
+        examIds: [],
       }
 
-    $scope.assessmentPayments = [{
-        firstName : "Mikael",
-        lastName: "Araya",
-        occupation: "Computer Scientist",
-        price: 300
-      },
-      {
-        firstName : "Dani",
-        lastName: "Belay",
-        occupation: "Accountant",
-        price: 300
-      }];
+      $scope.PENDING_PAYMENTS = '';
 
-      $scope.payment = {
-        invoiceNo: "",
-        date: ""
-      }
+      $http({
+        method: 'GET',
+        url: 'backend/index.php/api/payment'
+      }).then(function(response){
+        $scope.PENDING_PAYMENTS = response.data.result;
+        $scope.PENDING_PAYMENTS.forEach(function(paymentInfo){
+          $scope.payment.examIds.push(paymentInfo.exam_id);
+          $scope.payment.totalAmount = parseFloat($scope.payment.totalAmount) + parseFloat(paymentInfo.amount_paid);
+          console.log($scope.payment.totalAmount);
+          $
+        })
+      })
 
-      $scope.changePassword = function() { 
+  
+      $scope.submitPayment = function() { 
 
         return $http({
                      method : "POST",
-                     url : "backend/index.php/api/focal/confirm_payment/",
-                     data :$httpParamSerializerJQLike($scope.password),
+                     url : "backend/index.php/api/payment/add_invoice",
+                     data :$httpParamSerializerJQLike($scope.payment),
                      headers: { 'Content-Type':'application/x-www-form-urlencoded' }
                     });
             }
+      }]);
 
-
-}]);
-
+      
 
 //admission card printing page controller
 app.controller("admissionController", ["$scope", function($scope){

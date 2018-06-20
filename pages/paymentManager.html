@@ -5,6 +5,16 @@
                 <form class="needs-validation"  ng-submit="submitPayment()" class="jumbotron form-inline" name="paymentForm" novalidate>
                     <div class="row">
                         <div class="form-group col">
+                            <label>Total Amount</label>
+                            <input type="text"
+                                    disabled
+                                    class="form-control"
+                                    ng-model="payment.totalAmount"
+                                    id="total"
+                                    name="total"
+                            >
+                        </div>
+                        <div class="form-group col">
                             <label for="invoice">Invoice Number</label>
                             <input 
                                     type="text"
@@ -13,7 +23,7 @@
                                     id="invoice"
                                     class="form-control"
                                     required="required"
-                                    ng-model="payemt.invoiceNo"
+                                    ng-model="payment.invoice_no"
                                 />
                                 <div ng-if="paymentForm.invoice.$error.required && paymentForm.invoice.$touched" class="text-danger">
                                   Invoice Number is required
@@ -65,19 +75,23 @@
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
+                        <th scope="col">EXAM ID</th>
+                        <th scope="col">REGISTRATION #</th>
+                        <th scope="col">Candidate</th>
                         <th scope="col">Occupation</th>
+                        <th scope="col">Level</th>
                         <th scope="col">Price</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="payment in assessmentPayments">
-                        <th scope="row">{{$index}}</th>
-                        <td ng-bind="payment.firstName"></td>
-                        <td ng-bind="payment.lastName"></td>
-                        <td ng-bind="payment.occupation"></td>
-                        <td ng-bind="payment.price"></td>
+                    <tr ng-repeat="payment in PENDING_PAYMENTS">
+                        <th scope="row">{{$index}}</th>              
+                        <td ng-bind="payment.exam_id"></td>      
+                        <td ng-bind="payment.reg_no"></td>                  
+                        <td ng-bind="payment.full_name"></td>
+                        <td ng-bind="payment.occ_name"></td>                        
+                        <td ng-bind="payment.level"></td>
+                        <td ng-bind="payment.amount_paid"></td>
                     </tr>
                     </tbody>
                 </table> 

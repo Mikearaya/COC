@@ -1,15 +1,16 @@
 <?php
 
- class OS extends API {
-
+ class Data extends API {
     public function __construct($config = 'rest') {
         parent::__construct($config);
-        $this->load->model('os_model');
+        $this->load->model('data_model');
     }
-    function index_get($os_type = NULL, $os_code = NULL) {
-     
-        $result['result'] = $this->os_model->get_os($os_type, $os_code);
-
+    function index_get($id = NULL) {
+        $os_type = $this->input->get('os_type');
+        $os_code = $this->input->get('os_code');
+        var_dump($os_type);
+        var_dump($os_code);
+        $result['result'] = $this->data_model->get_sector($id, );
         $result['columns'] = [];
 
         if(count($result)>0) {
@@ -20,7 +21,7 @@
 }
 
 function occupation_get($id = NULL){
-    $result['result'] = $this->os_model->get_occupation($id);
+    $result['result'] = $this->data_model->get_occupation($id);
         $result['columns'] = [];
 
         if(count($result)>0) {
@@ -31,7 +32,7 @@ function occupation_get($id = NULL){
 }
 function unit_of_competency_get($id = NULL) {
 
-    $result['result'] = $this->os_model->get_unit_of_competency($id);
+    $result['result'] = $this->data_model->get_unit_of_competency($id);
         $result['columns'] = [];
 
         if(count($result)>0) {
@@ -43,7 +44,7 @@ function unit_of_competency_get($id = NULL) {
 }
 
 function assessment_price_get($id = NULL) {
-    $result['result'] = $this->os_model->get_assessment_price($id);
+    $result['result'] = $this->data_model->get_assessment_price($id);
         $result['columns'] = [];
 
         if(count($result)>0) {
@@ -53,16 +54,5 @@ function assessment_price_get($id = NULL) {
     $this->response($result,API::HTTP_OK);
 
 
-}
-
-
-function sector_get($id = NULL) {
-    $result['result'] = $this->os_model->get_sector($id);
-    $result['columns'] = [];
-    if(count($result['result']) > 0) {
-        $first_record = (isset($result['result'][0])) ? $result['result'][0] : $result['result'];
-        $result['columns'] = array_keys((array)$first_record);
-    }
-    $this->response($result, API::HTTP_OK);
 }
 }
