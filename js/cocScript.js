@@ -206,25 +206,15 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
 
 
 //result viewing page controller
-app.controller("resultController", ["$scope", function($scope){
+app.controller("resultController", ["$scope", "$http", function($scope, $http){
 
-
-  $scope.assessmentResults = [{
-    groupId: "G-001",
-    location: "Vision College",
-    occupation: "OCC-938",
-    date: "1-13-2018",
-    time: "09:00 ETC"
-  },
-  {
-    groupId: "G-002",
-    location: "Vision College",
-    occupation: "OCC-977",
-    date: "1-13-2018",
-    time: "09:00 ETC"
-  }];
-
-
+  $scope.AVAILABLE_RESULTS = [];
+      $http({
+        method: 'GET',
+        url: 'backend/index.php/api/result/'
+      }).then(function(response){
+        $scope.AVAILABLE_RESULTS = response.data.result
+      })
 }]);
 
 
