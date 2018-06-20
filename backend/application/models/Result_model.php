@@ -9,11 +9,14 @@ class Result_model extends MY_Model {
 //get compitant candidate 
 public function get_result() {
     
-       $this->db->select('candidate.full_name,candidate.reg_no, CONCAT(assessment.practical_result, assessment.practical_result) as result');
+       $this->db->select('candidate_group.gr_id , candidate_group.sch_id , center.center_name ,  schedule.scheduled_date, schedule.time, COUNT(candidate_group.exam_id) as total,
+       assessment.occ_code');
        $this->db->from('assessment');
-       $where = "practical_result='Satisfactory' AND knowledge_result >=36";
-       $this->db->where($where);
-       $this->db->join('candidate','candidate.id=assessment.exam_id','left');
+       $this->db->join('candidate_group','candidate_group.exam_id = assessment.exam_id','left');
+       $this->db->join('schedule','schedule.group_no = candidate_group.gr_id','left');
+       $this->db->join('center','assessment.center_code = center.center_code','left');
+       
+       $this->db->group_by('candidate_group.gr_id');
     
         
         $query = $this->db->get(); 

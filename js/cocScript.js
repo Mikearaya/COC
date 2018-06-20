@@ -144,46 +144,44 @@ app.controller("homeController", ["$scope", function($scope){
 
 
 //payment managment page controller
-app.controller("paymentController", ["$scope", function($scope){
+app.controller("paymentController", ["$scope", "$http","$httpParamSerializerJQLike", function($scope, $http, $httpParamSerializerJQLike){
   
       $scope.payment = {
         invoice_no: '',
         date: '',
-        amount: '',
-        center_code: ''
+        totalAmount: 0.0,
+        center_code: '',
+        examIds: [],
       }
 
-    $scope.assessmentPayments = [{
-        firstName : "Mikael",
-        lastName: "Araya",
-        occupation: "Computer Scientist",
-        price: 300
-      },
-      {
-        firstName : "Dani",
-        lastName: "Belay",
-        occupation: "Accountant",
-        price: 300
-      }];
+      $scope.PENDING_PAYMENTS = '';
 
-      $scope.payment = {
-        invoiceNo: "",
-        date: ""
-      }
+      $http({
+        method: 'GET',
+        url: 'backend/index.php/api/payment'
+      }).then(function(response){
+        $scope.PENDING_PAYMENTS = response.data.result;
+        $scope.PENDING_PAYMENTS.forEach(function(paymentInfo){
+          $scope.payment.examIds.push(paymentInfo.exam_id);
+          $scope.payment.totalAmount = parseFloat($scope.payment.totalAmount) + parseFloat(paymentInfo.amount_paid);
+          console.log($scope.payment.totalAmount);
+          $
+        })
+      })
 
-      $scope.changePassword = function() { 
+  
+      $scope.submitPayment = function() { 
 
         return $http({
                      method : "POST",
-                     url : "backend/index.php/api/focal/confirm_payment/",
-                     data :$httpParamSerializerJQLike($scope.password),
+                     url : "backend/index.php/api/payment/add_invoice",
+                     data :$httpParamSerializerJQLike($scope.payment),
                      headers: { 'Content-Type':'application/x-www-form-urlencoded' }
                     });
             }
+      }]);
 
-
-}]);
-
+      
 
 //admission card printing page controller
 app.controller("admissionController", ["$scope", function($scope){
@@ -192,29 +190,18 @@ app.controller("admissionController", ["$scope", function($scope){
 
 
 //schedule page controller
-app.controller("scheduleController", ["$scope", function($scope){
+app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQLike",  function($scope, $http, $httpParamSerializerJQLike){
 
-  $scope.assessmentSchedules = [{
-        scheduleId : "SCH-001",
-        groupId: "G-001",
-        location: "Vision College",
-        occupation: "OCC-938",
-        date: "1-13-2018",
-        time: "09:00 ETC"
-      },
-      {
-        scheduleId : "SCH-002",
-        groupId: "G-002",
-        location: "Vision College",
-        occupation: "OCC-977",
-        date: "1-13-2018",
-        time: "09:00 ETC"
-      }];
+          $scope.AVAILABLE_SCHEDULES = [];
 
-      $scope.payment = {
-        invoiceNo: "",
-        date: ""
-      }
+          $http({
+            method: 'GET',
+            url: 'backend/index.php/api/schedule'
+          }).then(function(response){
+                  if(response) {
+                    $scope.AVAILABLE_SCHEDULES = response.data.result;
+                  }
+          });
 }]);
 
 
@@ -300,34 +287,28 @@ app.controller('logInController', ["$scope", "$http", "$httpParamSerializerJQLik
                             function($scope, $http, $httpParamSerializerJQLike){
     var self = this;
 
-    self.user = {
+    $scope.user = {
                   password: "",
-                  email: ""
+                  contact_person: ""
 
               };
-      self.hide = function() {
-        $mdDialog.hide();
-      };
-      self.cancel = function() {
-        $mdDialog.cancel();
-      };
-      self.answer = function(answer) {
-        $mdDialog.hide(answer);
-      };
+      $scope.result = '';
 
-      self.Submit = function(){
-        console.log('loged in');
-                      /*    return $http({
+      $scope.Submit = function(){
+                        return $http({
                                           method : "POST",
-                                          url : "includes/systemController.php",
-                                          data : $httpParamSerializerJQLike({form : "log_in", data : self.user })
+                                          url : "backend/index.php/api/focal",
+                                          data : $httpParamSerializerJQLike($scope.user),
+                                          headers: { 'Content-Type':'application/x-www-form-urlencoded' }
                                   })
                                   .then(function(response){
-                                    console.log(response);
-                                    session.create(response.data.organizerId, response.data.organizerName);
-                                    self.hide();
-                                  });
-                                  */
+                                    if(response.success == 'true'){
+                                    alert('welcome');
+                                    } else {
+                                      $scope.result = 'Username or Password Incorrect';
+                                    }
+                                    });
+                                
                       };
 
 }]);

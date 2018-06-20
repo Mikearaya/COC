@@ -12,19 +12,22 @@
                             <th scope="col">Location</th>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
-                            <th scope="col">Occupation</th>  
+                            <th scope="col">Occupation</th>
+                            <th scope="col">Total</th>
+
                             <th scope="col-1">Print</th>                   
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="schedule in assessmentSchedules">
+                            <tr ng-repeat="schedule in AVAILABLE_SCHEDULES">
                             <th scope="row">{{$index}}</th>
-                            <td ng-bind="schedule.scheduleId"></td>
-                            <td ng-bind="schedule.groupId"></td>
+                            <td ng-bind="schedule.sch_id"></td>
+                            <td ng-bind="schedule.gr_id"></td>
                             <td ng-bind="schedule.location"></td>
-                            <td ng-bind="schedule.date"></td>
+                            <td ng-bind="schedule.scheduled_date"></td>
                             <td ng-bind="schedule.time"></td>
-                            <td ng-bind="schedule.occupation"></td>
+                            <td ng-bind="schedule.occ_code"></td>
+                            <td ng-bind="schedule.total"></td>
                             <th scope="col-1"><button type="button" class="btn btn-sm btn-info" href="#">Print</button> </th> 
                             </tr>
                         </tbody>

@@ -6,11 +6,14 @@
     }
     // list candidate who are paid for assessment
     public function get_payment(){
+        
+        $user = $this->session->get_userdata();
         $this->db->select('candidate.full_name, candidate.reg_no, assessment.paid,assessment.amount_paid ,assessment.registration_date,assessment.exam_id,
-                         invoice.id,invoice.invoice_no,invoice.date,invoice.amount,occupation.occ_name,occupation.level');
+                         occupation.occ_name,occupation.level');
         $this->db->from('assessment');
-        $this->db->where('paid',1);
-        $this->db->join('invoice','invoice.id=assessment.exam_id','left');
+        
+        $this->db->where('assessment.paid', 1);
+        $this->db->where('assessment.center_code',  $user['center_code']);
         $this->db->join('candidate','candidate.reg_no = assessment.can_regno');
         $this->db->join('occupation','occupation.occ_code = assessment.occ_code');
         $this->db->order_by('assessment.registration_date','desc');         
@@ -19,19 +22,29 @@
                 return $query->result_array();
             } else {    
                 return false;
-        }
+            }
         
     }
     
     // save and update invoice number 
-    public function save_invoice($invoice) {
-       if(!is_null($invoice['id'])){
+    public function save_invoice($invoice, $candidateIds) {
+       if(isset($invoice['id'])){
            return $this->update_invoice($invoice);
        }else {
+           var_dump($candidateIds);
            $this->db->insert('invoice',$invoice);
+           $updatedCandidates = [];
+           for($i = 0; $i < sizeof($candidateIds); $i++) {
+               echo $candidateIds[$i];
+                $updatedCandidate[] = array(
+                    'exam_id' => $candidateIds[$i],
+                    'invoice_no' => $invoice['invoice_no']
+                );
+           }
+
+           $this->db->update_batch('assessment', $updatedCandidate, 'exam_id');
        }
-       return ($this->db->affected_rows()) ? true : false; 
-     
+       return ($this->db->affected_rows()) ? true : false;      
     }
     public function update_invoice($invoice) {    
           $this->db->where('id', $invoice['id']);

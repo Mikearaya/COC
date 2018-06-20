@@ -35,7 +35,8 @@ public function save_assessment($assessment, $candidateId) {
 	$assessment['registered_by'] = 'addisu';
 	$assessment['center_code'] = '00';
 	$assessment['payment_status'] = 'PENDING';
-
+    $assessment['paid'] = ($assessment['paid'] == 'true') ? 1 : 0;
+         
     $this->db->insert('assessment' , $assessment);
 return ($this->db->affected_rows()) ? $candidateId : false; 
 }

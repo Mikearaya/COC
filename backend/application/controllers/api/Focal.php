@@ -9,22 +9,28 @@ class Focal extends API {
 
 }  
 function index_post(){
-    $data['error']=0;
-    if($_POST){
+
         $contact_person=$this->input->post('contact_person',true);
         $password=$this->input->post('password',true);
         $focal=$this->focal_model->select_focal($contact_person,$password);
         if(!$focal){
-            $data['error']=1;
+            $result = array('success' => false);
         }
         else{
-            $this->session->set_userdata('center_id',$focal['center_id']);
+            $this->session->set_userdata('center_code',$focal['center_code']);
             $this->session->set_userdata('center_name',$focal['center_name']);
-            $this->response('sucssus');
+            $this->session->set_userdata('contact_person',$focal['contact_person']);
+            $result = array('success' => true);
+           
         }
+<<<<<<< HEAD
     }
 
     //echo 'not found';
+=======
+   
+    $this->response($result, API::HTTP_OK);
+>>>>>>> 3168544dfb72033cbd3941ed32f5695c9fcedae3
 }
 
 }

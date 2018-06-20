@@ -22,20 +22,36 @@ class Payment extends API {
         $this->load->library('form_validation');
         $result['success'] = false;
     
-        $this->form_validation->set_rules("invoice_no", "invoice_no", "required");
+        $this->form_validation->set_rules("invoice_no", "Invoice Number", "required");
                
-    
             if($this->form_validation->run() === FALSE ) {
                 $this->response($this->validation_errors(), API::HTTP_OK);
             } else {
                 $data = array(
                     'id' => $id, 
                     'invoice_no' => $this->input->post('invoice_no'),
-                    'date' => $this->input->post('date'),
-                                   
-                );
-    
+                    'date' => $this->input->post('date'),                                   
+            );    
                 $result['success'] = ($this->payment_model->save_invoice($data)) ? true : false;
+                $this->response($result, API::HTTP_OK);
+            }
+    }
+
+    function add_invoice_post(){
+        $this->load->library('form_validation');
+        $result['success'] = false;
+        $this->form_validation->set_rules("invoice_no", "Invoice Number", "required");
+               
+            if($this->form_validation->run() === FALSE ) {
+                $this->response($this->validation_errors(), API::HTTP_OK);
+            } else {
+                $data = array( 
+                    'invoice_no' => $this->input->post('invoice_no'),
+                    'date' => $this->input->post('date'),   
+                    'amount' => $this->input->post('totalAmount'),  
+                    'center_code' => '00'                                 
+            );    
+                $result['success'] = ($this->payment_model->save_invoice($data, $this->input->post('examIds'))) ? true : false;
                 $this->response($result, API::HTTP_OK);
             }
     }
