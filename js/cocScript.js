@@ -23,12 +23,39 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
     $routeProvider.when('/admission', {templateUrl: "pages/admissionManager.html"});
     $routeProvider.when('/schedule', {templateUrl: "pages/scheduleManager.html"});
     $routeProvider.when('/result', {templateUrl: "pages/resultManager.html"});
+    $routeProvider.when('/result/:groupId', {templateUrl: "pages/resultDetail.html"});
     $routeProvider.when('/password', {templateUrl: "pages/passwordManager.html"});
     $routeProvider.when('/logIn', {templateUrl: "pages/logIn.html"});
         
 
 }]);
 
+//result detail controller
+app.controller('resultDetailController', ["$scope", "$http", "$route", function($scope, $http, $route){
+  var groupId = $route.current.params.groupId;
+  console.log(groupId);
+  $scope.ASSESSMENT_RESULTS = [];
+  $scope.CENTER = '';
+  $scope.OCCUPATION = '';
+  $scope.GROUP = '';
+    
+              $http({
+                method: 'GET',
+                url: 'backend/index.php/api/result/group_result/'+groupId
+              }).then(function(response){                
+                  $scope.ASSESSMENT_RESULTS = response.data;
+                  $scope.GROUP = response.data[0].gr_id;
+                  $scope.CENTER = response.data[0]._center_name;
+                  $scope.OCCUPATION = response.data[0].occ_name;
+                  $scope.ASSESSMENT_DATE = response.data[0].scheduled_date;
+
+              });
+
+              $scope.print = function() {
+                window.print();
+              }
+
+}]);
 //registration page controller
 app.controller("registrationController", ["$scope", "$http", "$httpParamSerializerJQLike", 
       function($scope, $http, $httpParamSerializerJQLike){

@@ -20,5 +20,11 @@ class Result extends API {
     }
     $this->response($result,API::HTTP_OK);
 }
+
+
+  function group_result_get($id = NULL) {
+    $result = $this->result_model->get_group_result($id);
+    $this->response($result, API::HTTP_OK);
+  }
 }
 ?>
