@@ -22,13 +22,65 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
     $routeProvider.when('/register', {templateUrl: "pages/registrationManager.html"});
     $routeProvider.when('/admission', {templateUrl: "pages/admissionManager.html"});
     $routeProvider.when('/schedule', {templateUrl: "pages/scheduleManager.html"});
+    $routeProvider.when('/schedule/:groupId', {templateUrl: "pages/scheduleDetail.html"});
     $routeProvider.when('/result', {templateUrl: "pages/resultManager.html"});
+    $routeProvider.when('/result/:groupId', {templateUrl: "pages/resultDetail.html"});
     $routeProvider.when('/password', {templateUrl: "pages/passwordManager.html"});
     $routeProvider.when('/logIn', {templateUrl: "pages/logIn.html"});
         
 
 }]);
 
+//result detail controller
+app.controller('resultDetailController', ["$scope", "$http", "$route", function($scope, $http, $route){
+  var groupId = $route.current.params.groupId;
+  console.log(groupId);
+  $scope.ASSESSMENT_RESULTS = [];
+  $scope.CENTER = '';
+  $scope.OCCUPATION = '';
+  $scope.GROUP = '';
+    
+              $http({
+                method: 'GET',
+                url: 'backend/index.php/api/result/group_result/'+groupId
+              }).then(function(response){                
+                  $scope.ASSESSMENT_RESULTS = response.data;
+                  $scope.GROUP = response.data[0].gr_id;
+                  $scope.CENTER = response.data[0]._center_name;
+                  $scope.OCCUPATION = response.data[0].occ_name;
+                  $scope.ASSESSMENT_DATE = response.data[0].scheduled_date;
+
+              });
+
+              $scope.print = function() {
+                window.print();
+              }
+
+}]);
+
+app.controller('scheduleDetailController', ['$scope', '$http', '$route', function($scope, $http, $route){
+
+      var groupId = $route.current.params.groupId;
+      console.log(groupId);
+      $scope.ASSESSMENT_SCHEDULES = [];
+      $scope.CENTER = '';
+      $scope.OCCUPATION = '';
+      $scope.GROUP = '';
+
+      $http({
+        method: 'GET',
+        url: 'backend/index.php/api/schedule/group_schedule/'+groupId
+      }).then(function(response){
+          $scope.ASSESSMENT_SCHEDULES = response.data;
+          $scope.CENTER = response.data[0].center_name;
+          $scope.OCCUPATION = response.data[0].occ_name;
+          $scope.GROUP = response.data[0].gr_id;
+      });
+      $scope.print = function() {
+        window.print();
+      }
+    
+}]);
 //registration page controller
 app.controller("registrationController", ["$scope", "$http", "$httpParamSerializerJQLike", 
       function($scope, $http, $httpParamSerializerJQLike){
