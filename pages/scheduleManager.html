@@ -6,29 +6,29 @@
                     <table class="table table-striped bg-white  table-sm">
                         <thead class="thead-dark">
                             <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Shecule ID</th>
-                            <th scope="col">Group ID</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Occupation</th>
-                            <th scope="col">Total</th>
+                            <th class="col">#</th>
+                            <th class="col">Shecule ID</th>
+                            <th class="col">Group ID</th>
+                            <th class="col">Location</th>
+                            <th class="col">Date</th>
+                            <th class="col">Time</th>
+                            <th class="col">Occupation</th>
+                            <th class="col">Total</th>
 
                             <th scope="col-1">Print</th>                   
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="schedule in AVAILABLE_SCHEDULES">
-                            <th scope="row">{{$index}}</th>
+                            <th>{{$index}}</th>
                             <td ng-bind="schedule.sch_id"></td>
-                            <td ng-bind="schedule.gr_id"></td>
+                            <td ng-bind="schedule.full_name"></td>
                             <td ng-bind="schedule.location"></td>
                             <td ng-bind="schedule.scheduled_date"></td>
                             <td ng-bind="schedule.time"></td>
                             <td ng-bind="schedule.occ_code"></td>
                             <td ng-bind="schedule.total"></td>
-                            <th scope="col-1"><button type="button" class="btn btn-sm btn-info" href="#">Print</button> </th> 
+                            <th scope="col-1"><a type="button" class="btn btn-sm btn-info" href="#schedule/{{schedule.gr_id}}">View</a> </th> 
                             </tr>
                         </tbody>
                     </table>

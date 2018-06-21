@@ -14,5 +14,11 @@
     }
     $this->response($result,API::HTTP_OK);
  }
+
+
+        function group_schedule_get($id) {
+            $result = $this->schedule_model->get_group_schedule($id);
+            $this->response($result, API::HTTP_OK);
+        }
 }
 ?>
