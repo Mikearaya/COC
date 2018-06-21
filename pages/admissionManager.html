@@ -3,19 +3,79 @@
         <div class="row">
             <div class="col align-items-center text-center" ng-init="valu = ''">
                 <form ng-submit="printAdmissions()"  >
-                    <div class="form-group">
-                    <textarea class="form-control" ng-keyup="valu = $event.target.value">
-
-                    </textarea>
-                    {{valu}}
-                </div>
-                    <button 
-                            type="submit"
-                            class="btn btn-md btn-primary">
-                            Print Admissions
-                        </button>
+                        <chips defer ng-model="candidates">
+                                <chip-tmpl>
+                                  <div class="defailt-chips"> {{chip.defer.full_name}}
+                                        <span class="glyphicon glyphicon-remove" remove-chip></span>
+                                  </div>
+                                </chip-tmpl>
+                                <input  ng-model-control ng-model="typeaheadModel" class="form-control"
+                                 uib-typeahead="candidate as candidate.full_name for candidate in getCandidates($viewValue)"></input>
+                             </chips>
+                             <div class="printvalue">
+                                    <b>Controller:</b>
+                                    <div> candidates= {{candidates}}</div>
+                                </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
+<style>
+
+body{
+	margin: 10px;
+}
+
+.loader-container {
+    position: relative;
+}
+
+.loader-container .loader {
+    position: absolute;
+    right: 50%;
+    bottom: 3px
+}
+
+.printvalue{
+	margin: 10px;
+}
+
+chip-tmpl {
+    display: inline-block;
+    margin: 0 5px 5px 0; }
+  
+  .default-chip {
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    background: #e0e0e0;
+    padding: 5px; }
+  
+  chip-tmpl:focus {
+    outline: none; }
+    chip-tmpl:focus .default-chip {
+      border: 2px solid #9e9e9e;
+      background: #9e9e9e;
+      color: white; }
+  
+  .chip-failed .default-chip {
+    color: red; }
+  
+  chips {
+    display: block;
+    padding: 5px; }
+    chips > div {
+      display: inline; }
+      chips > div > input {
+        height: 100%;
+        border: none;
+        font-size: 14px; }
+      chips > div > input:focus {
+        outline: none; }
+  
+  .chip-out-focus {
+    border-bottom: 1px solid #e0e0e0; }
+  
+  .chip-in-focus {
+    border-bottom: 1px solid #106cc8; }
+</style>
