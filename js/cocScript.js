@@ -6,9 +6,18 @@ var app = angular.module('myApp', ['ngRoute',
 
 ]);
 
-app.controller("mainController", ["$scope", 
-function($scope){
+app.controller("mainController", ["$scope", "$http", 
+function($scope, $http){
 
+  $scope.admissionCount = 0;
+  $scope.scheduleCount = 0;
+  $scope.resultCount = 0;
+  $scope.paymentCount = 0;
+
+        $http.get('backend/index.php/api/dash/schedule/00').then(function(response){$scope.scheduleCount = response.data});
+        $http.get('backend/index.php/api/dash/admission/00').then(function(response){$scope.admissionCount = response.data});
+        $http.get('backend/index.php/api/dash/result/00').then(function(response){$scope.resultCount = response.data});
+        $http.get('backend/index.php/api/dash/payment/00').then(function(response){$scope.paymentCount = response.data});
 }]);
 
 app.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
@@ -49,6 +58,7 @@ app.controller('resultDetailController', ["$scope", "$http", "$route", function(
                   $scope.CENTER = response.data[0]._center_name;
                   $scope.OCCUPATION = response.data[0].occ_name;
                   $scope.ASSESSMENT_DATE = response.data[0].scheduled_date;
+                  $scope.OCC_CODE = response.data[0].occ_code;
 
               });
 

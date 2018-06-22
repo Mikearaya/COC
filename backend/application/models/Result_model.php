@@ -14,9 +14,9 @@ public function get_result() {
        $this->db->from('assessment');
        $this->db->join('candidate_group','candidate_group.exam_id = assessment.exam_id','left');
        $this->db->join('schedule','schedule.group_no = candidate_group.gr_id','left');
-       $this->db->join('center','assessment.center_code = center.center_code','left');
-       
+       $this->db->join('center','assessment.center_code = center.center_code','left');       
        $this->db->group_by('candidate_group.gr_id');
+       $this->db->limit(100);
     
         
         $query = $this->db->get(); 
@@ -40,7 +40,9 @@ public function get_group_result($id = NULL) {
     $this->db->join('candidate_group', 'candidate_group.exam_id = assessment.exam_id', 'left');
     $this->db->join('schedule', 'candidate_group.sch_id = schedule.sch_id', 'left');
     $this->db->join('center', 'schedule.center_code = center.center_code');
+ 
     $result = $this->db->get();
+
     return $result->result_array();
 }
 
