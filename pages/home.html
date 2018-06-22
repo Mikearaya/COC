@@ -4,35 +4,35 @@
     <div class="row text-center justify-content-between " style="margin-top: 5%;">
         <div class="col col-xs-12 ">
                 <div class="card border-danger mb-5" >
-                        <div class="card-header">Un-Confirmed Payments <span class="badge badge-pill badge-danger">1434</span></div>
+                        <div class="card-header">Un-Confirmed Payments <span class="badge badge-pill badge-danger">{{paymentCount}}</span></div>
                         <div class="card-body text-secondary">
-                    <button href="#/payment" type="button" class="btn btn-outline-danger">Complete Payment</button>                          
+                    <a href="#/payment" type="button" class="btn btn-outline-danger">Complete Payment</a>                          
                         </div>
                       </div>
 
         </div>
         <div class="col col-xs-12 ">
                 <div class="card border-warning mb-5" >
-                        <div class="card-header">Un-Printed Addmission Cards <span class="badge badge-pill badge-warning">100</span></div>
+                        <div class="card-header">Un-Printed Addmission Cards <span class="badge badge-pill badge-warning">{{admissionCount}}</span></div>
                         <div class="card-body text-secondary">
-                    <button href="#/admission" type="button" class="btn btn-outline-warning">Print Admissions</button>                          
+                    <a href="#/admission" type="button" class="btn btn-outline-warning">Print Admissions</a>                          
                         </div>
                       </div>
         </div>
 
         <div class="col col-xs-12 ">
                 <div class="card border-success mb-5" >
-                        <div class="card-header">New Schedules <span class="badge badge-pill badge-success">13</span></div>
+                        <div class="card-header">New Schedules <span class="badge badge-pill badge-success">{{scheduleCount}}</span></div>
                         <div class="card-body text-secondary">
-                         <button href="#/schedule" type="button" class="btn btn-outline-success">View Schedules</button>                          
+                         <a href="#/schedule" type="button" class="btn btn-outline-success">View Schedules</a>                          
                         </div>
                       </div>
         </div>
         <div class="col col-xs-12">
                 <div class="card border-primary mb-5" >
-                        <div class="card-header">New Results <span class="badge badge-pill badge-primary">70</span></div>
+                        <div class="card-header">New Results <span class="badge badge-pill badge-primary">{{resultCount}}</span></div>
                         <div class="card-body text-secondary">                          
-                          <button href="#/result" type="button" class="btn btn-outline-primary">View Results</button>
+                          <a href="#/result" type="button" class="btn btn-outline-primary">View Results</a>
                         </div>
                       </div>
         </div>
