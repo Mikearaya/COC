@@ -46,7 +46,7 @@ class Dash_model extends MY_Model {
         $this->db->from('schedule');
         $this->db->join('candidate_group','schedule.group_no = candidate_group.gr_id','left');
         //$this->db->where('assessment.center_code',  $user['center_code']);
-       
+        
         $this->db->group_by('candidate_group.gr_id');
         $query = $this->db->get(); 
         if($query->num_rows() != 0){
