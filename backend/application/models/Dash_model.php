@@ -35,9 +35,11 @@ class Dash_model extends MY_Model {
         $this->db->select('count(candidate_group.gr_id) as total');
         $this->db->from('schedule');
         $this->db->join('candidate_group','schedule.group_no = candidate_group.gr_id','left');
+
         $this->db->join('assessment','assessment.exam_id = candidate_group.exam_id','left');
         $this->db->where('schedule.center_code', $center_id);
         $this->db->where('schedule.scheduled_date <=', date('YYYY-mm-dd') );
+
         $this->db->group_by('candidate_group.gr_id');
         $query = $this->db->get(); 
 
