@@ -13,7 +13,7 @@
         $this->db->from('assessment');
         
         $this->db->where('assessment.paid', 1);
-        $this->db->where('assessment.center_code',  $user['center_code']);
+        $this->db->where('assessment.center_code',  $this->session->userdata('center_code'));
         $this->db->join('candidate','candidate.reg_no = assessment.can_regno');
         $this->db->join('occupation','occupation.occ_code = assessment.occ_code');
         $this->db->order_by('assessment.registration_date','desc');         

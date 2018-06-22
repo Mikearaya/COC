@@ -1,88 +1,60 @@
 <div class="shadow p-3 mb-5 bg-white rounded container">
-   <div class="row">
-      <div class="form-group col">                          
-         <label for="fullName"></label>
-         <input type="text" 
-               name="fullName" 
-               id="fullName" 
-               class="form-control" 
-               ng-required="true"
-               placeholder="Full Name"
-               ng-model="candidate.basic_info.full_name"
-               >                                                    
-      </div>                   
-   </div>
-   <div class="row">
-      <div class="form-group col">
-         <label for="gender">Gender</label>
-         <select 
-               name="gender"
-               ng-model="candidate.basic_info.sex"
-               required
-               id="gender"
-               aria-placeholder="Gender"                                
-               class="form-control"
-            >
-            <option  value="Male">Male</option>
-            <option  value="Female">Female</option>
-         </select>               
-      </div>
-   </div>
-   <div class="row">
-      <div class="form-group col">
-         <label for="birthdate">Birthdate</label>
-         <input 
-               type="text"
-               required
-               ng-model="candidate.basic_info.age"
-               name="birthdate"
-               pattern="[0-9]{2}"
-               id="birthdate"
-               class="form-control"
-               placeholder="Birthdate"
-         >
-      </div>
-   </div> 
-   <div class="row">
-      <div class="form-group col">
-         <label for="maritalStatus">Marital Status</label>
-         <select 
-               name="maritalStatus"
-               ng-model="candidate.basic_info.marital_status"
-               required
-               id="maritalStatus"
-               aria-placeholder="Marital Status"                                
-               class="form-control"
-            >
-            <option  value="Married">Married</option>
-            <option  value="Single">Single</option>
-         </select>               
-      </div>
-   </div>       
-   <div class="row">
-      <div class="form-check form-check-inline">
-         <label for="isDisabled">Has a Disablity</label>                                  
-         <input
-               type="checkbox"
-               name="disablity"
-               ng-model="candidate.basic_info.disablity"
-               id="isDisabled"
-               value="yes"
-               class="form-check-input"
-             >
-      </div>
-   </div>
-   <div class="row">
-      <div class="form-group col" >
-         <label for="disablityNature">Disablity Nature</label>
-         <textarea ng-disabled="!candidate.basic_info.disablity"
-                  class="form-control" 
-                  name="disablityNature"
-                  id="disablityNature" 
-                  rows="3" 
-                  ng-model="candidate.disablityNature">
+    <div class="row">
+        <div class="form-group col">
+            <label for="fullName"></label>
+            <input type="text" name="fullName" id="fullName" class="form-control" ng-required="true" placeholder="Full Name" ng-model="candidate.basic_info.full_name">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col">
+            <label for="gender">Gender</label>
+            <select name="gender" ng-model="candidate.basic_info.sex" required id="gender" aria-placeholder="Gender" class="form-control">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col">
+            <label for="birthdate">Birthdate</label>
+            <input  type="text" 
+                    required 
+                    ng-model="candidate.basic_info.age" 
+                    name="birthdate" 
+                    pattern="[0-9]{2}" 
+                    id="birthdate" 
+                    class="form-control"
+                    placeholder="Birthdate"
+                >
+            <div ng-messages="registrationForm.birthdate.$error ">
+                <div ng-message="pattern">Birthdate should be only digit</div>
+                <div ng-message="required" > Brithdate is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col">
+            <label for="maritalStatus">Marital Status</label>
+            <select name="maritalStatus" ng-model="candidate.basic_info.marital_status" required id="maritalStatus" aria-placeholder="Marital Status"
+                class="form-control">
+                <option value="Married">Married</option>
+                <option value="Single">Single</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-check form-check-inline">
+            <label for="isDisabled">Has a Disablity</label>
+            <input type="checkbox" name="disablity" ng-model="candidate.basic_info.disablity" id="isDisabled" value="yes" class="form-check-input">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col">
+            <label for="disablityNature">Disablity Nature</label>
+            <textarea ng-disabled="!candidate.basic_info.disablity" class="form-control" name="disablityNature" id="disablityNature"
+                rows="3" ng-model="candidate.disablityNature">
 
          </textarea>
-      </div>
-   </div>   
+        </div>
+    </div>
 </div>

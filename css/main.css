@@ -1,0 +1,4 @@
+div[ng-messages] {
+    color: red;
+    font-size: 1em;
+}

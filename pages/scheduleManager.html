@@ -6,24 +6,23 @@
                     <table class="table table-striped bg-white  table-sm">
                         <thead class="thead-dark">
                             <tr>
-                            <th class="col">#</th>
-                            <th class="col">Shecule ID</th>
-                            <th class="col">Group ID</th>
-                            <th class="col">Location</th>
-                            <th class="col">Date</th>
-                            <th class="col">Time</th>
-                            <th class="col">Occupation</th>
-                            <th class="col">Total</th>
-
-                            <th scope="col-1">Print</th>                   
+                            <th>#</th>
+                            <th>Shecule ID</th>
+                            <th>Group ID</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Occupation</th>
+                            <th>Total</th>
+                            <th >Print</th>                   
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="schedule in AVAILABLE_SCHEDULES">
                             <th>{{$index}}</th>
                             <td ng-bind="schedule.sch_id"></td>
-                            <td ng-bind="schedule.full_name"></td>
-                            <td ng-bind="schedule.location"></td>
+                            <td ng-bind="schedule.gr_id"></td>
+                            <td ng-bind="schedule.center_name"></td>
                             <td ng-bind="schedule.scheduled_date"></td>
                             <td ng-bind="schedule.time"></td>
                             <td ng-bind="schedule.occ_code"></td>

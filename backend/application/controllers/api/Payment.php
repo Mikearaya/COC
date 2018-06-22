@@ -8,13 +8,7 @@ class Payment extends API {
     //get function for payment
     function index_get($id = NULL) {
 
-        $result['result'] = $this->payment_model->get_payment($id);
-        $result['columns']=[];
-        
-        if(count($result)>0) {
-            $first_record= isset($result['result'][0]) ? $result['result'][0] : $result['result'];                      
-            $result['columns']=array_keys((array)$first_record);
-        }
+        $result = $this->payment_model->get_payment($id);                
         $this->response($result,API::HTTP_OK);
     }
     // post function for save invoice 

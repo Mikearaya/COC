@@ -30,10 +30,10 @@ public function save_candidate($candidate) {
 }
 
 public function save_assessment($assessment, $candidateId) {
-	$assessment['can_regno'] =$candidateId;
-	$assessment['branch_code'] ='W';
+    $assessment['can_regno'] =$candidateId;
+    $assessment['branch_code'] = 'W';
 	$assessment['registered_by'] = 'addisu';
-	$assessment['center_code'] = '00';
+	$assessment['center_code'] = $this->session->userdata('center_code');
 	$assessment['payment_status'] = 'PENDING';
     $assessment['paid'] = ($assessment['paid'] == 'true') ? 1 : 0;
          

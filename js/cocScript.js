@@ -177,29 +177,23 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
 
         $scope.loadSectors = function (parentId = null) {
             initializeOS('sector', parentId).then(function (response) {
-                if (parentId) {
-                    $scope.SECTORS = response.data.result;
-                } else {
-                    $scope.PARENT_SECTORS = response.data.result;
-                }
+                if (parentId) { $scope.SECTORS = (response.data) ? response.data : []; } 
+                else { $scope.PARENT_SECTORS = (response.data) ? response.data : []; }
             });
 
         };
+
         $scope.loadSectors();
+        
+        
         $scope.loadOccupations = function (sectorId) {
-            initializeOS('occupation', sectorId).then(function (response) {
-                $scope.OCCUPATIONS = response.data.result;
-            });
-
-
+            initializeOS('occupation', sectorId).then(function (response) { $scope.OCCUPATIONS = (response.data) ? response.data : []; });
         }
 
 
         $scope.loadUCs = function (occupationId) {
             applicationFee(occupationId);
-            initializeOS('unit_of_competency', occupationId).then(function (response) {
-                $scope.UCS = response.data.result;
-            });
+            initializeOS('unit_of_competency', occupationId).then(function (response) { $scope.UCS = (response.data) ? response.data : []; });
         }
 
         $scope.register = function () {
@@ -209,9 +203,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                 url: "backend/index.php/api/candidate/",
                 data: $httpParamSerializerJQLike($scope.candidate),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-            })
-                .then(function (response) {
-                });
+            }).then(function (response) { });
         };
         $scope.REGIONS = [
             "Addis Ababa",
@@ -250,29 +242,31 @@ app.controller("paymentController", ["$scope", "$http", "$httpParamSerializerJQL
 
     $scope.PENDING_PAYMENTS = '';
 
-    $http({
-        method: 'GET',
-        url: 'backend/index.php/api/payment'
-    }).then(function (response) {
-        $scope.PENDING_PAYMENTS = response.data.result;
-        $scope.PENDING_PAYMENTS.forEach(function (paymentInfo) {
-            $scope.payment.examIds.push(paymentInfo.exam_id);
-            $scope.payment.totalAmount = parseFloat($scope.payment.totalAmount) + parseFloat(paymentInfo.amount_paid);
+    $http.get('backend/index.php/api/payment')
+                .then(function (response) {
+                $scope.PENDING_PAYMENTS = response.data;
+                response.data.forEach(function (paymentInfo) {
+                $scope.payment.examIds.push(paymentInfo.exam_id);
+                $scope.payment.totalAmount = $scope.payment.totalAmount  + parseInt(paymentInfo.amount_paid);
             console.log($scope.payment.totalAmount);
-            $
         })
     })
 
 
     $scope.submitPayment = function () {
 
-        return $http({
+       $http({
             method: "POST",
             url: "backend/index.php/api/payment/add_invoice",
             data: $httpParamSerializerJQLike($scope.payment),
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }).then(function(response) {
+                if (response.data.success) { $('#paymentResult').append('<div class="alert alert-success"> Invoice Saved Successfuly </div>'); } 
+                else {   $('#paymentResult').append('<div class="alert alert-danger">Error Saveing Invoice!!!</div>'); }
         });
     }
+
+
 }]);
 
 
@@ -288,13 +282,8 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
 
     $scope.AVAILABLE_SCHEDULES = [];
 
-    $http({
-        method: 'GET',
-        url: 'backend/index.php/api/schedule'
-    }).then(function (response) {
-        if (response) {
-            $scope.AVAILABLE_SCHEDULES = response.data.result;
-        }
+    $http.get('backend/index.php/api/schedule')
+                .then(function (response) { if (response.data) {  $scope.AVAILABLE_SCHEDULES = response.data;  }
     });
 }]);
 
@@ -303,12 +292,8 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
 app.controller("resultController", ["$scope", "$http", function ($scope, $http) {
 
     $scope.AVAILABLE_RESULTS = [];
-    $http({
-        method: 'GET',
-        url: 'backend/index.php/api/result/'
-    }).then(function (response) {
-        $scope.AVAILABLE_RESULTS = response.data.result
-    })
+    $http.get('backend/index.php/api/result/')
+                    .then(function (response) {  $scope.AVAILABLE_RESULTS = response.data.result  });
 }]);
 
 
@@ -331,36 +316,6 @@ app.controller("passwordController", ["$scope", "$http", "$httpParamSerializerJQ
 
 
 
-//search controller used for searching events
-app.controller('searchCtrl', ["$scope", "$http", "$q", "$location",
-    function ($scope, $http, $q, $location, $route) {
-
-        var searchValue = $scope.searchText;
-
-        $scope.searchItemSelected = function (selected) {
-            $location.path('/eventDetail/' + selected.eventId);
-        };
-        $scope.showEventDetail = function (eventId) {
-            $location.path('/eventDetail/' + eventId);
-        };
-
-        $scope.getMatches = function (searchValue) {
-            return $http({
-                method: 'GET',
-                url: "includes/systemController.php",
-                params: { get: "searchEvent", value: searchValue }
-            })
-                .then(function mySuccess(response) {
-                    return response.data;
-                },
-                    function myError(response) {
-                        return response;
-                    });
-
-        };
-
-    }]);
-//Search Controller End
 
 //log in Controller
 app.controller('logInController', ["$scope", "$http", "$httpParamSerializerJQLike",
