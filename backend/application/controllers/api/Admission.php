@@ -8,7 +8,7 @@ class Admission extends API {
     parent::__construct($config);
     $this->load->model('admission_model');
   }
-
+//print admission card
   function index_get($id = NULL) {
 
     $result['result'] = $this->admission_model->get_admission($id);

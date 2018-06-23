@@ -4,9 +4,9 @@
         parent::__construct();
         $this->load->database();
     }
-
+    //get assessment schedule
     public function get_schedule($scheduleID = NULL) {
-      // assessment schedule
+      
       $this->db->select('candidate_group.gr_id , candidate_group.sch_id , center.center_name ,  schedule.scheduled_date, schedule.time, COUNT(candidate_group.exam_id) as total,
       assessment.occ_code');
       $this->db->from('assessment');
@@ -20,7 +20,7 @@
               
             return $query->result_array();
         } 
-
+    //get group schedule
         public function get_group_schedule($id) {
             $this->db->select('candidate.full_name, candidate.sex, assessment.can_regno, assessment.exam_id, candidate_group.gr_id,
                                 assessment.occ_code, center.center_code, center.center_name, assessment.practical_result,

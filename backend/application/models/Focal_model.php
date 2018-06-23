@@ -4,6 +4,7 @@ class Focal_model extends MY_Model {
         parent::__construct();
         $this->load->database();
     }
+    //login function for focal
     function select_focal($contact_person,$password){
         $where=array(
             'contact_person'=>$contact_person,
