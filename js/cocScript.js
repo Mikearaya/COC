@@ -317,7 +317,10 @@ app.controller("paymentController", ["$scope", "$http", "$httpParamSerializerJQL
                 $scope.PENDING_PAYMENTS = response.data;
                 response.data.forEach(function (paymentInfo) {
                 $scope.payment.examIds.push(paymentInfo.exam_id);
+                if(paymentInfo.amount_paid){
                 $scope.payment.totalAmount = $scope.payment.totalAmount  + parseInt(paymentInfo.amount_paid);
+                }
+                console.log(paymentInfo);
         })
     })
 
