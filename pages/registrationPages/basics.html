@@ -26,9 +26,9 @@
                     class="form-control"
                     placeholder="Birthdate"
                 >
-            <div ng-messages="registrationForm.birthdate.$error ">
-                <div ng-message="pattern">Birthdate should be only digit</div>
-                <div ng-message="required" > Brithdate is required</div>
+            <div ng-messages="registrationForm.birthdate.$errors && registrationForm.birthdate.$touched">
+                <div ng-message="registrationForm.birthdate.$error.pattern" >Birthdate should be only digit</div>
+                <div ng-message="registrationForm.birthdate.$error.required" > Brithdate is required</div>
             </div>
         </div>
     </div>
