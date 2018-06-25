@@ -34,7 +34,7 @@
 
 <body ng-controller="mainController as main" ng-cloak>
 
-  <nav class="d-print-none">
+  <nav class="d-print-none" ng-if="isLogged()">
     <ul class="nav nav-pills nav-fill bg-white" id="navigation">
       <li class="nav-item">
         <a class="nav-link active" href="#/home">Home</a>
@@ -58,7 +58,7 @@
         <a class="nav-link" href="#password">Change Password</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#logIn">Log Out</a>
+        <a class="nav-link" ng-click="logOut() " href="#" >Log Out</a>
       </li>
 
     </ul>
@@ -68,34 +68,6 @@
       <ng-view>
 
       </ng-view>
-    </div>
-  </div>
-  <div class="modal" tabindex="-1" id="logInModal" role="dialog">
-    <div class="modal-dialog" role="authentication">
-      <div class="modal-content shadow rounded p-5 bg-white">
-        <div class="modal-header">
-          <h5 class="modal-title">LOG IN</h5>          
-        </div>
-        <form ng-submit="Submit()" name="loginForm">
-          <div class="modal-body">
-            <div class="form-group">
-              <output ng-bind="result" class="alert-danger" style="display: block;"></output>
-              <label for="focalName">User Name</label>
-              <input type="text" class="form-control" ng-model="user.contact_person" id="focalName" required="required" aria-describedby="User Name"  placeholder="User Name">
-            </div>
-            <div class="form-group">
-              <label for="focalPassword">Password</label>
-              <input type="password" class="form-control" id="focalPassword" required name="focalPassword" ng-model="user.password" placeholder="Password">
-              <div ng-messages="focalPassword.$error">
-                <div ng-message="required">Password is Required!!!</div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer text-center">
-            <button type="submit" class="btn btn-primary">Log In</button>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
 

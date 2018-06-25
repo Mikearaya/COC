@@ -6,41 +6,104 @@ var app = angular.module('myApp', ['ngRoute',
 
 ]);
 
-app.controller("mainController", ["$scope", "$http", "$httpParamSerializerJQLike",
-    function ($scope, $http,  $httpParamSerializerJQLike) {
+//session Service
+app.factory("session", ["$http", function($http){
 
+    var focal_person_name = "";
+    var center_id = "";
+    var center_name = "";
+    var loged_in = false;
 
-        $('#logInModal').modal({
-            backdrop: 'static',
-            show: true,
-            keyboard: false
-        });
-        $('#phoneModal').on('shown.bs.modal', function () {
-            $('#candidatePhone').trigger('focus');
-        });
-    
-        $scope.user = {
-            password: "",
-            contact_person: ""
-    
-        };
-        $scope.result = '';
-        $scope.Submit = function () {
-            return $http({
-                method: "POST",
-                url: "backend/index.php/api/focal",
-                data: $httpParamSerializerJQLike($scope.user),
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-            })
-                .then(function (response) {
-                    if (response.data.success) {
-                        $("#logInModal").modal('hide');
-                    } else {
-                        $scope.result = 'Username or Password Incorrect';
-                    }
-                });
-    
-        };
+    function createSession(centerId, centerName, focalName) {
+
+      focal_person_name = focalName;
+      center_id = centerId;
+      center_name = centerName;
+      loged_in = true;
+    };
+
+    function getUserName() {
+      return focal_person_name;
+    }
+
+    function getCenterName() {
+        return center_name;
+    }
+    function getCenterId() {
+      return center_id;
+    }
+
+    function destroySession() {
+      loged_in = false;
+      focal_person_name = "";
+      center_id = "";
+      center_name="";
+
+      $http({
+        method : "GET",
+        url : "backend/index.php/api/focal/log_out",
+      }).then(function(response){ });
+
+    };
+
+    function isLoggedIn() {
+      return loged_in;
+    };
+
+    function refresh() {
+       $http({
+        method : "GET",
+        url : "backend/index.php/api/focal/is_session_active",
+      }).then(function(response){
+
+        if(response.data.is_active) {
+          focal_person_name = response.data.focal_name;
+          center_id = response.data.center_id;
+          center_name = response.data.center_name;
+          loged_in = true;
+        }
+
+      });
+
+    }
+
+  refresh();
+return {
+        create : createSession,
+        destroy : destroySession,
+        isLoggedIn : isLoggedIn,
+        getUserName : getUserName,
+        getCenterName: getCenterName,
+        getCenterId : getCenterId
+      };
+
+}]);
+
+app.controller("mainController", ["$scope", "$http", "session",  "$location", "$httpParamSerializerJQLike",
+    function ($scope, $http, session, $location ,$httpParamSerializerJQLike) {
+    console.log(session.isLoggedIn());
+
+    $scope.isLogged = function() {
+        return session.isLoggedIn();
+  };
+
+    $scope.logOut = function() {
+        session.destroy();
+                 $location.path("/pages/logIn");
+    }
+
+/*
+            $('#logInModal').modal({
+                backdrop: 'static',
+                show: true,
+                keyboard: false
+            });
+
+            $('#phoneModal').on('shown.bs.modal', function () {
+                $('#candidatePhone').trigger('focus');
+            });
+    */
+
 }]);
 
 app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -215,16 +278,23 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
     }]);
 
 //home page controller
-app.controller("homeController", ["$scope","$http", function ($scope, $http) {
+app.controller("homeController", ["$scope","$http", "session", "$location", function ($scope, $http, session, $location) {
     $scope.admissionCount = 0;
     $scope.scheduleCount = 0;
     $scope.resultCount = 0;
     $scope.paymentCount = 0;
+    if(session.isLoggedIn()){
+    $http.get('backend/index.php/api/dash/schedule/'+session.getCenterId()).then(function (response) { $scope.scheduleCount = response.data });
+    $http.get('backend/index.php/api/dash/admission/'+session.getCenterId()).then(function (response) { $scope.admissionCount = response.data });
+    $http.get('backend/index.php/api/dash/result/'+session.getCenterId()).then(function (response) { $scope.resultCount = response.data });
+    $http.get('backend/index.php/api/dash/payment/'+session.getCenterId()).then(function (response) { $scope.paymentCount = response.data });
+    } else {
+        $location.path('/logIn');
+    }
 
-    $http.get('backend/index.php/api/dash/schedule/00').then(function (response) { $scope.scheduleCount = response.data });
-    $http.get('backend/index.php/api/dash/admission/00').then(function (response) { $scope.admissionCount = response.data });
-    $http.get('backend/index.php/api/dash/result/00').then(function (response) { $scope.resultCount = response.data });
-    $http.get('backend/index.php/api/dash/payment/00').then(function (response) { $scope.paymentCount = response.data });
+    $scope.isLogged = function() {
+        return session.isLoggedIn();
+    }
     
 }]);
 
@@ -248,7 +318,6 @@ app.controller("paymentController", ["$scope", "$http", "$httpParamSerializerJQL
                 response.data.forEach(function (paymentInfo) {
                 $scope.payment.examIds.push(paymentInfo.exam_id);
                 $scope.payment.totalAmount = $scope.payment.totalAmount  + parseInt(paymentInfo.amount_paid);
-            console.log($scope.payment.totalAmount);
         })
     })
 
@@ -318,9 +387,37 @@ app.controller("passwordController", ["$scope", "$http", "$httpParamSerializerJQ
 
 
 //log in Controller
-app.controller('logInController', ["$scope", "$http", "$httpParamSerializerJQLike",
-    function ($scope, $http, $httpParamSerializerJQLike) {
-        var self = this;
+app.controller('logInController', ["$scope", "$http", "session", "$location", "$httpParamSerializerJQLike",
+    function ($scope, $http,session, $location, $httpParamSerializerJQLike) {
 
+        $scope.user = {
+            password: "",
+            contact_person: ""
+    
+        };
+        $scope.result = '';
+        $scope.Submit = function () {
+            return $http({
+                method: "POST",
+                url: "backend/index.php/api/focal/log_in",
+                data: $httpParamSerializerJQLike($scope.user),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+                .then(function (response) {
+                    if (response.data.success) {
+                        console.log(response.data);
+                        session.create(response.data.center_id, 
+                            response.data.center_name, 
+                            response.data.focal_name);
+                            $location.path('/home');
+              
+                        
+
+                    } else {
+                        $scope.result = 'Username or Password Incorrect';
+                    }
+                });
+    
+        };
 
     }]);

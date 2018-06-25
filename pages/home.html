@@ -1,7 +1,7 @@
 <section 
     ng-controller="homeController"
-    class="container-fluid">
-    <div class="row text-center justify-content-between " style="margin-top: 5%;">
+    class="container-fluid" >
+    <div class="row text-center justify-content-between " ng-if="isLogged()" style="margin-top: 5%;" >
         <div class="col col-xs-12 ">
                 <div class="card border-danger mb-5" >
                         <div class="card-header">Un-Confirmed Payments <span class="badge badge-pill badge-danger">{{paymentCount}}</span></div>
