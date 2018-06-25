@@ -18,10 +18,6 @@ class Candidate extends API {
     }
 
 
-    /**
-     * 
-     * 
-     */
     public function register_assessment($assessment, $candidateId) {
         $this->load->library('form_validation');
         $result['success'] = false;

@@ -4,7 +4,7 @@
         parent::__construct();
         $this->load->database();
     }
-
+    //get occupation for candidate registration
     public function get_occupation($sector_id = NULL) {
             $result = NULL;
                 if(!is_null($sector_id)) {
@@ -16,7 +16,7 @@
                 }
               return $result;
             }
-
+    //get unit of competency for candidate registration
     public function get_unit_of_competency($occupation_id = NULL) {
                 $result = NULL;
                     if(!is_null($occupation_id)) {
@@ -28,6 +28,7 @@
                     }
                   return $result;
                 }
+    //get assessment for candidate registration            
     public function get_assessment_price($occupation_id = NULL) {
                     $result = NULL;
                         if(!is_null($occupation_id)) {
@@ -39,7 +40,7 @@
                         }
                       return $result;
                     }
-
+    //get sector for candidate registration
     public function get_sector($sector_id = NULL) {
                 $result = $this->db->get_where('sector', array('parent' => $sector_id));
                 return $result->result_array();

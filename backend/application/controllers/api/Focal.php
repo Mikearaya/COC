@@ -8,7 +8,7 @@ class Focal extends API {
       $this->load->model('focal_model');
 
 }  
-// 
+// log in function for focal person
 function index_post(){
     $result;
 
@@ -17,16 +17,16 @@ function index_post(){
         $focal=$this->focal_model->select_focal($contact_person,$password);
         if(!$focal){
             $result['success']= false;
+
         }
         else{
             $this->session->set_userdata('center_id',$focal['center_id']);
+            $this->session->set_userdata('center_id',$focal['center_id']);
             $this->session->set_userdata('center_name',$focal['center_name']);
             $this->session->set_userdata('contact_person',$focal['contact_person']);
-            
             $result['success']= true;
         }
-
-    $this->response($result, API::HTTP_OK);
+        $this->response($result, API::HTTP_OK);
 }
 
 }

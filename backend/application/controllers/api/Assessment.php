@@ -5,6 +5,7 @@
         parent::__construct($config);
         $this->load->model('assessment_model');
     }
+//get assessment
     function index_get($id = NULL) {
         $result['result'] = $this->assessment_model->get_assessment($id);
         $result['columns'] = [];
@@ -20,6 +21,7 @@
         $this->register_assessment($id);
     }
 
+//save assessment
     function register_assessment($assessmentInfo) {
 
         $this->load->library('form_validation');

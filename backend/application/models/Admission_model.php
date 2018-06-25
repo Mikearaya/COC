@@ -4,7 +4,7 @@
         parent::__construct();
         $this->load->database();
     }
-    // list candidate who are paid for assessment
+    // list candidate who are paid for assessment get admission
     public function get_admission(){
         $this->db->select('candidate.full_name, candidate.reg_no,candidate.print_admission,assessment.registered_by,center.center_name,occupation.occ_name,occupation.level,
                           assessment.paid,assessment.amount_paid ,assessment.registration_date,assessment.invoice_no');

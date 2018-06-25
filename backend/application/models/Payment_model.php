@@ -26,7 +26,7 @@
         
     }
     
-    // save and update invoice number 
+    // save and update invoice number for payment
     public function save_invoice($invoice, $candidateIds) {
        if(isset($invoice['id'])){
            return $this->update_invoice($invoice);
