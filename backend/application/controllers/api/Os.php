@@ -6,7 +6,7 @@
         parent::__construct($config);
         $this->load->model('os_model');
     }
-
+//get occupation for candidate registration
 function occupation_get($id = NULL){
     $result = $this->os_model->get_occupation($id);
     $this->response($result,API::HTTP_OK);
