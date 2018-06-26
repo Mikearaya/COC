@@ -33,8 +33,7 @@ public function save_candidate($candidate) {
 // save assessment
 public function save_assessment($assessment, $candidateId) {
     $assessment['can_regno'] =$candidateId;
-    $assessment['branch_code'] = 'W';
-	$assessment['registered_by'] = 'addisu';
+	$assessment['registered_by'] = $this->session->userdata('focal_name');
 	$assessment['center_code'] = $this->session->userdata('center_code');
 	$assessment['payment_status'] = 'PENDING';
     $assessment['paid'] = ($assessment['paid'] == 'true') ? 1 : 0;

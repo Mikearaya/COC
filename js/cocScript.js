@@ -58,8 +58,8 @@ app.factory("session", ["$http", function($http){
       }).then(function(response){
 
         if(response.data.is_active) {
-          focal_person_name = response.data.focal_name;
-          center_id = response.data.center_id;
+          focal_person_name = response.data.contact_person;
+          center_id = response.data.center_code;
           center_name = response.data.center_name;
           loged_in = true;
         }
@@ -235,7 +235,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
         applicationFee = function (occ_code) {
 
             initializeOS('assessment_price', occ_code).then(function (response) {
-                $scope.candidate.assessment.assessment_rate = response.data.result.amount_for_level;
+                $scope.candidate.assessment.assessment_rate = response.data.amount_for_knwledge;
             });
         };
 
