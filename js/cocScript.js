@@ -21,7 +21,7 @@ app.factory("session", ["$http", function($http){
       center_id = centerId;
       center_name = centerName;
       loged_in = true;
-    };
+    }
 
     function getUserName() {
       return focal_person_name;
@@ -45,11 +45,11 @@ app.factory("session", ["$http", function($http){
         url : "backend/index.php/api/focal/log_out",
       }).then(function(response){ });
 
-    };
+    }
 
     function isLoggedIn() {
       return loged_in;
-    };
+    }
 
     function refresh() {
        $http({
@@ -112,7 +112,7 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
     $locationProvider.hashPrefix('');
     $routeProvider.caseInsensitiveMatch = true;
 
-    $routeProvider.when('/', { templateUrl: "pages/home.html" });
+    $routeProvider.when('/', { templateUrl: "pages/logIn.html" });
     $routeProvider.when('/home', { templateUrl: "pages/home.html" });
     $routeProvider.when('/payment', { templateUrl: "pages/paymentManager.html" });
     $routeProvider.when('/register', { templateUrl: "pages/registrationManager.html" });
@@ -181,6 +181,14 @@ app.controller('scheduleDetailController', ['$scope', '$http', '$route', functio
 //registration page controller
 app.controller("registrationController", ["$scope", "$http", "$httpParamSerializerJQLike",
     function ($scope, $http, $httpParamSerializerJQLike) {
+        $scope.MARITAL_STATUS = [];
+        $scope.TRAINING_MODES = [];
+        $scope.TRAINING_TYPES = [];
+        $scope.COMPANY_STATUS = [];
+        $scope.NATIONALITIES = [];
+    
+       //modal used to initialize form for returning candidate with previous infomation
+       //using mobile number
         $("#phoneModal").modal({
             keyboard: false,
             show: true,
@@ -190,7 +198,25 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
             $('#candidatePhone').trigger('focus');
         });
 
-
+//initialize select controls with data from server
+        $http.get('backend/index.php/api/init/registration').then(function(response){
+            response.data.forEach(function(control){
+                console.log(control);
+                switch(control.field){
+                    case 'marital_status': $scope.MARITAL_STATUS.push(control.value);
+                        break;
+                    case 'mode_of_training': $scope.TRAINING_MODES.push(control.value);
+                        break;
+                    case 'type_of_training': $scope.TRAINING_TYPES.push(control.value);
+                    console.log('type');
+                        break;
+                    case 'nationality': $scope.NATIONALITIES.push(control.value);
+                        break;
+                    case 'company_status_you_are_working_on':  $scope.COMPANY_STATUS.push(control.value);
+                        break;
+                }
+            })
+        });
         $scope.candidate = {
             basic_info: {
                 id: '',
@@ -235,7 +261,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
         applicationFee = function (occ_code) {
 
             initializeOS('assessment_price', occ_code).then(function (response) {
-                $scope.candidate.assessment.assessment_rate = response.data.amount_for_knwledge;
+                $scope.candidate.assessment.assessment_rate = response.data.amount_for_knowledge;
             });
         };
 
@@ -284,18 +310,18 @@ app.controller("homeController", ["$scope","$http", "session", "$location", func
     $scope.scheduleCount = 0;
     $scope.resultCount = 0;
     $scope.paymentCount = 0;
-    if(session.isLoggedIn()){
+  //  if(session.isLoggedIn()){
     $http.get('backend/index.php/api/dash/schedule/'+session.getCenterId()).then(function (response) { $scope.scheduleCount = response.data });
     $http.get('backend/index.php/api/dash/admission/'+session.getCenterId()).then(function (response) { $scope.admissionCount = response.data });
     $http.get('backend/index.php/api/dash/result/'+session.getCenterId()).then(function (response) { $scope.resultCount = response.data });
     $http.get('backend/index.php/api/dash/payment/'+session.getCenterId()).then(function (response) { $scope.paymentCount = response.data });
-    } else {
-        $location.path('/logIn');
-    }
+   // } else {
+    //    $location.path('/logIn');
+    //}
 
     $scope.isLogged = function() {
         return session.isLoggedIn();
-    }
+    };
     
 }]);
 

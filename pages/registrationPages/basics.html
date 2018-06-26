@@ -37,8 +37,7 @@
             <label for="maritalStatus">Marital Status</label>
             <select name="maritalStatus" ng-model="candidate.basic_info.marital_status" required id="maritalStatus" aria-placeholder="Marital Status"
                 class="form-control">
-                <option value="Married">Married</option>
-                <option value="Single">Single</option>
+                <option ng-repeat="status in MARITAL_STATUS" value="{{status}}">{{status}}</option>
             </select>
         </div>
     </div>
