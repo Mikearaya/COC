@@ -1,21 +1,26 @@
-<section ng-controller="admissionController"    >
+<section ng-controller="admissionController">
     <div class="container" style="margin-top: 10px;">
         <div class="row">
-            <div class="col align-items-center text-center" ng-init="valu = ''">
-                <form ng-submit="printAdmissions()"  >
-                    <div class="form-group">
-                    <textarea class="form-control" ng-keyup="valu = $event.target.value">
-
-                    </textarea>
-                    {{valu}}
-                </div>
-                    <button 
-                            type="submit"
-                            class="btn btn-md btn-primary">
-                            Print Admissions
-                        </button>
+            <div class="col align-items-center text-center" >
+                <form ng-submit="printAdmissions()">
+                        <ui-select ng-model="candidates" multiple append-to-body="true"  theme="bootstrap">
+                                <ui-select-match placeholder="enter admission name">
+                                    <span ng-bind="$item.full_name"></span>
+                                </ui-select-match>
+                                <ui-select-choices position="down" repeat="candidate  in availableCandidates | filter: $select.search track by $index "
+                                refresh="getCandidates($select.search)"
+                                refresh-delay="0"
+                             >
+                             <div ng-bind-html="candidate.full_name | highlight: $select.search"></div>
+                             <div ng-bind-html="candidate.reg_no | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                    <a class="btn btn-primary" href="#/slip">Primt Admissions</a>
                 </form>
             </div>
         </div>
     </div>
 </section>
+<style>
+
+</style>

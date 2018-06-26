@@ -14,6 +14,7 @@
       $this->db->join('schedule','schedule.group_no = candidate_group.gr_id','left');
       $this->db->join('center','assessment.center_code = center.center_code','left');
       $this->db->group_by('candidate_group.gr_id');
+      $this->db->where('assessment.center_code', $this->session->userdata('center_code'));
       $this->db->limit(20);
 
         $query = $this->db->get();

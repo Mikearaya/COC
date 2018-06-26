@@ -11,7 +11,7 @@
         $this->db->select('candidate.full_name, candidate.reg_no, assessment.paid,assessment.amount_paid ,assessment.registration_date,assessment.exam_id,
                          occupation.occ_name,occupation.level');
         $this->db->from('assessment');
-        
+
         $this->db->where('assessment.paid', 1);
         $this->db->where('assessment.center_code',  $this->session->userdata('center_code'));
         $this->db->join('candidate','candidate.reg_no = assessment.can_regno');

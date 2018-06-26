@@ -14,17 +14,12 @@ public function get_result() {
        $this->db->from('assessment');
        $this->db->join('candidate_group','candidate_group.exam_id = assessment.exam_id','left');
        $this->db->join('schedule','schedule.group_no = candidate_group.gr_id','left');
+       $this->db->where('assessment.center_code', $this->session->userdata('center_code'));
        $this->db->join('center','assessment.center_code = center.center_code','left');       
        $this->db->group_by('candidate_group.gr_id');
        $this->db->limit(20);
-    
-        
-        $query = $this->db->get(); 
-            if($query->num_rows() != 0){
-                return $query->result_array();
-            } else {    
-                return false;
-        }
+             $query = $this->db->get(); 
+         return $query->result_array();
         
     }
 
