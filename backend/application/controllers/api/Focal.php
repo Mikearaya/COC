@@ -18,12 +18,12 @@ class Focal extends API {
             $result['success']= false;
 
         } else {
-            $this->session->set_userdata('center_code',$focal['center_id']);
+            $this->session->set_userdata('center_code',$focal['center_code']);
             $this->session->set_userdata('center_name',$focal['center_name']);
             $this->session->set_userdata('contact_person',$focal['contact_person']);
             $result['success']= true;
-            $result['focal_name'] = $this->session->userdata('contact_person');
-            $result['center_id'] = $this->session->userdata('center_code');
+            $result['contact_person'] = $this->session->userdata('contact_person');
+            $result['center_code'] = $this->session->userdata('center_code');
             $result['center_name'] = $this->session->userdata('center_name');
         }
         $this->response($result, API::HTTP_OK);
@@ -42,7 +42,7 @@ class Focal extends API {
             $this->session->has_userdata('center_name') &&
             $this->session->has_userdata('contact_person')) {
             $result['is_active']= true;
-            $result['focal_name'] = $this->session->userdata('contact_person');
+            $result['contact_person'] = $this->session->userdata('contact_person');
             $result['center_id'] = $this->session->userdata('center_id');
             $result['center_name'] = $this->session->userdata('center_name');
 
