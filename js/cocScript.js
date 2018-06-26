@@ -2,7 +2,8 @@
 var app = angular.module('myApp', ['ngRoute',
     'ngMessages',
     'ngAria',
-    'ngAnimate'
+    'ngSanitize',
+    'ui.select'
 
 ]);
 
@@ -344,8 +345,31 @@ app.controller("paymentController", ["$scope", "$http", "$httpParamSerializerJQL
 
 
 //admission card printing page controller
-app.controller("admissionController", ["$scope", function ($scope) {
+app.controller("admissionController", ["$scope", "$http", function ($scope, $http) {
 
+    $scope.candidates = [
+        {full_name: 'Mikael Araya', reg_no: '10'}
+      ];
+      $scope.availableCandidates = [];
+      $scope.selectedCandidates = [];
+    
+      removeCandidate = function(data){
+        console.log(data);
+      };
+      $scope.getCandidates= function(val) {
+       $http.get('backend/index.php/api/admission/filter', 
+                        {params: {filter: val} }).then(function(response){
+          $scope.availableCandidates = response.data;     
+        });
+      };
+
+
+      $scope.modelOptions = {
+        debounce: {
+          default: 500,
+          blur: 250
+        }
+      };
 }]);
 
 
