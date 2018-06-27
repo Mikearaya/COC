@@ -1,4 +1,4 @@
-<div class="shadow p-3 mb-5 bg-white rounded container">
+<div class="shadow p-3 mb-5  rounded container">
   <div class="row">
     <div class="form-group col">
       <label for="mainSector" >Sector </label>
@@ -53,26 +53,28 @@
     <div class="form-check form-check-inline"> 
         <label for="ucRegister" class="form-check-label">Register For UC</label>
         <input 
+              ng-change="ucCheck(candidate.assessment.apply_for_uc)"
               type="checkbox"
               name="ucRegister"
-              ng-model="applyUc"
+              ng-model="candidate.assessment.apply_for_uc"
               id="ucRegister_yes"
               class="form-check-input"
-              value="yes"                              
-
+              value="yes"                   
         >
       </div>        
   </div>
   <div class="row">
-    <div class="form-group col" ng-if="applyUc">
-      <label for="uc">Unit of Competencies</label>
+    <div class="form-group col" >
+      <label for="ucReg">Unit of Competencies</label>
       <select
               ng-disabled="!candidate.assessment.occ_code"
-              name="uc"
+              name="ucReg"
               aria-placeholder="Unit Of Competencies"
-              id="uc"
-              ng-model="uc_code"
-              required    
+              id="ucReg"
+              ng-model="candidate.assessment.selected_uc"
+              ng-required="candidate.assessment.apply_for_uc"
+              disabled="!candidate.assessment.apply_for_uc" 
+              ng-readonly="!candidate.assessment.apply_for_uc"                        
               multiple
               class="form-control"
       >
@@ -86,22 +88,18 @@
     <input type="text"
         
             disabled
-            ng-model="candidate.assessment.assessment_rate"
+            ng-model="candidate.assessment.amount_paid"
             id="applicationFee"
             name="applicationFee"
             class="form-control"
+            
     >
     </div>
-    <div class="form-check form-check-inline col">
-    <input type="checkbox"
-            name="paid"
-            ng-change="candidate.assessment.amount_paid = candidate.assessment.assessment_rate"
-            ng-model="candidate.assessment.paid"
-            class="form-check-input"
-            id="paid"
-            required
-    >
-    <label for="paid" class="form-check-label">Paid</label>    
+    <div class=" form-group text-center col">
+    
+    <button type="button" class="btn btn-primary" id="paid" ng-checked="paymentStatus(candidate.assessment.paid)" ng-model="candidate.assessment.paid" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+paid  </button>
+
   </div>
 </div>
 

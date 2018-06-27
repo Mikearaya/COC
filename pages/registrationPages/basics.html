@@ -16,7 +16,7 @@
     </div>
     <div class="row">
         <div class="form-group col">
-            <label for="birthdate">Birthdate</label>
+            <label for="age">Age</label>
             <input  type="text" 
                     required 
                     ng-model="candidate.basic_info.age" 
@@ -24,7 +24,7 @@
                     pattern="[0-9]{2}" 
                     id="birthdate" 
                     class="form-control"
-                    placeholder="Birthdate"
+                    placeholder="Age"
                 >
             <div ng-messages="registrationForm.birthdate.$errors && registrationForm.birthdate.$touched">
                 <div ng-message="registrationForm.birthdate.$error.pattern" >Birthdate should be only digit</div>
@@ -51,7 +51,7 @@
         <div class="form-group col">
             <label for="disablityNature">Disablity Nature</label>
             <textarea ng-disabled="!candidate.basic_info.disablity" class="form-control" name="disablityNature" id="disablityNature"
-                rows="3" ng-model="candidate.disablityNature">
+                rows="3" ng-model="candidate.disablity_nature">
 
          </textarea>
         </div>

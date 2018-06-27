@@ -2,6 +2,8 @@
 var app = angular.module('myApp', ['ngRoute',
     'ngMessages',
     'ngAria',
+    'ngAnimate',
+    'ui.bootstrap',
     'ngSanitize',
     'ui.select'
 
@@ -175,17 +177,34 @@ app.controller('scheduleDetailController', ['$scope', '$http', '$route', functio
     });
     $scope.print = function () {
         window.print();
-    }
+    };
+
 
 }]);
 //registration page controller
 app.controller("registrationController", ["$scope", "$http", "$httpParamSerializerJQLike",
     function ($scope, $http, $httpParamSerializerJQLike) {
+        $scope.candidate = {
+            basic_info: {
+                id: '',
+                reg_no: '',
+            },
+            assessment: {}
+        };
+
+        $scope.paymentStatus = function(val){
+            console.log(val);
+        };
+           // $('#mobile').mask('000-0-00-00-00');
+            //$('#homePhone').mask('000-0-00-00-00');
+        
         $scope.MARITAL_STATUS = [];
         $scope.TRAINING_MODES = [];
         $scope.TRAINING_TYPES = [];
         $scope.COMPANY_STATUS = [];
         $scope.NATIONALITIES = [];
+        $scope.OCCUPATION_FEE = 0.0;
+        $scope.LEVELS = [1,2,3,4];
     
        //modal used to initialize form for returning candidate with previous infomation
        //using mobile number
@@ -201,14 +220,12 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
 //initialize select controls with data from server
         $http.get('backend/index.php/api/init/registration').then(function(response){
             response.data.forEach(function(control){
-                console.log(control);
                 switch(control.field){
                     case 'marital_status': $scope.MARITAL_STATUS.push(control.value);
                         break;
                     case 'mode_of_training': $scope.TRAINING_MODES.push(control.value);
                         break;
                     case 'type_of_training': $scope.TRAINING_TYPES.push(control.value);
-                    console.log('type');
                         break;
                     case 'nationality': $scope.NATIONALITIES.push(control.value);
                         break;
@@ -217,13 +234,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                 }
             })
         });
-        $scope.candidate = {
-            basic_info: {
-                id: '',
-                reg_no: '',
-            },
-            assessment: {}
-        };
+     
 
         $scope.searchPhone = function () {
 
@@ -244,7 +255,18 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
         $scope.OCCUPATIONS = [];
         $scope.UCS = [];
         $scope.APPLICATION_FEE = 0;
-
+        $scope.ucCheck = function(val) {
+            console.log(val);
+            if(val && $scope.OCCUPATION_FEE.amount_for_uc) {
+                $scope.candidate.assessment.amount_paid = $scope.OCCUPATION_FEE.amount_for_uc; 
+            } else if( val == false && $scope.OCCUPATION_FEE.amount_for_knowledge) {
+                $scope.candidate.assessment.amount_paid = $scope.OCCUPATION_FEE.amount_for_knowledge; 
+            } else if( val && !$scope.OCCUPATION_FEE.amount_for_uc && $scope.OCCUPATION_FEE.amount_for_knowledge) {                
+                $scope.candidate.assessment.amount_paid = $scope.OCCUPATION_FEE.amount_for_knowledge; 
+            } else {
+                $scope.candidate.assessment.amount_paid = 0;
+            }
+        }
 
 
         initializeOS = function (type, id = null) {
@@ -259,9 +281,13 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
 
 
         applicationFee = function (occ_code) {
-
             initializeOS('assessment_price', occ_code).then(function (response) {
-                $scope.candidate.assessment.assessment_rate = response.data.amount_for_knowledge;
+                $scope.OCCUPATION_FEE = response.data;
+                if ($scope.OCCUPATION_FEE.amount_for_knowledge){
+                    $scope.candidate.assessment.amount_paid = parseFloat($scope.OCCUPATION_FEE.amount_for_knowledge);
+                } else {
+                    $scope.candidate.assessment.amount_paid = 0.0;
+                }
             });
         };
 
@@ -407,6 +433,21 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
     $http.get('backend/index.php/api/schedule')
                 .then(function (response) { if (response.data) {  $scope.AVAILABLE_SCHEDULES = response.data;  }
     });
+
+    $scope.totalItems = 64;
+    $scope.currentPage = 4;
+  
+    $scope.setPage = function (pageNo) {
+      $scope.currentPage = pageNo;
+    };
+  
+    $scope.pageChanged = function() {
+      $log.log('Page changed to: ' + $scope.currentPage);
+    };
+  
+    $scope.maxSize = 5;
+    $scope.bigTotalItems = 175;
+    $scope.bigCurrentPage = 1;
 }]);
 
 

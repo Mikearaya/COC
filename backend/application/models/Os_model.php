@@ -21,7 +21,7 @@
                 $result = NULL;
                     if(!is_null($occupation_id)) {
                         $query = $this->db->get_where('unit_of_competency' , array('occ_code' => $occupation_id));
-                        $result = $query->row_array();
+                        $result = $query->result_array();
                     } else {
                         $query = $this->db->get('unit_of_competency');
                         $result = $query->result_array();
