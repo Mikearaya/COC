@@ -1,74 +1,59 @@
 <section ng-controller="registrationController" style="margin-top: 10px;">
     <div class="shadow-sm p-3 mb-5 bg-white rounded container">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" data-target="#basic-info">Basic Info</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link nav-item " data-toggle="tab"  data-target="#address" >Address</a>
-                </li>
-            <li class="nav-item">
-                <a class="nav-link nav-item " data-toggle="tab"  data-target="#education" >Education History</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link nav-item " data-toggle="tab"  data-target="#employment" >Employment History</a>
-                </li>
-            <li class="nav-item">
-                <a class="nav-link nav-item " data-toggle="tab" data-target="#assessment">Assessment</a>
-            </li>
-        </ul>
-        <form name="registrationForm" ng-submit="register()">
-            <div class="row">
-                <div class="col">
-                    <button type="submit" class="btn btn-primary btn-md">Save</button>
-                    <button type="button" class="btn btn-danger btn-md">Cancel</button>
-                </div>
-            </div>
-            <div class="tab-content" id="nav-tabContent">                  
-                <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="nav-home-tab">  
-                <ng-include src="'pages/registrationPages/basics.html'"></ng-include> 
-                                        
-                </div>
-                <div class="tab-pane fade" id="address" role="tabpanel">
-                    <ng-include src="'pages/registrationPages/address.html'"></ng-include> 
-                </div>
-                <div class="tab-pane fade" id="education" role="tabpanel" >                      
-                    <ng-include src="'pages/registrationPages/education.html'"></ng-include> 
-                </div>
-                <div class="tab-pane fade" id="employment" role="tabpanel" >
-                    <ng-include src="'pages/registrationPages/employment.html'"></ng-include> 
-                </div>
-                <div class="tab-pane fade" id="assessment" role="tabpanel" >
-                    <ng-include src="'pages/registrationPages/assessment.html'"></ng-include>          
-                </div>
-            </div>
-        </form>
+
+        <ng-form name="registrationForm" ng-submit="register()">
+            <button type="submit" class="btn btn-primary btn-md">Save</button>
+            <button type="button" class="btn btn-danger btn-md">Cancel</button>
+
+            <uib-tabset active="Basics">
+                <uib-tab index="0" heading="Basics">
+
+                    <ng-include src="'pages/registrationPages/basics.html'"></ng-include>
+                </uib-tab>
+                <uib-tab index="1" heading="Assessment">
+                    <ng-include src="'pages/registrationPages/assessment.html'"></ng-include>
+                </uib-tab>
+                <uib-tab index="2" heading="Address">
+
+                    <ng-include src="'pages/registrationPages/address.html'"></ng-include>
+                </uib-tab>
+
+                <uib-tab index="3" heading="Education">
+                    <ng-include src="'pages/registrationPages/education.html'"></ng-include>
+                </uib-tab>
+
+                <uib-tab index="4" heading="Employment">
+                    <ng-include src="'pages/registrationPages/employment.html'"></ng-include>
+                </uib-tab>
+
+            </uib-tabset>
+        </ng-form>
     </div>
     <div class="modal" tabindex="-1" id="phoneModal" role="dialog">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
-                  <button type="button" class="close" ng-click="cancelRegistration()" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" ng-click="cancelRegistration()" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <form name="phoneSearch" ng-submit="searchPhone()">
-                <div class="modal-body">
-                    
+                    <div class="modal-body">
+
                         <div class="row">
                             <div class="col form-group">
                                 <label for="candidatePhone">Candidate Phone </label>
-                                <input type="text" ng-model="phoneNumber" class="form-control" name="candidatePhone" id="candidatePhone" required>                                
+                                <input type="text" ng-model="phoneNumber" class="form-control" name="candidatePhone" id="candidatePhone" required>
                             </div>
                         </div>
-                    
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" ng-disabled="phoneSearch.$invalid" class="btn btn-primary">Search</button>
-                </div>
-            </form>
-              </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" ng-disabled="phoneSearch.$invalid" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
             </div>
-          </div>
+        </div>
+    </div>
 </section>

@@ -424,7 +424,7 @@ app.controller("admissionController", ["$scope", "$http", function ($scope, $htt
 
 
 //schedule page controller
-app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQLike", function ($scope, $http, $httpParamSerializerJQLike) {
+app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQLike", "$log", function($scope, $http, $httpParamSerializerJQLike, $log) {
 
     $scope.AVAILABLE_SCHEDULES = [];
 
@@ -451,8 +451,7 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
 
 //result viewing page controller
 app.controller("resultController", ["$scope", "$http", function ($scope, $http) {
-
-    $scope.AVAILABLE_RESULTS = [];
+   $scope.AVAILABLE_RESULTS = [];
     $http.get('backend/index.php/api/result/')
                     .then(function (response) {  $scope.AVAILABLE_RESULTS = response.data.result  });
 }]);

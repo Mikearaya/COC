@@ -1,105 +1,59 @@
 <div class="shadow p-3 mb-5  rounded container">
   <div class="row">
     <div class="form-group col">
-      <label for="mainSector" >Sector </label>
-      <select
-              name="mainSector"
-              aria-placeholder="Sector"
-              id="mainSector"
-              ng-model="sector"
-              required
-              ng-change="loadSectors(sector)"
-              class="form-control"
-      >
-      <option ng-repeat="parentSector in PARENT_SECTORS" value="{{parentSector.sector_code}}">{{parentSector.sector_name}}</option>
+      <label for="mainSector">Sector </label>
+      <select name="mainSector" aria-placeholder="Sector" id="mainSector" ng-model="sector" required ng-change="loadSectors(sector)"
+        class="form-control">
+        <option ng-repeat="parentSector in PARENT_SECTORS" value="{{parentSector.sector_code}}">{{parentSector.sector_name}}</option>
       </select>
     </div>
   </div>
   <div class="row">
     <div class="form-group col">
-      <label for="subSector" > Sub-Sector </label>
-      <select
-              ng-disabled="!sector"
-              name="subSector"
-              aria-placeholder="subSector"
-              id="subSector"
-              ng-model="subSector"
-              required
-              ng-change="loadOccupations(subSector)"
-              class="form-control"
-      >
-      <option ng-repeat="sector in SECTORS" value="{{sector.sector_code}}">{{sector.sector_name}}</option>
+      <label for="subSector"> Sub-Sector </label>
+      <select ng-disabled="!sector" name="subSector" aria-placeholder="subSector" id="subSector" ng-model="subSector" required
+        ng-change="loadOccupations(subSector)" class="form-control">
+        <option ng-repeat="sector in SECTORS" value="{{sector.sector_code}}">{{sector.sector_name}}</option>
       </select>
     </div>
   </div>
   <div class="row">
     <div class="form-group col">
-        <label for="occupation">Occupation</label>
-        <select
-                ng-disabled="!subSector"
-                name="occupation"
-                aria-placeholder="Occupation"
-                id="occupation"
-                ng-change="loadUCs(candidate.assessment.occ_code)"
-                ng-model="candidate.assessment.occ_code"
-                required
-                class="form-control"
-        >
+      <label for="occupation">Occupation</label>
+      <select ng-disabled="!subSector" name="occupation" aria-placeholder="Occupation" id="occupation" ng-change="loadUCs(candidate.assessment.occ_code)"
+        ng-model="candidate.assessment.occ_code" required class="form-control">
         <option ng-repeat="occupation in OCCUPATIONS" value="{{occupation.occ_code}}">{{occupation.occ_code}}-{{occupation.occ_name}}</option>
-        </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="form-check form-check-inline"> 
-        <label for="ucRegister" class="form-check-label">Register For UC</label>
-        <input 
-              ng-change="ucCheck(candidate.assessment.apply_for_uc)"
-              type="checkbox"
-              name="ucRegister"
-              ng-model="candidate.assessment.apply_for_uc"
-              id="ucRegister_yes"
-              class="form-check-input"
-              value="yes"                   
-        >
-      </div>        
-  </div>
-  <div class="row">
-    <div class="form-group col" >
-      <label for="ucReg">Unit of Competencies</label>
-      <select
-              ng-disabled="!candidate.assessment.occ_code"
-              name="ucReg"
-              aria-placeholder="Unit Of Competencies"
-              id="ucReg"
-              ng-model="candidate.assessment.selected_uc"
-              ng-required="candidate.assessment.apply_for_uc"
-              disabled="!candidate.assessment.apply_for_uc" 
-              ng-readonly="!candidate.assessment.apply_for_uc"                        
-              multiple
-              class="form-control"
-      >
-      <option ng-repeat="uc in UCS" value="{{uc.uc_code}}">{{uc.uc_code}}-{{uc.uc_name}}</option>
       </select>
     </div>
   </div>
-<div class="row">
-  <div class="form-group col alert-info">
-    <label for="applicationFee">Application Fee</label>
-    <input type="text"
-        
-            disabled
-            ng-model="candidate.assessment.amount_paid"
-            id="applicationFee"
-            name="applicationFee"
-            class="form-control"
-            
-    >
+  <div class="row">
+    <div class="form-check form-check-inline">
+      <label for="ucRegister" class="form-check-label">Register For UC</label>
+      <input ng-change="ucCheck(candidate.assessment.apply_for_uc)" type="checkbox" name="ucRegister" ng-model="candidate.assessment.apply_for_uc"
+        id="ucRegister_yes" class="form-check-input" value="yes">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col">
+      <label for="ucReg">Unit of Competencies</label>
+      <select ng-disabled="!candidate.assessment.occ_code" name="ucReg" aria-placeholder="Unit Of Competencies" id="ucReg" ng-model="candidate.assessment.selected_uc"
+        ng-required="candidate.assessment.apply_for_uc" disabled="!candidate.assessment.apply_for_uc" ng-readonly="!candidate.assessment.apply_for_uc"
+        multiple class="form-control">
+        <option ng-repeat="uc in UCS" value="{{uc.uc_code}}">{{uc.uc_code}}-{{uc.uc_name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col alert-info">
+      <label for="applicationFee">Application Fee</label>
+      <input type="text" disabled ng-model="candidate.assessment.amount_paid" id="applicationFee" name="applicationFee" class="form-control">
     </div>
     <div class=" form-group text-center col">
-    
-    <button type="button" class="btn btn-primary" id="paid" ng-checked="paymentStatus(candidate.assessment.paid)" ng-model="candidate.assessment.paid" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
-paid  </button>
 
+      <button type="button" class="btn btn-primary" id="paid" ng-checked="paymentStatus(candidate.assessment.paid)" ng-model="candidate.assessment.paid"
+        uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+        paid </button>
+
+    </div>
   </div>
 </div>
-

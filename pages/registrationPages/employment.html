@@ -2,83 +2,47 @@
   <div class="row">
     <div class="form-group col-12">
       <label for="fieldOfEmplyeement">Field of Employment</label>
-      <input 
-            type="text"
-            ng-model="candidate.basic_info.field_of_employment"
-            name="fieldOfEmplyeement"
-            id="fieldOfEmplyeement"
-            class="form-control"
-            placeholder="Field of Employment"
-      >
+      <input type="text" ng-model="candidate.basic_info.field_of_employment" name="fieldOfEmplyeement" id="fieldOfEmplyeement"
+        class="form-control" placeholder="Field of Employment">
     </div>
   </div>
   <div class="row">
     <div class="form-group col-12">
       <label for="employmentCondition"> Employment Condition </label>
-      <input 
-            type="text"
-            ng-model="candidate.basic_info.employment_condition"
-            name="employmentCondition"
-            id="employmentCondition"
-            class="form-control"
-            placeholder="Employment Condition"
-      >
+      <input type="text" ng-model="candidate.basic_info.employment_condition" name="employmentCondition" id="employmentCondition"
+        class="form-control" placeholder="Employment Condition">
     </div>
   </div>
   <div class="row">
     <div class="form-group col-12">
       <label for="companyName">Company Name</label>
-      <input 
-            type="text"
-            id="companyName"
-            ng-model="candidate.basic_info.company_name"
-            class="form-control"
-            name="companyName"
-            placeholder="Company Name"
-      >
+      <input type="text" id="companyName" ng-model="candidate.basic_info.company_name" class="form-control" name="companyName"
+        placeholder="Company Name">
     </div>
-</div>
-<div class="row">
-        <div class="form-group col">
-          <label for="companyType"> Compay type</label>
-          <select 
-                  ng-model="candidate.basic_info.company_type"
-                  id="companyType"
-                  name="companyType"
-                  class="form-control"
-                  placeholder="Company Type"
-                  >
-            <option value="Private">Private</option>
-            <option value="Governmetn">Government</option>
-            <option value="NGO">NGO</option>
-          
-          </select>
-          
-        </div>
-        <div class="form-group col">
-          <label for="companyStatus"> Compay Status</label>
-          <select 
-                  ng-model="candidate.basic_info.status_of_company"
-                  id="companyStatus"
-                  name="companyStatus"
-                  class="form-control"
-                  placeholder="Company Status"
-                  >
-            <option ng-repeat="status in COMPANY_STATUS" value="{{status}}">{{status}}</option>          
-          </select>
-          
-        </div>
-  
-        <div class="form-group col">
-          <label for="serviceYear"> Service Year</label>
-          <input 
-                  type="number"
-                  name="serviceYear"
-                  ng-model="candidate.basic_info.service_year"
-                  id="serviceYear"
-                  placeholder="Service Year"
-                  class="form-control"
-          >
-      </div>
+  </div>
+  <div class="row">
+    <div class="form-group col">
+      <label for="companyType"> Compay type</label>
+      <select ng-model="candidate.basic_info.company_type" id="companyType" name="companyType" class="form-control" placeholder="Company Type">
+        <option value="Private">Private</option>
+        <option value="Governmetn">Government</option>
+        <option value="NGO">NGO</option>
+
+      </select>
+
+    </div>
+    <div class="form-group col">
+      <label for="companyStatus"> Compay Status</label>
+      <select ng-model="candidate.basic_info.status_of_company" id="companyStatus" name="companyStatus" class="form-control" placeholder="Company Status">
+        <option ng-repeat="status in COMPANY_STATUS" value="{{status}}">{{status}}</option>
+      </select>
+
+    </div>
+
+    <div class="form-group col">
+      <label for="serviceYear"> Service Year</label>
+      <input type="number" name="serviceYear" ng-model="candidate.basic_info.service_year" id="serviceYear" placeholder="Service Year"
+        class="form-control">
+    </div>
   </div>
 </div>

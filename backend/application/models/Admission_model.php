@@ -13,7 +13,7 @@
 		$this->db->like('full_name', $val);
 
 		$this->db->limit(20);
-        $this->db->where('assessment.payment_status','Paid');
+       // $this->db->where('LOWER(assessment.payment_status)','paid');
         $this->db->join('assessment','candidate.reg_no = assessment.can_regno');
         $this->db->join('center','center.center_code = assessment.center_code');
         $this->db->join('occupation','occupation.occ_code = assessment.occ_code');     
