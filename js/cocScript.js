@@ -395,8 +395,6 @@ app.controller("paymentController", ["$scope", "$http", "$httpParamSerializerJQL
 }]);
 
 
-
-//admission card printing page controller
 app.controller("admissionController", ["$scope", "$http", function ($scope, $http) {
 
     $scope.candidates = [
