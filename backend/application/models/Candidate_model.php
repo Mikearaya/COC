@@ -17,30 +17,53 @@ public function get_candidate($candidateID = NULL) {
         }
       return $result;
     } 
-//save candidate  
-public function save_candidate($candidate) {
-    if(false) {
-        return $this->update_candidate($candidate);
-      
-    } else {
-        $candidate['reg_no'] = $candidate['cell_phone'];
-        $this->db->insert('candidate' , $candidate);        
-    }
+	// save assessment
+	public function save_assessment($assessment, $candidate) {
+		$result = false;
+		try {
+				$this->db->trans_start();
+						if(trim($candidate['reg_no'])) {
+							$assessment['can_regno'] =$candidate['reg_no'];
+						} else {
+							$candidate['reg_no'] = $candidate['cell_phone'];
+							$this->db->insert('candidate' , $candidate);        
+						}
+						$selected_uc = [];
+						if(isset($assessment['selected_uc'])) {
+							$selected_uc = $assessment['selected_uc'];
+							unset($assessment['selected_uc']);
+						}
+						$assessment['can_regno'] = $candidate['cell_phone'];
+						$assessment['registered_by'] = $this->session->userdata('focal_name');
+						$assessment['center_code'] = $this->session->userdata('center_code');
+						$assessment['payment_status'] = 'PENDING';
+				$assessment['apply_for_uc'] = ($assessment['apply_for_uc'] = 'true') ? 'Yes' : 'No';	
+							
+						$this->db->insert('assessment' , $assessment);    
+						$assessment_id = $this->db->insert_id();
+						if($assessment['apply_for_uc'] = 'Yes') {
+							$ucs = [];
+							for($i = 0; $i < count($selected_uc); $i++) {
+								$this->db->insert('uc_application',array('exam_id' => $assessment_id,
+											'uc_code' => $selected_uc[$i]));
+								//$ucs[$i]['exam_id'] = $assessment_id;
+								//$ucs[$i]['uc_code'] = $selected_uc[$i];
+							}
+							//$this->db->insert_batch('uc_application',array($ucs));
+						}
+			$this->db->trans_complete();
 
-
-    return ($this->db->affected_rows()) ? $candidate['cell_phone'] : false; 
-}
-// save assessment
-public function save_assessment($assessment, $candidateId) {
-    $assessment['can_regno'] =$candidateId;
-	$assessment['registered_by'] = $this->session->userdata('focal_name');
-	$assessment['center_code'] = $this->session->userdata('center_code');
-	$assessment['payment_status'] = 'PENDING';
-    $assessment['paid'] = ($assessment['paid'] == 'true') ? 1 : 0;
-         
-    $this->db->insert('assessment' , $assessment);
-return ($this->db->affected_rows()) ? $candidateId : false; 
-}
+					if($this->db->trans_status() === false ) {
+						$result = false;
+					} else {
+						$result = true;
+					}
+						
+		} catch (Exception $e) {
+			$result = false;
+		}
+	return $result; 
+	}
 //update candidate
 public function update_candidate($candidate) {    
       $this->db->where('reg_no', $candidate['reg_no']);

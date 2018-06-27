@@ -1,28 +1,29 @@
 
 
-<li>የምዘና ጣቢያ መግቢያ ስሊፕ Admission Slip</li>
 
-<div class="container">
+<div class="container rounded p-3 mt-5 bg-white shadow" ng-controller="admissionSlipController">
+        <div class="row">
+            <div class="col text-center">
+
+<h2>የምዘና ጣቢያ መግቢያ ስሊፕ Admission Slip</h2>
+            </div>
+        </div>
         <div class="row">
              <div class="col form-group">
                  <label for="receptNo">የደረሰኝ ቁጥር <br/> Recept No.</label>
                  <input type="text" id="receptNo" name="receptNo" class="form-control" ng-model="receptNo" placeholder="የደረሰኝ ቁጥር">                            
              </div>            
-        </div>
-        <div class="row">
             <div class="col form-group">
                 <label for="amount">መጠን <br/> Amount</label>
-                <input type="number" id="amount" name="amount" class="form-control" ng-model="amount" placeholder="የደረሰኝ ቁጥር">
+                <input type="number" id="amount" name="amount" class="form-control" ng-model="amount" placeholder="መጠን">
             </div>
         </div>
         <div class="row">
             <div class="col form-ground">
                 <label for="date">ቀን <br/> Date</label>
-                <input type="date" id="" name="date" class="form-control" ng-model="date" placeholder="የደረሰኝ ቁጥር">
+                <input type="date" id="date" name="date" class="form-control" ng-model="date" placeholder="date">
 
             </div>
-        </div>
-        <div class="row">
              <div class="col form-group">
                  <label for="referenceNo">የመለያ ቁጥር <br/> Reference No.</label>
                  <input type="text" id="referenceNo" name="referenceNo" class="form-control" ng-model="referenceNo" placeholder="የመለያ ቁጥር">                            
@@ -33,8 +34,6 @@
                  <label for="bank"> የባንኩ ስም <br/> Bank</label>
                  <input type="text" id="bank" name="bank" class="form-control" ng-model="bank" placeholder="የባንኩ ስም">
              </div>
-         </div>
-         <div class="row">
              <div class="col form-group">
                  <label for="name">ሙሉ ስም <br/> Name</label>
                  <input type="text" id="name" name="name" class="form-control" ng-model="name" placeholder="ሙሉ ስም">                            
@@ -45,8 +44,6 @@
                 <label for="occupation">የሚመዘኑበት የሙያ አይነት <br/> Assessment Applied</label>
                 <input type="text" id="occupation" name="occupation" class="form-control" ng-model="occupation" placeholder="የሚመዘኑበት የሙያ አይነት">                            
             </div>     
-        </div>
-        <div class="row">
             <div class="col form-group">
                 <label for="level">ደረጃ <br/> Level</label>
                 <input type="text" id="level" name="level" class="form-control" ng-model="levl" placeholder="ደረጃ">                            
@@ -57,8 +54,6 @@
                 <label for="dateT">የምዘና ቀን <br/> Date of Assessment</label>
                 <input type="date" id="dateT" name="dateT" class="form-control" ng-model="dateT" placeholder="የምዘና ቀን">                            
             </div>     
-        </div>
-        <div class="row">
             <div class="col form-group">
                 <label for="time">ሰዓት <br/> Time </label>
                     <input type="time" id="time" name="time" class="form-control" ng-model="time" placeholder="ሰዓት">                            
@@ -69,8 +64,6 @@
                 <label for="center">የምዘና ጣቢያ <br/> Venue</label>
                 <input type="text" id="center" name="center" class="form-control" ng-model="center" placeholder="የምዘና ጣቢያ">                            
             </div>     
-        </div>
-        <div class="row">
             <div class="col form-group">
                 <label for="assessor">ምዘናውን የሚያካሄደው ባለሙያ <br/> Competency Assessor</label>
                 <input type="text" id="assessor" name="assessor" class="form-control" ng-model="assessor" placeholder="ምዘናውን የሚያካሄደው ባለሙያ">                            
@@ -81,9 +74,7 @@
                 <label for="supervisor">ምዝገባውን ያካሄደው <br/> Processedby</label>
                 <input type="text" id="supervisor" name="supervisor" class="form-control" ng-model="supervisor" placeholder="ምዘናውን ያካሄደው">                            
             </div>     
-        </div>
-        <div class="row">
-            <div class="row">
+            <div class="col form-group">
                 <lable for="signiture">የአመልካቹ  ፊርማ <br/> signiture of Applicant</lable>
                 <textarea placeholder="የአመልካቹ  ፊርማ" rows="" class="form-control" ng-model="signiture" name="signiture" id="signiture"></textarea>
             </div>

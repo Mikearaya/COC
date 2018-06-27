@@ -50,16 +50,9 @@ class Candidate extends API {
                 $candidate_info = $this->input->post('basic_info');
                 $assessment = $this->input->post('assessment'); 
         
-            try {
-				$candidate_id = $candidate_info['reg_no'];
-					if(!trim($candidate_id)) { 
-                    	$candidate_id = $this->candidate_model->save_candidate($candidate_info);						
-					} 
-						$this->register_assessment($assessment, $candidate_id);
+        
+			$result['success'] = $this->candidate_model->save_assessment($assessment,$candidate_info);
 					
-                } catch (Exception $e) {
-                    echo $e->getMessage();
-                }
             $this->response($result, API::HTTP_OK);
         }
 	}

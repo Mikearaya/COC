@@ -2,7 +2,6 @@
     <div class="container" style="margin-top: 10px;">
         <div class="row">
             <div class="col align-items-center text-center" >
-                <form ng-submit="printAdmissions()">
                         <ui-select ng-model="candidates" multiple append-to-body="true"  theme="bootstrap">
                                 <ui-select-match placeholder="enter admission name">
                                     <span ng-bind="$item.full_name"></span>
@@ -15,8 +14,7 @@
                              <div ng-bind-html="candidate.reg_no | highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
-                    <a class="btn btn-primary" href="#/slip">Primt Admissions</a>
-                </form>
+                    <a class="btn btn-primary" ng-click="printAdmissions()">Primt Admissions</a>
             </div>
         </div>
     </div>
