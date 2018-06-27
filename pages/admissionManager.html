@@ -1,9 +1,10 @@
 <section ng-controller="admissionController">
-    <div class="container" style="margin-top: 10px;">
+    <div class="container" style="margin-top: 100px;">
         <div class="row">
             <div class="col align-items-center text-center" >
-                <form ng-submit="printAdmissions()">
-                        <ui-select ng-model="candidates" multiple append-to-body="true"  theme="bootstrap">
+                <form ng-submit="printAdmissions($item)">
+                        <ui-select ng-model="candidates" on-select="onSelect($item, $model)"
+                         multiple append-to-body="true" on-remove="onRemove($item, $model)"  theme="bootstrap">
                                 <ui-select-match placeholder="enter admission name">
                                     <span ng-bind="$item.full_name"></span>
                                 </ui-select-match>
@@ -15,7 +16,7 @@
                              <div ng-bind-html="candidate.reg_no | highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
-                    <a class="btn btn-primary" href="#/slip">Primt Admissions</a>
+                    <button type="submit" class="btn btn-primary"  >Print Admissions</button>
 
                 </form>
             </div>

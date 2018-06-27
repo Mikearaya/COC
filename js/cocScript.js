@@ -9,6 +9,26 @@ var app = angular.module('myApp', ['ngRoute',
 
 ]);
 
+//service used to pass data between controllers
+app.factory("transporter" , function(){
+
+    var data = undefined;
+
+      function set(transport){
+          data = transport;
+      }
+
+      function get() {
+        return data;
+      }
+
+  return {
+      set : set,
+      get : get
+  };
+
+});
+
 //session Service
 app.factory("session", ["$http", function($http){
 
@@ -125,6 +145,7 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
     $routeProvider.when('/result/:groupId', { templateUrl: "pages/resultDetail.html" });
     $routeProvider.when('/password', { templateUrl: "pages/passwordManager.html" });
     $routeProvider.when('/logIn', { templateUrl: "pages/logIn.html" });
+    $routeProvider.when('/admission/print', { templateUrl: "pages/slip.html" });
 
 
 }]);
@@ -394,18 +415,32 @@ app.controller("paymentController", ["$scope", "$http", "$httpParamSerializerJQL
 
 }]);
 
+app.controller("admissionSlipController", ["$scope", "transporter", function($scope, transporter){
+    $scope.CANDIDATES = [];        
+    if(transporter.get()) {
+        $scope.CANDIDATES = transporter.get();
+        console.log($scope.CANDIDATES);
+    }
 
-app.controller("admissionController", ["$scope", "$http", function ($scope, $http) {
+    $scope.printAdmissions = function() {
+        window.print();
+    };
+}]);
 
-    $scope.candidates = [
-        {full_name: 'Mikael Araya', reg_no: '10'}
-      ];
+app.controller("admissionController", ["$scope", "$http", "transporter", "$location",  function ($scope, $http, transporter, $location) {
+
+ 
+       $scope.candidates = []; 
       $scope.availableCandidates = [];
       $scope.selectedCandidates = [];
-    
-      removeCandidate = function(data){
-        console.log(data);
-      };
+
+    $scope.onSelect = function(item, model) {
+        $scope.selectedCandidates.push(item);
+    }
+    $scope.onRemove = function(item, model) {
+        index = $scope.selectedCandidates.indexOf(item);
+        $scope.selectedCandidates.splice(index, 1);
+    }
       $scope.getCandidates= function(val) {
        $http.get('backend/index.php/api/admission/filter', 
                         {params: {filter: val} }).then(function(response){
@@ -413,6 +448,11 @@ app.controller("admissionController", ["$scope", "$http", function ($scope, $htt
         });
       };
 
+      $scope.printAdmissions = function(val) {
+        transporter.set($scope.selectedCandidates);
+          console.log(val);
+          $location.path("/admission/print");
+      }
 
       $scope.modelOptions = {
         debounce: {
