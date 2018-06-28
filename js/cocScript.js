@@ -500,8 +500,35 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
 //result viewing page controller
 app.controller("resultController", ["$scope", "$http", function ($scope, $http) {
    $scope.AVAILABLE_RESULTS = [];
-    $http.get('backend/index.php/api/result/')
-                    .then(function (response) {  $scope.AVAILABLE_RESULTS = response.data  });
+    
+   $scope.loadSchedules = function (a_offset, a_limit) {
+    return $http.get('backend/index.php/api/result/',
+                        {params :{ 'limit-offset': a_offset, 'limit': a_limit }})
+                        .then(function(response){
+                            $scope.AVAILABLE_RESULTS = response.data;
+                        });
+}
+
+$scope.loadSchedules(0, 15);
+/*
+$http.get('backend/index.php/api/schedule')
+            .then(function (response) { if (response.data) {  $scope.AVAILABLE_SCHEDULES = response.data;  }
+});
+*/
+$scope.totalItems = 64;
+$scope.currentPage = 0;
+
+$scope.setPage = function (pageNo) {
+  $scope.currentPage = pageNo;
+};
+
+$scope.pageChanged = function() {
+    $scope.loadSchedules($scope.currentPage, 15) ;
+  $log.log('Page changed to: ' + $scope.currentPage);
+};
+
+
+$scope.maxSize = 5;
 }]);
 
 

@@ -14,7 +14,7 @@ public function get_result($limit,$offset) {
        $this->db->from('assessment');
        $this->db->join('candidate_group','candidate_group.exam_id = assessment.exam_id','left');
        $this->db->join('schedule','schedule.group_no = candidate_group.gr_id','left');
-       $this->db->where('assessment.center_code', $this->session->userdata('center_code'));
+       //$this->db->where('assessment.center_code', $this->session->userdata('center_code'));
        $this->db->join('center','assessment.center_code = center.center_code','left');       
        $this->db->group_by('candidate_group.gr_id');
        $this->db->limit($limit,$offset);
@@ -36,8 +36,6 @@ public function get_group_result($id = NULL,$limit,$offset) {
     $this->db->join('schedule', 'candidate_group.sch_id = schedule.sch_id', 'left');
     $this->db->join('center', 'schedule.center_code = center.center_code');
     $this->db->limit($limit,$offset);
-    //$this->db->limit($page,$segment);
-    //$this->db->offset($offset);
     $result = $this->db->get();
 
     return $result->result_array();

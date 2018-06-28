@@ -14,7 +14,7 @@ class Result extends API {
 
     $limit=$this->input->get('limit');
     $offset= $this->input->get('limit-offset');
-    $result['success'] = ($this->result_model->get_result($limit,$offset)) ? true : false;
+    $result = $this->result_model->get_result($limit,$offset);
 
     $this->load->library('pagination');
 
@@ -29,12 +29,12 @@ class Result extends API {
 }
 
 //get candidate result by group
-  function group_result_get($offset=0) {
+  function group_result_get($group_id) {
  
 
   $limit=$this->input->get('limit');
   $offset= $this->input->get('limit-offset');
-  $result ['success'] = ($this->result_model->get_group_result($limit,$offset)) ? true : false;
+  $result = $this->result_model->get_group_result($group_id, $limit,$offset);
 
   $this->load->library('pagination');
 
