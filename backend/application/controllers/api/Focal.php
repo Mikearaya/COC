@@ -38,12 +38,12 @@ class Focal extends API {
 
         $result;
 
-        if($this->session->has_userdata('center_id') &&
+        if($this->session->has_userdata('center_code') &&
             $this->session->has_userdata('center_name') &&
             $this->session->has_userdata('contact_person')) {
             $result['is_active']= true;
             $result['contact_person'] = $this->session->userdata('contact_person');
-            $result['center_id'] = $this->session->userdata('center_id');
+            $result['center_code'] = $this->session->userdata('center_code');
             $result['center_name'] = $this->session->userdata('center_name');
 
         } else {

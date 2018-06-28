@@ -64,15 +64,20 @@
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div class="form-check form-check-inline">
-            <label for="isDisabled">Has a Disablity</label>
-            <input type="checkbox" name="disablity" ng-model="candidate.basic_info.disablity" id="isDisabled" value="yes" class="form-check-input">
+            <button type="button" class="btn btn-default" 
+                    ng-click="candidate.basic_info.disablity = !candidate.basic_info.disablity">
+                    Has Disablity</button>
+                <hr>
+             
+           
             
         </div>
     </div>
     <div class="row">
-        <div class="form-group col">
+        <div class="form-group col" uib-collapse="!candidate.basic_info.disablity">
             <label for="disablityNature">Disablity Nature</label>
             <textarea ng-disabled="!candidate.basic_info.disablity" 
                         class="form-control" 
@@ -81,7 +86,7 @@
                         rows="3" 
                         ng-model="candidate.disablity_nature">                        
 
-         </textarea>
-        </div>
+            </textarea>
+        </div>       
     </div>
 </div>

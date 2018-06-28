@@ -5,7 +5,8 @@ var app = angular.module('myApp', ['ngRoute',
     'ngAnimate',
     'ui.bootstrap',
     'ngSanitize',
-    'ui.select'
+    'ui.select',
+    'ui-notification'
 
 ]);
 
@@ -29,20 +30,33 @@ app.factory("transporter" , function(){
 
 });
 
-//session Service
-app.factory("session", ["$http", function($http){
+app.config(function(NotificationProvider) {
+    NotificationProvider.setOptions({
+        delay: 10000,
+        startTop: 20,
+        startRight: 10,
+        verticalSpacing: 20,
+        horizontalSpacing: 20,
+        positionX: 'right',
+        positionY: 'top'
+    });
+});
 
+//session Service
+app.factory("session", ["$http", 'Notification', '$location', function($http, Notification, $location){
+        
     var focal_person_name = "";
-    var center_id = "";
+    var center_code = "";
     var center_name = "";
     var loged_in = false;
 
     function createSession(centerId, centerName, focalName) {
 
       focal_person_name = focalName;
-      center_id = centerId;
+      center_code = centerId;
       center_name = centerName;
       loged_in = true;
+      Notification({title: 'Loged in', message: 'Welcome '+focalName});
     }
 
     function getUserName() {
@@ -53,19 +67,23 @@ app.factory("session", ["$http", function($http){
         return center_name;
     }
     function getCenterId() {
-      return center_id;
+      return center_code;
     }
 
     function destroySession() {
-      loged_in = false;
-      focal_person_name = "";
-      center_id = "";
-      center_name="";
 
       $http({
         method : "GET",
         url : "backend/index.php/api/focal/log_out",
-      }).then(function(response){ });
+      }).then(function(response){
+            $location.path('/logIn');
+            
+            Notification({title: 'Loged Out', message: 'Good bye  '+focal_person_name});
+            loged_in = false;
+            focal_person_name = "";
+            center_code= "";
+            center_name="";
+       });
 
     }
 
@@ -74,16 +92,21 @@ app.factory("session", ["$http", function($http){
     }
 
     function refresh() {
+        
        $http({
         method : "GET",
         url : "backend/index.php/api/focal/is_session_active",
       }).then(function(response){
 
         if(response.data.is_active) {
+            createSession(response.data.center_code, response.data.center_name, response.data.contact_person);
           focal_person_name = response.data.contact_person;
-          center_id = response.data.center_code;
+          center_code = response.data.center_code;
           center_name = response.data.center_name;
-          loged_in = true;
+          loged_in = true;          
+          $location.path('/home');
+        } else {
+            $location.path('/logIn');
         }
 
       });
@@ -102,30 +125,18 @@ return {
 
 }]);
 
-app.controller("mainController", ["$scope", "$http", "session",  "$location", "$httpParamSerializerJQLike",
-    function ($scope, $http, session, $location ,$httpParamSerializerJQLike) {
-    console.log(session.isLoggedIn());
+app.controller("mainController", ["$scope", "session",
+    function ($scope, session) {
 
     $scope.isLogged = function() {
         return session.isLoggedIn();
   };
 
+
     $scope.logOut = function() {
         session.destroy();
-                 $location.path("/pages/logIn");
-    }
+    };
 
-/*
-            $('#logInModal').modal({
-                backdrop: 'static',
-                show: true,
-                keyboard: false
-            });
-
-            $('#phoneModal').on('shown.bs.modal', function () {
-                $('#candidatePhone').trigger('focus');
-            });
-    */
 
 }]);
 
@@ -134,7 +145,7 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
     $locationProvider.hashPrefix('');
     $routeProvider.caseInsensitiveMatch = true;
 
-    $routeProvider.when('/', { templateUrl: "pages/logIn.html" });
+    $routeProvider.when('/', { templateUrl: "pages/home.html" });
     $routeProvider.when('/home', { templateUrl: "pages/home.html" });
     $routeProvider.when('/payment', { templateUrl: "pages/paymentManager.html" });
     $routeProvider.when('/register', { templateUrl: "pages/registrationManager.html" });
@@ -357,14 +368,14 @@ app.controller("homeController", ["$scope","$http", "session", "$location", func
     $scope.scheduleCount = 0;
     $scope.resultCount = 0;
     $scope.paymentCount = 0;
-  //  if(session.isLoggedIn()){
+   if(session.isLoggedIn()){
     $http.get('backend/index.php/api/dash/schedule/'+session.getCenterId()).then(function (response) { $scope.scheduleCount = response.data });
     $http.get('backend/index.php/api/dash/admission/'+session.getCenterId()).then(function (response) { $scope.admissionCount = response.data });
     $http.get('backend/index.php/api/dash/result/'+session.getCenterId()).then(function (response) { $scope.resultCount = response.data });
     $http.get('backend/index.php/api/dash/payment/'+session.getCenterId()).then(function (response) { $scope.paymentCount = response.data });
-   // } else {
-    //    $location.path('/logIn');
-    //}
+   } else {
+        $location.path('/logIn');
+}
 
     $scope.isLogged = function() {
         return session.isLoggedIn();
@@ -383,7 +394,11 @@ app.controller("paymentController", ["$scope", "$http", "$httpParamSerializerJQL
         center_code: '',
         examIds: [],
     }
-
+    $scope.options = {
+        customClass: getDayClass,
+        minDate: new Date(),
+        showWeeks: true
+      };
     $scope.PENDING_PAYMENTS = '';
 
     $http.get('backend/index.php/api/payment')
@@ -480,7 +495,7 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
                 .then(function (response) { if (response.data) {  $scope.AVAILABLE_SCHEDULES = response.data;  }
     });
 */
-    $scope.totalItems = 64;
+    $scope.totalItems = 20;
     $scope.currentPage = 0;
   
     $scope.setPage = function (pageNo) {
@@ -571,10 +586,9 @@ app.controller('logInController', ["$scope", "$http", "session", "$location", "$
             })
                 .then(function (response) {
                     if (response.data.success) {
-                        console.log(response.data);
-                        session.create(response.data.center_id, 
+                        session.create(response.data.center_code, 
                             response.data.center_name, 
-                            response.data.focal_name);
+                            response.data.contact_person);
                             $location.path('/home');
               
                         

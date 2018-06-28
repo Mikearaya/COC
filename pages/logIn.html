@@ -5,10 +5,10 @@
       </div>
   <section class="col-6 "  ng-controller="logInController as logIn" class="my-form" style="margin-top: 10%;" >
                 
-        <form ng-submit="Submit()" name="loginForm" class=" shadow p-5 m-5 bg-white">
-            <h5 class="">LOG IN</h5>    
+        <form ng-submit="Submit()" name="loginForm" class=" shadow-lg p-5 m-5 rounded bg-white">
+            <h2 class="text-center text-info">LOG IN</h2>    
             <div class="form-group">
-              <output ng-bind="result" class="alert-danger" style="display: block;"></output>
+              <output ng-bind="result" ng-if="result" class="alert-danger" style="display: block;"></output>
               <label for="focalName">User Name</label>
               <input type="text" class="form-control" ng-model="user.contact_person" id="focalName" required="required" aria-describedby="User Name"  placeholder="User Name">
             </div>
@@ -21,7 +21,7 @@
             </div>
  
           <div class=" text-center">
-            <button type="submit" class="btn btn-primary">Log In</button>
+            <button type="submit" class="btn btn-lg btn-outline-primary">Log In</button>
           </div>
         </form>
   </section>
