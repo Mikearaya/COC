@@ -9,6 +9,26 @@ var app = angular.module('myApp', ['ngRoute',
 
 ]);
 
+//service used to pass data between controllers
+app.factory("transporter" , function(){
+
+    var data = undefined;
+
+      function set(transport){
+          data = transport;
+      }
+
+      function get() {
+        return data;
+      }
+
+  return {
+      set : set,
+      get : get
+  };
+
+});
+
 //session Service
 app.factory("session", ["$http", function($http){
 
@@ -125,7 +145,7 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
     $routeProvider.when('/result/:groupId', { templateUrl: "pages/resultDetail.html" });
     $routeProvider.when('/password', { templateUrl: "pages/passwordManager.html" });
     $routeProvider.when('/logIn', { templateUrl: "pages/logIn.html" });
-    $routeProvider.when('/slip', { templateUrl: "pages/registrationPages/slip.html" });
+    $routeProvider.when('/admission/print', { templateUrl: "pages/slip.html" });
 
 
 }]);
@@ -395,18 +415,32 @@ app.controller("paymentController", ["$scope", "$http", "$httpParamSerializerJQL
 
 }]);
 
+app.controller("admissionSlipController", ["$scope", "transporter", function($scope, transporter){
+    $scope.CANDIDATES = [];        
+    if(transporter.get()) {
+        $scope.CANDIDATES = transporter.get();
+        console.log($scope.CANDIDATES);
+    }
 
+    $scope.printAdmissions = function() {
+        window.print();
+    };
+}]);
 
-//admission card printing page controller
-app.controller("admissionController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
+app.controller("admissionController", ["$scope", "$http", "transporter", "$location",  function ($scope, $http, transporter, $location) {
 
-    $scope.candidates = [];
+ 
+       $scope.candidates = []; 
       $scope.availableCandidates = [];
       $scope.selectedCandidates = [];
-    
-      removeCandidate = function(data){
-        console.log(data);
-      };
+
+    $scope.onSelect = function(item, model) {
+        $scope.selectedCandidates.push(item);
+    }
+    $scope.onRemove = function(item, model) {
+        index = $scope.selectedCandidates.indexOf(item);
+        $scope.selectedCandidates.splice(index, 1);
+    }
       $scope.getCandidates= function(val) {
        $http.get('backend/index.php/api/admission/filter', 
                         {params: {filter: val} }).then(function(response){
@@ -414,15 +448,17 @@ app.controller("admissionController", ["$scope", "$http", "$location", function 
         });
       };
 
-    $scope.printAdmissions = function() {
-        console.log($scope.candidates);
+      $scope.printAdmissions = function(val) {
+        transporter.set($scope.selectedCandidates);
+          $location.path("/admission/print");
+      }
 
         assessmentIds = [];
         $scope.candidate.forEach(function(data){
             assessmentIds.push(data.exam_id);
         })
         transporter.set($scope.candidates);
-    }
+    
       $scope.modelOptions = {
         debounce: {
           default: 500,
@@ -433,7 +469,7 @@ app.controller("admissionController", ["$scope", "$http", "$location", function 
 
 
 //schedule page controller
-app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQLike", function ($scope, $http, $httpParamSerializerJQLike) {
+app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQLike", "$log", function($scope, $http, $httpParamSerializerJQLike, $log) {
 
     $scope.AVAILABLE_SCHEDULES = [];
 
@@ -460,8 +496,7 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
 
 //result viewing page controller
 app.controller("resultController", ["$scope", "$http", function ($scope, $http) {
-
-    $scope.AVAILABLE_RESULTS = [];
+   $scope.AVAILABLE_RESULTS = [];
     $http.get('backend/index.php/api/result/')
                     .then(function (response) {  $scope.AVAILABLE_RESULTS = response.data.result  });
 }]);

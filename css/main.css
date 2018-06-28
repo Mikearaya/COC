@@ -16,6 +16,13 @@ body{
 .printvalue{
 	margin: 10px;
 }
+.borderless-input{
+  border: none;
+}
+.dashed-divider {
+  width: 100%;
+  border: 2px dashed black;
+}
 
 chip-tmpl {
     display: inline-block;

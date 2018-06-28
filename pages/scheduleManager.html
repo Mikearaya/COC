@@ -2,7 +2,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-            
+                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
                     <table class="table table-striped bg-white  table-sm">
                         <thead class="thead-dark">
                             <tr>
@@ -31,7 +31,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
                 </div>
             </div>
         </div>
