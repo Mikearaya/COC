@@ -1,0 +1,153 @@
+<div class="container-fluid" class="bg-white" ng-controller="admissionSlipController">
+    <div class="row">
+        <div class="col align-right">
+            <button ng-click="printAdmissions()" class="btn btn-primary ">Print</button>
+        </div>
+    </div>
+
+    <div class="row mt-10 mb-10 p-5 bg-white" ng-repeat="info in CANDIDATES">
+        <div class="col">
+            <table width="100%" border="1" class="bg-white">
+                <thead>
+                    <tr>
+                        <th colspan="8" class="text-center">
+                            <h5>የምዘና ጣቢያ መግቢያ ስሊፕ Admission Slip</h5>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>የደረሰኝ ቁጥር
+                            <br/> Recept No.</th>
+                        <td ng-bind="info.invoice_no"> </td>
+                        
+                        <th>መጠን
+                            <br/> Amount
+                        </th>
+                        <td ng-bind="info.amount_paid">
+                        </td>
+                        <th> ቀን
+                            <br/> Date
+                        </th>
+                        <td ng-bind="info.date"></td>   </td>
+                        <th>
+                           የመለያ ቁጥር
+                                <br/> Reference No.
+                        </th>
+                        <td ng-bind="info.reg_no"> </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2"> የባንኩ ስም
+                            <br/> Bank
+                        </th>
+                        <td colspan="6" >
+                            <span ng-bind="info.bank_name"></span>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> ሙሉ ስም
+                            <br/> Name
+                        </th>
+                        <td colspan="2">
+                           <span ng-bind="info.full_name"></span>
+                        <th> የሚመዘኑበት የሙያ አይነት
+                            <br/> Assessment Applied
+                        </th>
+                        <td colspan="2"> <span ng-bind="info.occ_name"></span>
+                        </td>
+                        <th>ደረጃ
+                            <br/> Level
+                        </th>
+                        <td > <span ng-bind="info.level"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> የምዘና ጣቢያ
+                            <br/> Venue
+                        </th>
+                        <td colspan="3">
+                           <span ng-bind="info.center_name"></span>
+                        </td>
+                        <th>የምዘና ቀን
+                            <br/> Date of Assessment
+                        </th>
+                        <td>
+                            <span ng-bind="info.assessment_date"></span>
+                        </td>
+                        <th>ሰዓት
+                            <br/> Time
+
+                        </th>
+                        <td>
+                           <span ng-bind="info.time"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> ምዘናውን የሚያካሄደው ባለሙያ
+                            <br/> Competency Assessor
+                        </th>
+                        <td colspan="3">
+                            <span ng-bind="info.assessor_name"></span>
+                        </td>
+                        <th>ምዝገባውን ያካሄደው
+                            <br/> Processedby
+                        </th>
+                        <td colspan="3">
+                            <span ng-bind="info.registered_by"></span>
+                        </td>
+                    </tr>
+                    <tr rowspan="2">
+                            <td  colspan="8"> <strong>በተግባር ምዘና ሰዓት የሚከተሉትን ይያዙ</strong> </td>
+                        </tr>
+                    
+                    <tr>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="8">
+
+                            <ol>
+                                <li> የስራ ልብስ (ለአስፈላጊ ሙያዎች) </li>
+                                <li> 2.እርሳስና እስኪብርቶ፣ </li>
+                                <li>3.የታደሰ መታወቂያ ምግብና ውሀ ምንአልባት ምዘናው ረጅም ሰዓት የሚወስድ ከሆነ </li>
+                            </ol>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="8">
+                            Bring the following on the assessment day of the assessment
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="8">
+                            <ol>
+                                <li>Working clothes(if needed) </li>
+                                <li>Pencile/Ball Pen </li>
+                                <li>Valid ID Food and water provision if assessment requires long duration </li>
+                            </ol>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="8">ማሳሰቢያ፡ ይህንን የመመዘኛ ጣቢያ መግቢያ ስሊፕ ያልያዘ ተመዝጋቢ መመዘን የማይችል መሆኑን እንገልፃለን
+                        </th>
+
+                    </tr>
+                    <tr>
+                            <th>የአመልካቹ ፊርማ
+                                <br/> signiture of Applicant
+                            </th>
+                            <td colspan="7"> </td>
+                        </tr>
+                    <tr>
+                        <th colspan="8">
+                            Note: Please present this admission slip during the day of assessment. No Admission slip, No Assesssment.
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="dashed-divider" ng-if="!$last"></div>
+    </div>
+</div>

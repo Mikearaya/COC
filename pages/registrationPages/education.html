@@ -37,9 +37,9 @@
                   class="form-control"
             >
             <option 
-                    ng-repeat="inist in INISTITUTE_TYPES" 
-                    value="{{inist}}"
-            >{{inist}}</option>
+                    ng-repeat="type in TRAINING_TYPES" 
+                    value="{{type}}"
+            >{{type}}</option>
             </select>
                   
           </div>
@@ -56,10 +56,10 @@
               aria-placeholder="Mode of Training"                                
               class="form-control"
         >
-        <option 
-                ng-repeat="inist in INISTITUTE_TYPES" 
-                value="{{inist}}"
-        >{{inist}}</option>
+        <option ng-repeat="mode in TRAINING_MODES" 
+                value="{{mode}}">
+            {{mode}}
+        </option>
         </select>
               
       </div>
@@ -148,9 +148,9 @@
                   class="form-control"
             >
             <option 
-                    ng-repeat="inist in INISTITUTE_TYPES" 
-                    value="{{inist}}"
-            >{{inist}}</option>
+                    ng-repeat="clevel in LEVELS" 
+                    value="{{clevel}}"
+            >{{clevel}}</option>
             </select>
                   
           </div>
@@ -165,9 +165,9 @@
                     class="form-control"
               >
               <option 
-                      ng-repeat="inist in graduated_levelS" 
-                      value="{{inist}}"
-              >{{inist}}</option>
+                      ng-repeat="glevel in LEVELS" 
+                      value="{{glevel}}"
+              >{{glevel}}</option>
               </select>
                     
             </div>

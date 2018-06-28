@@ -16,5 +16,10 @@ class Admission extends API {
 		$result = $this->admission_model->get_admission($filter_string);
 	 $this->response($result,API::HTTP_OK);
 	}
+
+	function slip_get() {
+		$result = $this->admission_model->get_admission_card_info(1);
+		$this->response($result, API::HTTP_OK);
+	}
 }
 ?>

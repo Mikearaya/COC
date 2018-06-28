@@ -12,7 +12,8 @@
                          occupation.occ_name,occupation.level');
         $this->db->from('assessment');
 
-        $this->db->where('assessment.paid', 1);
+		$this->db->where('assessment.paid', 1);
+		$this->db->where('assessment.invoice_no', null);
         $this->db->where('assessment.center_code',  $this->session->userdata('center_code'));
         $this->db->join('candidate','candidate.reg_no = assessment.can_regno');
         $this->db->join('occupation','occupation.occ_code = assessment.occ_code');

@@ -10,18 +10,20 @@
   <meta name="viewport" content="width=device-width user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
   <link href="css/main.css" rel="stylesheet" />
   <link href="css/bootstrap.css" rel="stylesheet" />
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
 
   <link href="css/select.css" rel="stylesheet" />
   <script src="js/jquery.min.js"></script>
   <script src="js/angular.min.js"></script>
   <script src="js/angular-sanitize.min.js"></script>
-  <script src="js/ui-bootstrap-tpls.js"></script>
+  <script src="js/angular-animate.min.js"></script>
   <script src="js/angular-aria.min.js"></script>
-  <script src="js/angular-route.min.js"></script>
+  <script src="js/angular-route.js"></script>
   <script src="js/angular-messages.min.js"></script>
-  <script src="js/cocScript.js"> </script>
   <script src="js/bootstrap.min.js"> </script>
+  <script src="js/cocScript.js"> </script>
   <script src="js/select.js"></script>
+
 
 </head>
 <style>
@@ -32,7 +34,7 @@
 
 <body ng-controller="mainController as main" ng-cloak>
 
-  <nav class="d-print-none" ng-if="isLogged()">
+  <nav class="d-print-none">
     <ul class="nav nav-pills nav-fill bg-white" id="navigation">
       <li class="nav-item">
         <a class="nav-link active" href="#/home">Home</a>
@@ -62,6 +64,7 @@
     </ul>
   </nav>
   <div class="app-body">
+
     <div class="app-content" style="height: 100%; width: 100%;">
       <ng-view>
 
