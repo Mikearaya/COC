@@ -5,7 +5,7 @@
         $this->load->database();
     }
     //get assessment schedule
-    public function get_schedule($scheduleID = NULL) {
+    public function get_schedule($limit,$offset) {
       
       $this->db->select('candidate_group.gr_id , candidate_group.sch_id , center.center_name ,  schedule.scheduled_date, schedule.time, COUNT(candidate_group.exam_id) as total,
       assessment.occ_code');
@@ -15,14 +15,14 @@
       $this->db->join('center','assessment.center_code = center.center_code','left');
       $this->db->group_by('candidate_group.gr_id');
       $this->db->where('assessment.center_code', $this->session->userdata('center_code'));
-      $this->db->limit(20);
+      $this->db->limit($limit,$offset);
 
         $query = $this->db->get();
               
             return $query->result_array();
         } 
     //get group schedule
-        public function get_group_schedule($id) {
+        public function get_group_schedule($id,$limit,$offset) {
             $this->db->select('candidate.full_name, candidate.sex, assessment.can_regno, assessment.exam_id, candidate_group.gr_id,
                                 assessment.occ_code, center.center_code, center.center_name, assessment.practical_result,
                                 schedule.sch_id, occupation.occ_name, schedule.scheduled_date, schedule.time ');
@@ -33,6 +33,7 @@
             $this->db->join('candidate_group', 'candidate_group.exam_id = assessment.exam_id', 'right');
             $this->db->join('schedule', 'candidate_group.sch_id = schedule.sch_id', 'right');
             $this->db->join('center', 'schedule.center_code = center.center_code');
+            $this->db->limit($limit,$offset);
             $result = $this->db->get();
             return $result->result_array();
         }
