@@ -1,4 +1,4 @@
-<div class="shadow p-3 mb-5 bg-white rounded container">
+<div class="p-3 mb-5 bg-white rounded container">
 <div class="row">
     <div class="form-group col">
         <label for="inistituteName">Inistitute Name</label>
@@ -11,6 +11,10 @@
               class="form-control"
               placeholder="Inistitute Name"
         >
+        <div ng-messages="registrationForm.inistituteName.$error"
+            ng-if="registrationForm.inistituteName.$error && registrationForm.inistituteName.$touched">
+          <div ng-message="required"> Inistitute Name is Required</div>
+          </div>
       </div>
 </div>
 <div class="row">
@@ -25,6 +29,9 @@
                 ng-model="candidate.basic_info.education_background"
                 placeholder="Education Background"
           > 
+          <div ng-messages="registrationForm.eduacationBackground.$error" ng-if="registrationForm.eduacationBackground.$touched">
+            <div ng-message="required"> Education Background is Required</div>
+          </div>
         </div>
         <div class="form-group col">
             <label for="trainingType">Type of Training</label>
@@ -41,7 +48,11 @@
                     value="{{type}}"
             >{{type}}</option>
             </select>
-                  
+            <div ng-messages="registrationForm.trainingType.$error" 
+            ng-if="registrationForm.trainingType.$error 
+                  && registrationForm.trainingType.$touched">
+            <div ng-message="required">Training Type is Required</div>
+        </div>     
           </div>
 
       </div>
@@ -61,7 +72,11 @@
             {{mode}}
         </option>
         </select>
-              
+          <div ng-messages="registrationForm.trainingMode.$error"
+                ng-if="registrationForm.trainingMode.$error &&
+                        registrationForm.trainingMode.$touched">
+        <div ng-message="required">Training mode is Required</div>
+          </div>   
       </div>
         <div class="form-group col">
           <label for="inistituteType">Inistitute Type</label>
@@ -78,7 +93,11 @@
                   value="{{inist}}"
           >{{inist}}</option>
           </select>
-                
+            <div ng-messages="registrationForm.inistituteType.$error"
+                  ng-if="registrationForm.inistituteType.$error &&
+                          registrationForm.inistituteType.$touched">
+                <div ng-message="required">Inistitute Type is Required</div>
+           </div>   
         </div>
         </div>
       <div class="row">

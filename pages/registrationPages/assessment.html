@@ -1,4 +1,4 @@
-<div class="shadow p-3 mb-5  rounded container">
+<div class="p-3 mb-5  rounded container">
   <div class="row">
     <div class="form-group col">
       <label for="mainSector">Sector </label>
@@ -6,6 +6,9 @@
         class="form-control">
         <option ng-repeat="parentSector in PARENT_SECTORS" value="{{parentSector.sector_code}}">{{parentSector.sector_name}}</option>
       </select>
+      <div ng-messages="registrationForm.mainSector.$error" ng-if="registrationForm.mainSector.$error && registrationForm.mainSector.$touched">
+        <div ng-message="required">Sector is Required !!!</div>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -15,6 +18,9 @@
         ng-change="loadOccupations(subSector)" class="form-control">
         <option ng-repeat="sector in SECTORS" value="{{sector.sector_code}}">{{sector.sector_name}}</option>
       </select>
+      <div ng-messages="registrationForm.subSector.$error" ng-if="registrationForm.subSector.$error && registrationForm.subSector.$touched">
+        <div ng-message="required">Sub Sector is Required</div>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -24,13 +30,16 @@
         ng-model="candidate.assessment.occ_code" required class="form-control">
         <option ng-repeat="occupation in OCCUPATIONS" value="{{occupation.occ_code}}">{{occupation.occ_code}}-{{occupation.occ_name}}</option>
       </select>
+      <div ng-messages="registrationForm.occupation.$error" ng-if="registrationForm.occupation.$error && registrationForm.occupation.$touched">
+        <div ng-message="required"> Occupation is Required</div>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="form-check form-check-inline">
       <label for="ucRegister" class="form-check-label">Register For UC</label>
       <input ng-change="ucCheck(candidate.assessment.apply_for_uc)" type="checkbox" name="ucRegister" ng-model="candidate.assessment.apply_for_uc"
-        id="ucRegister_yes" class="form-check-input" value="yes">
+        id="ucRegister_yes" class="form-check-input" value="yes">      
     </div>
   </div>
   <div class="row">
@@ -41,6 +50,9 @@
         multiple class="form-control">
         <option ng-repeat="uc in UCS" value="{{uc.uc_code}}">{{uc.uc_code}}-{{uc.uc_name}}</option>
       </select>
+      <div ng-messages="registrationForm.ucReg.$error" ng-if="registrationForm.ucReg.$error && registrationForm.ucReg.$touched">
+        <div ng-message="required">Unit of Competency is Required</div>
+      </div>
     </div>
   </div>
   <div class="row">

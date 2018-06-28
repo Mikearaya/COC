@@ -44,6 +44,9 @@ chip-tmpl {
   .chip-failed .default-chip {
     color: red; }
   
+  div[ng-messages] {
+    color: red;
+  }
   chips {
     display: block;
     padding: 5px; }

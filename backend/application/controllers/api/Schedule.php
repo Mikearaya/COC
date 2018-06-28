@@ -27,11 +27,11 @@
  }
 
     //get schedule by group
-    function group_schedule_get($id,$offset=0) {
+    function group_schedule_get($id) {
 
         $limit=$this->input->get('limit');
         $offset= $this->input->get('limit-offset');
-        $result = $this->schedule_model->get_group_schedule($limit,$offset);
+        $result = $this->schedule_model->get_group_schedule($id, $limit,$offset);
 
         $this->load->library('pagination');
 

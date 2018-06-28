@@ -1,4 +1,4 @@
-<div class="shadow p-3 mb-5 bg-white rounded container">
+<div class="p-3 mb-5 bg-white rounded container">
       <div class="row">
          <div class="col">
             <div class="row">
@@ -15,6 +15,12 @@
                         >
                         <option ng-repeat="nationality in NATIONALITIES" value="{{nationality}}">{{nationality}}</option>
                         </select>
+                        <div ng-messages="registrationForm.nationality.$error"
+                              ng-if="registrationForm.nationality.$error 
+                                    || registrationForm.nationality.$touched">
+                        <div ng-message="required">Nationality is Required</div>
+                        </div>
+
                      </div>
          </div>
          <div class="row">
@@ -31,6 +37,9 @@
                >
                <option ng-repeat="region in REGIONS" value="{{region}}">{{region}}</option>
                </select>
+               <div ng-messages="registrationForm.region.$error" ng-if="registrationForm.region.$error || registrationForm.region.$touched ">
+                     <div ng-message="required">Region is required</div>
+               </div>
             </div>
          </div>
          <div class="form-row">
@@ -45,6 +54,9 @@
                      placeholder="City"
                      class="form-control"
                >
+               <div ng-messages="registrationForm.city.$error" ng-if="registrationForm.city.$error || registrationForm.city.$touched ">
+                     <div ng-message="required">City is Required</div>
+               </div>
             </div>
          </div>
          <div class="row">
@@ -59,6 +71,9 @@
                      required="required"
                      class="form-control"
                >
+            <div ng-messages="registrationForm.zone.$error" ng-if="registrationForm.zone.$error || registrationForm.zone.$touched">
+                  <div ng-message="required">Zone is Required</div>
+            </div>
             </div>
          </div>
          <div class="row">
@@ -73,6 +88,9 @@
                      placeholder="Wereda"
                      class="form-control"
                >
+            <div ng-messages="registrationForm.wereda.$error" ng-if="registrationForm.wereda.$touched && registrationForm.wereda.$error">
+                  <div ng-message="required">Wereda is Required</div>
+            </div>
             </div>
          </div>
       </div>
@@ -90,6 +108,9 @@
                         class="form-control"
                         placeholder="Mobile Number"
                   >
+               </div>
+               <div ng-messages="registrationForm.mobile.$error" ng-if="registrationForm.mobile.$error && registrationForm.mobile.$touched">
+                     <div ng-message="required">Main mobile is Required</div>
                </div>
             </div>
             <div class="row">
@@ -118,6 +139,7 @@
                         placeholder="Home Phone Number"
                         class="form-control"
                   >
+                  
                </div>
             </div>
             <div class="row">
