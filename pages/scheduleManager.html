@@ -1,10 +1,10 @@
-<section  ng-controller="scheduleController" >
-        <div class="container">
-            <div class="row">
-                <div class="col">                        
-                    <table class="table table-striped bg-white  table-sm">
-                        <thead class="thead-dark">
-                            <tr>
+<section ng-controller="scheduleController">
+    <div class="container ">
+        <div class="row mt-15 p-3  bg-white ">
+            <div class="col">
+                <table class="table table-striped table-sm">
+                    <thead class="thead-dark">
+                        <tr>
                             <th>#</th>
                             <th>Shecule ID</th>
                             <th>Group ID</th>
@@ -13,12 +13,12 @@
                             <th>Time</th>
                             <th>Occupation</th>
                             <th>Total</th>
-                            <th >Print</th>                   
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="schedule in AVAILABLE_SCHEDULES">
-                            <th>{{$index}}</th>
+                            <th>Print</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="schedule in AVAILABLE_SCHEDULES">
+                            <th>{{$index + 1}}</th>
                             <td ng-bind="schedule.sch_id"></td>
                             <td ng-bind="schedule.gr_id"></td>
                             <td ng-bind="schedule.center_name"></td>
@@ -26,13 +26,15 @@
                             <td ng-bind="schedule.time"></td>
                             <td ng-bind="schedule.occ_code"></td>
                             <td ng-bind="schedule.total"></td>
-                            <th scope="col-1"><a type="button" class="btn btn-sm btn-info" href="#schedule/{{schedule.gr_id}}">View</a> </th> 
-                            </tr>
-                        </tbody>
-                    </table>
+                            <th scope="col-1">
+                                <a type="button" class="btn btn-sm btn-info" href="#/schedule/{{schedule.gr_id}}">View</a>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
-                </div>
+                <ul uib-pagination total-items="totalItems" max-size="15" ng-model="currentPage" ng-change="pageChanged()"></ul>
             </div>
         </div>
+    </div>
 </section>

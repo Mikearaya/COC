@@ -38,7 +38,8 @@ app.config(function(NotificationProvider) {
         verticalSpacing: 20,
         horizontalSpacing: 20,
         positionX: 'right',
-        positionY: 'top'
+        positionY: 'top',
+        replaceMessage: true
     });
 });
 
@@ -55,8 +56,7 @@ app.factory("session", ["$http", 'Notification', '$location', function($http, No
       focal_person_name = focalName;
       center_code = centerId;
       center_name = centerName;
-      loged_in = true;
-      Notification({title: 'Loged in', message: 'Welcome '+focalName});
+      loged_in = true;      
     }
 
     function getUserName() {
@@ -104,7 +104,6 @@ app.factory("session", ["$http", 'Notification', '$location', function($http, No
           center_code = response.data.center_code;
           center_name = response.data.center_name;
           loged_in = true;          
-          $location.path('/home');
         } else {
             $location.path('/logIn');
         }
@@ -169,6 +168,9 @@ app.controller('resultDetailController', ["$scope", "$http", "$route", function 
     $scope.CENTER = '';
     $scope.OCCUPATION = '';
     $scope.GROUP = '';
+    $scope.OCC_CODE = '';
+    $scope.TIME = '';
+    $scope.ASSESSMENT_DATE = '';
 
     $http({
         method: 'GET',
@@ -176,9 +178,10 @@ app.controller('resultDetailController', ["$scope", "$http", "$route", function 
     }).then(function (response) {
         $scope.ASSESSMENT_RESULTS = response.data;
         $scope.GROUP = response.data[0].gr_id;
-        $scope.CENTER = response.data[0]._center_name;
+        $scope.CENTER = response.data[0].center_name;
         $scope.OCCUPATION = response.data[0].occ_name;
         $scope.ASSESSMENT_DATE = response.data[0].scheduled_date;
+        $scope.TIME = response.data[0].time;
         $scope.OCC_CODE = response.data[0].occ_code;
 
     });
@@ -197,6 +200,9 @@ app.controller('scheduleDetailController', ['$scope', '$http', '$route', functio
     $scope.CENTER = '';
     $scope.OCCUPATION = '';
     $scope.GROUP = '';
+    $scope.ASSESSMENT_DATE = '';
+    $scope.TIME = '';
+    $scope.OCC_CODE = '';
 
     $http({
         method: 'GET',
@@ -206,6 +212,10 @@ app.controller('scheduleDetailController', ['$scope', '$http', '$route', functio
         $scope.CENTER = response.data[0].center_name;
         $scope.OCCUPATION = response.data[0].occ_name;
         $scope.GROUP = response.data[0].gr_id;
+        $scope.ASSESSMENT_DATE = response.data[0].scheduled_date;
+        $scope.TIME = response.data[0].time;
+        $scope.OCC_CODE = response.data[0].occ_code;
+
     });
     $scope.print = function () {
         window.print();
@@ -477,25 +487,26 @@ app.controller("admissionController", ["$scope", "$http", "transporter", "$locat
 
 
 //schedule page controller
-app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQLike", "$log", function($scope, $http, $httpParamSerializerJQLike, $log) {
+app.controller("scheduleController", ["$scope", "$http", function($scope, $http) {
 
     $scope.AVAILABLE_SCHEDULES = [];
-
+    $scope.totalItems = 0;
     $scope.loadSchedules = function (a_offset, a_limit) {
         return $http.get('backend/index.php/api/schedule/',
                             {params :{ 'limit-offset': a_offset, 'limit': a_limit }})
                             .then(function(response){
-                                $scope.AVAILABLE_SCHEDULES = response.data;
+                                $scope.AVAILABLE_SCHEDULES = response.data.rows;
+                                $scope.totalItems = response.data.total;
                             });
     }
 
-    $scope.loadSchedules(0, 15);
+    $scope.loadSchedules(1, 15);
 /*
     $http.get('backend/index.php/api/schedule')
                 .then(function (response) { if (response.data) {  $scope.AVAILABLE_SCHEDULES = response.data;  }
     });
 */
-    $scope.totalItems = 20;
+
     $scope.currentPage = 0;
   
     $scope.setPage = function (pageNo) {
@@ -504,7 +515,6 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
   
     $scope.pageChanged = function() {
         $scope.loadSchedules($scope.currentPage, 15) ;
-      $log.log('Page changed to: ' + $scope.currentPage);
     };
 
   
@@ -515,31 +525,28 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
 //result viewing page controller
 app.controller("resultController", ["$scope", "$http", function ($scope, $http) {
    $scope.AVAILABLE_RESULTS = [];
-    
-   $scope.loadSchedules = function (a_offset, a_limit) {
+    $scope.totalItems = 0;
+   $scope.loadResults = function (a_offset, a_limit) {
     return $http.get('backend/index.php/api/result/',
                         {params :{ 'limit-offset': a_offset, 'limit': a_limit }})
                         .then(function(response){
-                            $scope.AVAILABLE_RESULTS = response.data;
+                            $scope.AVAILABLE_RESULTS = response.data.rows;
+                            $scope.totalItems = response.data.total;
                         });
 }
 
-$scope.loadSchedules(0, 15);
-/*
-$http.get('backend/index.php/api/schedule')
-            .then(function (response) { if (response.data) {  $scope.AVAILABLE_SCHEDULES = response.data;  }
-});
-*/
-$scope.totalItems = 64;
-$scope.currentPage = 0;
+$scope.loadResults(1, 15);
+
+
+$scope.currentPage = 1;
 
 $scope.setPage = function (pageNo) {
   $scope.currentPage = pageNo;
 };
 
 $scope.pageChanged = function() {
-    $scope.loadSchedules($scope.currentPage, 15) ;
-  $log.log('Page changed to: ' + $scope.currentPage);
+    $scope.loadResults($scope.currentPage, 15) ;
+  console.log('Page changed to: ' + $scope.currentPage);
 };
 
 
@@ -548,18 +555,27 @@ $scope.maxSize = 5;
 
 
 //password reset controller
-app.controller("passwordController", ["$scope", "$http", "$httpParamSerializerJQLike",
-    function ($scope, $http, $httpParamSerializerJQLike) {
+app.controller("passwordController", ["$scope", "$http", "$httpParamSerializerJQLike", "Notification",
+    function ($scope, $http, $httpParamSerializerJQLike, Notification) {
 
         $scope.account = {};
         
         $scope.changePassword = function () {
 
-            return $http({
+         $http({
                 method: "POST",
                 url: "backend/index.php/api/password/change/",
                 data: $httpParamSerializerJQLike($scope.account),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).then(function(response){
+                if(response.data.success) {
+                    $scope.changed = true; 
+                    Notification.success({title: 'Password Changed Successfully', message: 'Use your new password next time you log in'});
+                } else {
+                    $scope.changed = false;
+                    Notification.error({title: 'Password Change Failed', message: response.data.message});
+                }
+
             });
         }
     }]);
@@ -590,7 +606,7 @@ app.controller('logInController', ["$scope", "$http", "session", "$location", "$
                             response.data.center_name, 
                             response.data.contact_person);
                             $location.path('/home');
-              
+                            Notification({title: 'Loged in', message: 'Welcome '+response.data.contact_person});
                         
 
                     } else {

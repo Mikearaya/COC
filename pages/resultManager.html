@@ -1,26 +1,24 @@
-<section 
-        ng-controller="resultController">
-    <div class="container">
-        <div class="container">
-            <div class="row">
-                <div class="col">            
-                    <table class="table table-striped bg-white  table-sm">
-                        <thead class="thead-dark">
-                            <tr>
+<section ng-controller="resultController">
+    <div class="container ">
+        <div class="row p-3 mt-15 ">
+            <div class="col">
+                <table class="table table-striped  bg-white table-sm">
+                    <thead class="thead-dark">
+                        <tr>
                             <th scope="col">#</th>
                             <th scope="col">Group ID</th>
                             <th scope="col">Schedule ID</th>
                             <th scope="col">Location</th>
                             <th scope="col">Exam Date</th>
                             <th scope="col">Time</th>
-                            <th scope="col">Occupation</th>  
-                            <th scope="col"># of candidates</th>  
-                            <th scope="col-1">View</th>                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="result in AVAILABLE_RESULTS">
-                            <th scope="row">{{$index}}</th>                        
+                            <th scope="col">Occupation</th>
+                            <th scope="col"># of candidates</th>
+                            <th scope="col-1">View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="result in AVAILABLE_RESULTS">
+                            <th scope="row">{{$index}}</th>
                             <td ng-bind="result.gr_id"></td>
                             <td ng-bind="result.sch_id"></td>
                             <td ng-bind="result.center_name"></td>
@@ -28,12 +26,13 @@
                             <td ng-bind="result.time"></td>
                             <td ng-bind="result.occ_code"></td>
                             <td ng-bind="result.total"></td>
-                            <th scope="col-1"><a class="btn btn-sm btn-info" href="#/result/{{result.gr_id}}">View</a> </th> 
-                            </tr>
-                        </tbody>
-                    </table>
-                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
-                </div>
+                            <th scope="col-1">
+                                <a class="btn btn-sm btn-info" href="#/result/{{result.gr_id}}">View</a>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul uib-pagination total-items="totalItems" max-size="15" ng-model="currentPage" ng-change="pageChanged()"></ul>
             </div>
         </div>
     </div>

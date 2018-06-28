@@ -1,71 +1,79 @@
 <section ng-controller="scheduleDetailController">
-        <div class="container shadow p-3 mt-5 bg-white">
-            <div class="row">
-                <div class="col d-print-none">
-                    <button type="buton" class="btn bt-md btn-primary d-print-none" ng-click="print()">Print</button>
-                </div>
-            </div>
-            <div class="form-row form-inline">
-                    <div class="form-group col">
-                    <div class="ml-1 col-lg-2 col-form-label text-uppercase">Occupation</div>
-                    <div class="ml-1 form-control text-uppercase">
-                           {{OCCUPATION}}
-                    </div>
-                    </div>
-                    <div class="form-group">
-                    <div class="ml-1 col-form-label text-uppercase">
-                        Group ID
-                    </div>
-                    <div class="ml-1 form-control text-uppercase">
-                            {{GROUP}}
-                    </div>
-                    </div>
-                    <div class="form-group col">
-                    <div class="ml-1 col-form-label text-uppercase">
-                                Center 
-                    </div>
-                    <div class="ml-1 form-control text-uppercase">
-                                 {{CENTER}}
-                    </div>
-                    </div>
-                    <div class="form-group col">
-                    <div class="ml-1 col-form-label text-uppercase">
-                            Date 
-                </div>
-                <div class="col ml-1 form-control text-uppercase">
-                             {{ASSESSMENT_DATE}}
-                </div>
-                </div>
-                </div>
-            <div class="row">
-                <div class="col">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>                            
-                                <th>#</th>
-                                <th>Group Id </th>
-                                <th>Candidate</th>
-                                <th>Occupation</th>
-                                <th>Assessment Center</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="schedule in ASSESSMENT_SCHEDULES">
-                                <td>{{$index}}</td>
-                                <td ng-bind="schedule.gr_id"></td>
-                                <td ng-bind="schedule.full_name"></td>
-                                <td ng-bind="schedule.occ_name"></td>
-                                <td ng-bind="schedule.center_name"></td>
-                                <td ng-bind="schedule.scheduled_date"></td>
-                                <td ng-bind="schedule.time"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                </div>
+    <div class="container shadow p-3 mt-5 bg-white">
+        <div class="row">
+            <div class="col d-print-none">
+                <button type="buton" class="btn bt-md btn-primary d-print-none" ng-click="print()">Print</button>
             </div>
         </div>
-    
-    </section>
+        <div class="row">
+            <div class="col">
+                <table style="width: 100%" class="table" border="1">
+                    <tbody>
+                        <tr>
+                            <th>
+                                Occupation Code
+                            </th>
+                            <td>
+                                <span ng-bind="OCC_CODE" class="text-uppercase"></span>
+                            </td>
+                            <th>Occupation</th>
+                            <td colspan="3">
+                                <span ng-bind="OCCUPATION" class="text-uppercase"></span>
+                            </td>
+                            <th>Date</th>
+                            <td>
+                                <span ng-bind="ASSESSMENT_DATE" class="text-uppercase"></span>
+                            </td>
+                            <th>
+                                <span>Time</span>
+                            </th>
+                            <td>
+                                <span ng-bind="TIME" class="text-uppercase"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Group ID</th>
+                            <td>
+                                <span ng-bind="GROUP" class="text-uppercase"></span>
+                            </td>
+                            <th>Center Name</th>
+                            <td colspan="7">
+                                <span ng-bind="CENTER" class="text-uppercase"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Group Id </th>
+                            <th>Candidate</th>
+                            <th>Occupation</th>
+                            <th>Assessment Center</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="schedule in ASSESSMENT_SCHEDULES">
+                            <td>{{$index}}</td>
+                            <td ng-bind="schedule.gr_id"></td>
+                            <td ng-bind="schedule.full_name"></td>
+                            <td ng-bind="schedule.occ_name"></td>
+                            <td ng-bind="schedule.center_name"></td>
+                            <td ng-bind="schedule.scheduled_date"></td>
+                            <td ng-bind="schedule.time"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -6,7 +6,7 @@ class Password_model extends MY_Model {
     }
     //get current password
  function get_password($centerId){
-    $query =$this->db->where(['center_id'=>$centerId])
+    $query =$this->db->where(['center_code'=>$centerId])
                         ->get('center');
     if($query->num_rows() > 0){
         return $query->row();
@@ -18,7 +18,7 @@ class Password_model extends MY_Model {
         $data = array(
             'password'=> $new_password
         );
-        return $this->db->where('center_id',$centerId)->update('center',$data);
+		return  $this->db->where('center_code',$centerId)->update('center',$data);
     }
 
 }

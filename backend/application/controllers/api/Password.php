@@ -23,10 +23,10 @@ function change_post(){
      $re_password= $this->input->post('repassword');
      
     
-     $password= $this->password_model->get_password($this->session->userdata('center_id'));
+     $password= $this->password_model->get_password($this->session->userdata('center_code'));
      if($password->password == $cur_password){
         if($new_password == $re_password){
-            if($this->password_model->update_password($new_password, $this->session->userdata('center_id'))){
+            if($this->password_model->update_password($new_password, $this->session->userdata('center_code'))){
                 $result['success'] = true;
             }
             else{

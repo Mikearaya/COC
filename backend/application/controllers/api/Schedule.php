@@ -10,42 +10,13 @@
     $limit=$this->input->get('limit');
     $offset= $this->input->get('limit-offset');
     $result = $this->schedule_model->get_schedule($limit,$offset);
-
-    $this->load->library('pagination');
-
-   $config = array();
-   $config['base_url'] = '';
-   $config['total_rows'] = $result;
-   $config['per_page'] = $limit;
-   $config['uri_segment']=3;
-   $result['pagination'] = $this->pagination->create_links();
-  
     $this->response($result,API::HTTP_OK);
-
-       // $result = $this->schedule_model->get_schedule($id);
-       // $this->response($result,API::HTTP_OK);
  }
 
     //get schedule by group
     function group_schedule_get($id) {
-
-        $limit=$this->input->get('limit');
-        $offset= $this->input->get('limit-offset');
-        $result = $this->schedule_model->get_group_schedule($id, $limit,$offset);
-
-        $this->load->library('pagination');
-
-        $config = array();
-        $config['base_url'] = '';
-        $config['total_rows'] = $result;
-        $config['per_page'] = $limit;
-        $config['uri_segment']=3;
-        $result['pagination'] = $this->pagination->create_links();
-
-
-        
-        //$result = $this->schedule_model->get_group_schedule($id);
+        $result = $this->schedule_model->get_group_schedule($id);    
         $this->response($result, API::HTTP_OK);
-        }
+	 }
 }
 ?>
