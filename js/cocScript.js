@@ -452,13 +452,6 @@ app.controller("admissionController", ["$scope", "$http", "transporter", "$locat
         transporter.set($scope.selectedCandidates);
           $location.path("/admission/print");
       }
-
-        assessmentIds = [];
-        $scope.candidate.forEach(function(data){
-            assessmentIds.push(data.exam_id);
-        })
-        transporter.set($scope.candidates);
-    
       $scope.modelOptions = {
         debounce: {
           default: 500,
@@ -473,24 +466,34 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
 
     $scope.AVAILABLE_SCHEDULES = [];
 
+    $scope.loadSchedules = function (a_offset, a_limit) {
+        return $http.get('backend/index.php/api/schedule/',
+                            {params :{ 'limit-offset': a_offset, 'limit': a_limit }})
+                            .then(function(response){
+                                $scope.AVAILABLE_SCHEDULES = response.data;
+                            });
+    }
+
+    $scope.loadSchedules(0, 15);
+/*
     $http.get('backend/index.php/api/schedule')
                 .then(function (response) { if (response.data) {  $scope.AVAILABLE_SCHEDULES = response.data;  }
     });
-
+*/
     $scope.totalItems = 64;
-    $scope.currentPage = 4;
+    $scope.currentPage = 0;
   
     $scope.setPage = function (pageNo) {
       $scope.currentPage = pageNo;
     };
   
     $scope.pageChanged = function() {
+        $scope.loadSchedules($scope.currentPage, 15) ;
       $log.log('Page changed to: ' + $scope.currentPage);
     };
+
   
     $scope.maxSize = 5;
-    $scope.bigTotalItems = 175;
-    $scope.bigCurrentPage = 1;
 }]);
 
 
@@ -498,7 +501,7 @@ app.controller("scheduleController", ["$scope", "$http", "$httpParamSerializerJQ
 app.controller("resultController", ["$scope", "$http", function ($scope, $http) {
    $scope.AVAILABLE_RESULTS = [];
     $http.get('backend/index.php/api/result/')
-                    .then(function (response) {  $scope.AVAILABLE_RESULTS = response.data.result  });
+                    .then(function (response) {  $scope.AVAILABLE_RESULTS = response.data  });
 }]);
 
 
@@ -507,7 +510,7 @@ app.controller("passwordController", ["$scope", "$http", "$httpParamSerializerJQ
     function ($scope, $http, $httpParamSerializerJQLike) {
 
         $scope.account = {};
-
+        
         $scope.changePassword = function () {
 
             return $http({
@@ -557,36 +560,3 @@ app.controller('logInController', ["$scope", "$http", "session", "$location", "$
         };
 
     }]);
-
-
-    app.controller('admissionSlipController', ["$scope", "$http", "session", "transporter", 
-                                        function($scope, $http, session, transporter){
-       $scope.CANDIDATES = [];
-       if(transporter.get()) {
-        $scope.CANDIDATES = transporter.get();
-        }
-
-       $scope.registration.exam_id 
-                                            
-        
-    }]);
-
-    //service used to pass data between controllers
-app.factory("transporter" , function(){
-
-    var data = undefined;
-
-      function set(transport){
-          data = transport;
-      };
-
-      function get() {
-        return data;
-      };
-
-  return {
-      set : set,
-      get : get
-  };
-
-});

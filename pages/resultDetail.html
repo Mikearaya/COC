@@ -61,13 +61,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
-                <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
-                <uib-pagination direction-links="false" boundary-links="true" total-items="totalItems" ng-model="currentPage"></uib-pagination>
-                <uib-pagination direction-links="false" total-items="totalItems" ng-model="currentPage" num-pages="smallnumPages"></uib-pagination>
-                <pre>The selected page no: {{currentPage}}</pre>
-                <button type="button" class="btn btn-info" ng-click="setPage(3)">Set current page to: 3</button>
-            
                 <hr />
             </div>
         </div>
