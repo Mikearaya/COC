@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.1.213',
+	'hostname' => '192.168.1.2',
 	'username' => 'root',
 	'password' => 'root',
 	'database' => 'smart_coc',
