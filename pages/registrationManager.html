@@ -2,11 +2,12 @@
     <div class="shadow-sm p-3 mb-5 bg-white rounded container">
 
         <ng-form name="registrationForm" ng-submit="register()">
-            <button type="submit" class="btn btn-primary btn-md">Save</button>
-            <button type="button" class="btn btn-danger btn-md">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-md"><i class="fa fa-save"></i> Save</button>
+            <button type="button" class="btn btn-danger btn-md"><i class="fa fa-ban "></i> Cancel</button>
 
             <uib-tabset active="Basics">
-                <uib-tab index="0" heading="Basics">
+                <uib-tab index="0"  heading=" Basics " >
+                       
                     <ng-include src="'pages/registrationPages/basics.html'"></ng-include>
                 </uib-tab>
                             
@@ -33,7 +34,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Search Record</h5>
                     <button type="button" class="close" ng-click="cancelRegistration()" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -50,7 +51,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" ng-disabled="phoneSearch.$invalid" class="btn btn-primary">Search</button>
+                        <button type="submit" ng-disabled="phoneSearch.$invalid" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                     </div>
                 </form>
             </div>

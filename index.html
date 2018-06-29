@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
   <link href="css/main.css" rel="stylesheet" />
   <link href="css/bootstrap.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link href="css/angular-ui-notification.min.css" rel="stylesheet" />
   <link href="css/select.css" rel="stylesheet" />
@@ -39,28 +40,29 @@
   <nav class="d-print-none" ng-if="isLogged()">
     <ul class="nav nav-pills nav-fill bg-white" id="navigation">
       <li class="nav-item">
-        <a class="nav-link active" href="#/home">Home</a>
+        <a class="nav-link active" href="#/home"> <i class="fa fa-home fa-2x"></i> Home</a>
       </li>
       <li class="nav-item text-primary">
-        <a class="nav-link text-primary" href="#/register">Register Candidate</a>
+        <a class="nav-link text-primary" href="#/register"> <i class="fa fa-users fa-2x"></i> Register Candidate</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#payment">Confirm Payment</a>
+        <a class="nav-link" href="#payment">  <i class="fa fa-money fa-2x"></i> Confirm Payment</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#admission">Print Admission</a>
+        <a class="nav-link" href="#admission">    <i class="fa fa-id-card fa-2x"></i> Print Admission</a>
+    
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#schedule">Schedules</a>
+        <a class="nav-link" href="#schedule">  <i class="fa fa-calendar fa-2x"></i> Schedules</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#result">Results</a>
+        <a class="nav-link" href="#result">  <i class="fa fa-calculator fa-2x"></i> Results</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#password">Change Password</a>
+        <a class="nav-link" href="#password">  <i class="fa fa-key fa-2x"></i> Change Password</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ng-click="logOut() " href="#" >Log Out</a>
+        <a class="nav-link" ng-click="logOut() " href="#" >  <i class="fa fa-sign-out fa-2x"></i> Log Out</a>
       </li>
 
     </ul>
