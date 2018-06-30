@@ -404,11 +404,6 @@ app.controller("paymentController", ["$scope", "$http", "$httpParamSerializerJQL
         center_code: '',
         examIds: [],
     }
-    $scope.options = {
-        customClass: getDayClass,
-        minDate: new Date(),
-        showWeeks: true
-    };
     $scope.PENDING_PAYMENTS = '';
 
     $http.get('backend/index.php/api/payment')

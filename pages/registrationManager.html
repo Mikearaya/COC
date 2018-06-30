@@ -1,7 +1,7 @@
 <section ng-controller="registrationController" style="margin-top: 10px;">
     <div class="shadow-sm p-3 mb-5 bg-white rounded container">
 
-        <ng-form name="registrationForm" ng-submit="register()">
+        <form name="registrationForm" ng-submit="register()">
             <button type="submit" class="btn btn-primary btn-md"><i class="fa fa-save"></i> Save</button>
             <button type="button" class="btn btn-danger btn-md"><i class="fa fa-ban "></i> Cancel</button>
 
@@ -28,7 +28,7 @@
                 </uib-tab>
 
             </uib-tabset>
-        </ng-form>
+        </form>
     </div>
     <div class="modal" tabindex="-1" id="phoneModal" role="dialog">
         <div class="modal-dialog" role="document">
