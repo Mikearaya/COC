@@ -18,7 +18,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="result in AVAILABLE_RESULTS">
-                            <th scope="row">{{$index}}</th>
+                            <th scope="row">{{($index + 1)}}</th>
                             <td ng-bind="result.gr_id"></td>
                             <td ng-bind="result.sch_id"></td>
                             <td ng-bind="result.center_name"></td>

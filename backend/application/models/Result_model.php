@@ -8,7 +8,7 @@ class Result_model extends MY_Model {
   }
 //get compitant candidate 
 public function get_result($limit,$current_page) {
-    
+
 			 $this->db->select('assessment.exam_id,candidate_group.gr_id , candidate_group.sch_id , center.center_name , 
 			  schedule.scheduled_date, schedule.time, COUNT(candidate_group.exam_id) as total,
        assessment.occ_code');
@@ -16,8 +16,8 @@ public function get_result($limit,$current_page) {
        $this->db->join('candidate_group','candidate_group.exam_id = assessment.exam_id' );
        $this->db->join('schedule','schedule.group_no = candidate_group.gr_id');
 			 $this->db->join('center','assessment.center_code = center.center_code');
-			 $this->db->where('assessment.center_code', $this->session->userdata('center_code'));
-			 $this->db->where('LOWER(schedule.evaluated)', 'yes');
+			 //$this->db->where('assessment.center_code', $this->session->userdata('center_code'));
+			// $this->db->where('LOWER(schedule.evaluated)', 'yes');
 			 $this->db->group_by('candidate_group.gr_id');
 	
 			 $offset = $limit * ($current_page - 1);
@@ -45,8 +45,10 @@ public function get_group_result($id = NULL) {
     $this->db->join('occupation', 'assessment.occ_code = occupation.occ_code');
     $this->db->join('candidate_group', 'candidate_group.exam_id = assessment.exam_id');
     $this->db->join('schedule', 'candidate_group.sch_id = schedule.sch_id');
-		$this->db->join('center', 'schedule.center_code = center.center_code');
-		$this->db->where('candidate_group.gr_id', $id);
+	$this->db->join('center', 'schedule.center_code = center.center_code');
+	$this->db->where('candidate_group.gr_id', $id);
+//	$this->db->where('LOWER(schedule.evaluated)', 'yes');
+	//$this->db->where('candidate_group.gr_id', $this->session->userdata('center_code'));
 		$result = $this->db->get();
 			$result_array = $result->result_array();
 			for($i = 0; $i < $result->num_rows(); $i++) {

@@ -1,6 +1,6 @@
 <section ng-controller="scheduleController">
-    <div class="container ">
-        <div class="row mt-15 p-3  bg-white ">
+    <div class="container mt-5 p-3 ">
+        <div class="row   bg-white ">
             <div class="col">
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
@@ -18,7 +18,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="schedule in AVAILABLE_SCHEDULES">
-                            <th>{{$index + 1}}</th>
+                            <th>{{ $index + 1 }}</th>
                             <td ng-bind="schedule.sch_id"></td>
                             <td ng-bind="schedule.gr_id"></td>
                             <td ng-bind="schedule.center_name"></td>

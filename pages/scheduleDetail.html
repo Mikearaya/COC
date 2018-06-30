@@ -1,5 +1,5 @@
 <section ng-controller="scheduleDetailController">
-    <div class="container shadow p-3 mt-5 bg-white">
+    <div class="container p-3 mt-5 bg-white">
         <div class="row">
             <div class="col d-print-none">
                 <button type="buton" class="btn bt-md btn-primary d-print-none" ng-click="print()"><i class="fa fa-print  fa-lg"> </i> Print</button>
@@ -7,7 +7,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <table style="width: 100%" class="table" border="1">
+                <table style="width: 100%" border="1">
                     <tbody>
                         <tr>
                             <th>
@@ -61,7 +61,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="schedule in ASSESSMENT_SCHEDULES">
-                            <td>{{$index}}</td>
+                            <td>{{$index + 1}}</td>
                             <td ng-bind="schedule.gr_id"></td>
                             <td ng-bind="schedule.full_name"></td>
                             <td ng-bind="schedule.occ_name"></td>

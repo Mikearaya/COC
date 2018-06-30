@@ -29,7 +29,6 @@ class Result extends API {
   $this->load->library('pagination');
     $this->response($result, API::HTTP_OK);
     
-    ;
   
   }}
 ?>

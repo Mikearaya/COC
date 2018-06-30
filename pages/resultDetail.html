@@ -1,13 +1,13 @@
 <section ng-controller="resultDetailController">
     <div class="container ">
-        <div class="row">
-            <div class="col d-print-none">
+        <div class="row bg-white mt-4">
+            <div class="col p-3 d-print-none">
                 <button type="buton" class="btn bt-md btn-primary d-print-none" ng-click="print()"><i class="fa fa-print  fa-lg"> </i> Print</button>
             </div>
         </div>
         <div class="row p-3 mt-10 bg-white">
             <div class="col">
-                <table style="width: 100%" class="table" border="1">
+                <table style="width: 100%" border="1">
                     <tbody>
                         <tr>
                             <th>
@@ -60,7 +60,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="result in ASSESSMENT_RESULTS">
-                            <td>{{index}}</td>
+                            <td>{{ ($index + 1)}}</td>
                             <td ng-bind="result.full_name"></td>
                             <td ng-bind="result.can_regno"></td>
                             <td ng-bind="result.practical_result"></td>
@@ -73,5 +73,4 @@
             </div>
         </div>
     </div>
-
 </section>

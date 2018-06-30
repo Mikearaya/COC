@@ -87,7 +87,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="payment in PENDING_PAYMENTS">
-                        <th scope="row">{{$index}}</th>              
+                        <th scope="row">{{$index + 1}}</th>              
                         <td ng-bind="payment.exam_id"></td>      
                         <td ng-bind="payment.reg_no"></td>                  
                         <td ng-bind="payment.full_name"></td>
