@@ -5,10 +5,10 @@ class Focal_model extends MY_Model {
         $this->load->database();
     }
     //login function for focal
-    function select_focal($contact_person,$password){
+    function select_focal($center_code,$password){
         $where=array(
-            'contact_person'=>$contact_person,
-            'password'=>$password
+            'center_code'=>$center_code,
+            'password'=>sha1($password)
         );
         $this->db->select('*')->from('center')->where($where);
         $query=$this->db->get();

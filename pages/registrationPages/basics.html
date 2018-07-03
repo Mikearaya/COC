@@ -1,6 +1,6 @@
-<div class="p-3 mb-5 bg-white rounded container">
+<div class="p-3 mb-5 bg-white container">
     <div class="row">
-        <div class="form-group col">
+        <div class="form-group col"   ng-class="{ 'valid-input' : registrationForm.fullName.$valid, 'input-error' : registrationForm.fullName.$error }">
             <label for="fullName"></label>
             <input type="text" 
                     name="fullName" 
@@ -9,13 +9,13 @@
                     required 
                     placeholder="Full Name" 
                     ng-model="candidate.basic_info.full_name">
-            <div ng-messages="registrationForm.fullName.$error" ng-if="registrationForm.fullName.$error && registrationForm.fullName.$touched" role="alert">
+            <div ng-messages="registrationForm.fullName.$error" role="alert">
                 <div ng-message="required">Candidate full Name is Required!!!</div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="form-group col">
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.gender.$valid, 'input-error' : registrationForm.gender.$error }">
             <label for="gender">Gender</label>
             <select name="gender" 
                     ng-model="candidate.basic_info.sex" 
@@ -25,16 +25,14 @@
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
-            <div ng-messages="registrationForm.gender.$error" 
-                ng-if="registrationForm.gender.$touched && registrationForm.gender.$error" 
-                role="alert">
+            <div ng-messages="registrationForm.gender.$error"  >
                 <div ng-message="required">Sex is required!!!</div>
             </div>
 
         </div>
     </div>
     <div class="row">
-        <div class="form-group col">
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.birthdate.$valid, 'input-error' : registrationForm.birthdate.$error }" >
             <label for="age">Age</label>
             <input  type="text" 
                     required 
@@ -45,21 +43,20 @@
                     class="form-control"
                     placeholder="Age"
                 >
-            <div ng-messages="registrationForm.birthdate.$error" ng-if="registrationForm.birthdate.$error && registrationForm.birthdate.$touched">
+            <div ng-messages="registrationForm.birthdate.$error" >
                 <div ng-message="pattern" >Birthdate should be only digit</div>
                 <div ng-message="required" > Brithdate is required</div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="form-group col">
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.maritalStatus.$valid, 'input-error' : registrationForm.maritalStatus.$error }">
             <label for="maritalStatus">Marital Status</label>
             <select name="maritalStatus" ng-model="candidate.basic_info.marital_status" required id="maritalStatus" aria-placeholder="Marital Status"
                 class="form-control">
                 <option ng-repeat="status in MARITAL_STATUS" value="{{status}}">{{status}}</option>
             </select>
-            <div ng-messages="registrationForm.maritalStatus.$error"
-                ng-if="registrationForm.maritalStatus.$error && registrationForm.maritalStatus.$touched">
+            <div ng-messages="registrationForm.maritalStatus.$error">
             <div ng-message="required">Marital Status is Required</div>
             </div>
         </div>
@@ -78,7 +75,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col" uib-collapse="!candidate.basic_info.disablity">
+        <div class="form-group col" uib-collapse="!candidate.basic_info.disablity" >
             <label for="disablityNature">Disablity Nature</label>
             <textarea ng-disabled="!candidate.basic_info.disablity" 
                         class="form-control" 

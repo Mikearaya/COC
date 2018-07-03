@@ -1,69 +1,41 @@
-<section ng-controller="paymentController"  style="margin-top: 10px;">
+<section ng-controller="paymentController" style="margin-top: 10px;">
     <div class="container">
         <div class="shadow p-3 mb-3 bg-white rounded row">
             <div class="col">
-                <form class="needs-validation"  ng-submit="submitPayment()" class="jumbotron form-inline" name="paymentForm" novalidate>
+                <form class="needs-validation" ng-submit="submitPayment()" class="jumbotron form-inline" name="paymentForm" novalidate>
                     <div class="row">
                         <div class="form-group col">
                             <label>Total Amount</label>
-                            <input type="text"
-                                    disabled
-                                    class="form-control"
-                                    ng-model="payment.totalAmount"
-                                    id="total"
-                                    name="total"
-                            >
+                            <input type="text" disabled class="form-control" ng-model="payment.totalAmount" id="total" name="total">
                         </div>
-                        <div class="form-group col">
+                        <div class="form-group col" ng-class="{ 'valid-input' : paymentForm.paymentDate.$valid, 'input-error' : paymentForm.paymentDate.$error }">
                             <label for="invoice">Invoice Number</label>
-                            <input 
-                                    type="text"
-                                    name="invoice"
-                                    placeholder="Invoice Number"
-                                    id="invoice"
-                                    class="form-control"
-                                    required="required"
-                                    ng-model="payment.invoice_no"
-                                />
-                                <div ng-if="paymentForm.invoice.$error.required && paymentForm.invoice.$touched" class="text-danger">
-                                  Invoice Number is required
-                                </div>
-                        </div>              
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="date">Payment Date</label>
-                                <input
-                                        type="date"
-                                        name="paymentDate"
-                                        ng-model="payment.date"
-                                        placeholder="Payment Date"
-                                        class="form-control"
-                                        id="paymentdate"
-                                        required="required"
-                                        />
-                                <div ng-if="paymentForm.paymentdate.$error.required && paymentForm.paymentdate.$touched" class="text-danger">
-                                        Payment date is required
-                                </div>
+                            <input type="text" name="invoice" placeholder="Invoice Number" id="invoice" class="form-control" required="required" ng-model="payment.invoice_no"
+                            />
+                            <div ng-messages="paymentForm.invoice.$error">
+                                <div ng-message="required"> Invoice Number is required </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'valid-input' : paymentForm.paymentDate.$valid, 'input-error' : paymentForm.paymentDate.$error }">
+                            <label for="date">Payment Date</label>
+                            <input type="date" name="paymentDate" ng-model="payment.date" placeholder="Payment Date" class="form-control" id="paymentdate"
+                                required="required" />
+                            <div ng-messages="paymentForm.paymentDate.$error">
+                                <div ng-message="required"> Payment date is required </div>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="row p-3">
 
-                                <button type="submit" 
-                                        class="btn col btn-primary btn-md"
-                                        ng-disabled="paymentForm.$invalid"
-                                        >
-                                        <i class="fa fa-save fa-lg"></i>
-                                        Save
+                                <button type="submit" class="btn col btn-primary btn-md" ng-disabled="paymentForm.$invalid">
+                                    <i class="fa fa-save fa-lg"></i>
+                                    Save
                                 </button>
                             </div>
                             <div class="row mt-2 p-3">
-                                <button type="button" 
-                                        class="btn col btn-danger btn-md"
-                                        ng-disabled="paymentForm.$submitted"
-                                        >
-                                        <i class="fa fa-ban fa-lg"></i>
-                                        Cancel
+                                <button type="button" class="btn col btn-danger btn-md" ng-disabled="paymentForm.$submitted">
+                                    <i class="fa fa-ban fa-lg"></i>
+                                    Cancel
                                 </button>
                             </div>
                         </div>
@@ -75,30 +47,29 @@
             <div class="col">
                 <table class="table table-striped bg-white  table-sm">
                     <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">EXAM ID</th>
-                        <th scope="col">REGISTRATION #</th>
-                        <th scope="col">Candidate</th>
-                        <th scope="col">Occupation</th>
-                        <th scope="col">Level</th>
-                        <th scope="col">Price</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">EXAM ID</th>
+                            <th scope="col">REGISTRATION #</th>
+                            <th scope="col">Candidate</th>
+                            <th scope="col">Occupation</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">Price</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="payment in PENDING_PAYMENTS">
-                        <th scope="row">{{$index + 1}}</th>              
-                        <td ng-bind="payment.exam_id"></td>      
-                        <td ng-bind="payment.reg_no"></td>                  
-                        <td ng-bind="payment.full_name"></td>
-                        <td ng-bind="payment.occ_name"></td>                        
-                        <td ng-bind="payment.level"></td>
-                        <td ng-bind="payment.amount_paid"></td>
-                    </tr>
+                        <tr ng-repeat="payment in PENDING_PAYMENTS">
+                            <th scope="row">{{$index + 1}}</th>
+                            <td ng-bind="payment.exam_id"></td>
+                            <td ng-bind="payment.reg_no"></td>
+                            <td ng-bind="payment.full_name"></td>
+                            <td ng-bind="payment.occ_name"></td>
+                            <td ng-bind="payment.level"></td>
+                            <td ng-bind="payment.amount_paid"></td>
+                        </tr>
                     </tbody>
-                </table> 
-            </div>   
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </section>

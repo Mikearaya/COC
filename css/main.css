@@ -7,10 +7,32 @@ body{
     position: relative;
 }
 
+.form-control {
+  width: 98% !important;
+}
+select.form-control:not([multiple]) {
+  height: calc(3.25rem + 2px) !important;
+}
+ div.input-error input, .input-error > .form-control {
+  border-color: red;
+}
+div.input-error label {
+  color: red;
+}
+.btn {
+  margin: 10px !important;
+}
+div.valid-input label {
+  color: inherit;
+}
+div.valid-input input, .valid-input > .form-control {
+  border-color: inherit;
+}
+
 .loader-container .loader {
     position: absolute;
     right: 50%;
-    bottom: 3px
+    bottom: 3px;
 }
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 .printvalue{

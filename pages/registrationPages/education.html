@@ -1,196 +1,121 @@
-<div class="p-3 mb-5 bg-white rounded container">
-<div class="row">
-    <div class="form-group col">
-        <label for="inistituteName">Inistitute Name</label>
-        <input
-              type="text"
-              ng-model="candidate.basic_info.institute_name"
-              required
-              name="inistituteName"
-              id="inistituteName"
-              class="form-control"
-              placeholder="Inistitute Name"
-        >
-        <div ng-messages="registrationForm.inistituteName.$error"
-            ng-if="registrationForm.inistituteName.$error && registrationForm.inistituteName.$touched">
-          <div ng-message="required"> Inistitute Name is Required</div>
-          </div>
-      </div>
-</div>
-<div class="row">
-        <div class="form-group col">
-          <label for="eduacationBackground">Education Background</label>
-          <input 
-                type="text"
-                name="eduacationBackground"
-                id="eduacationBackground"
-                class="form-control"
-                required
-                ng-model="candidate.basic_info.education_background"
-                placeholder="Education Background"
-          > 
-          <div ng-messages="registrationForm.eduacationBackground.$error" ng-if="registrationForm.eduacationBackground.$touched">
-            <div ng-message="required"> Education Background is Required</div>
-          </div>
-        </div>
-        <div class="form-group col">
-            <label for="trainingType">Type of Training</label>
-            <select 
-                  name="trainingType"
-                  ng-model="candidate.basic_info.type_of_training"
-                  required
-                  id="trainingType"
-                  aria-placeholder="Training Type"                                
-                  class="form-control"
-            >
-            <option 
-                    ng-repeat="type in TRAINING_TYPES" 
-                    value="{{type}}"
-            >{{type}}</option>
-            </select>
-            <div ng-messages="registrationForm.trainingType.$error" 
-            ng-if="registrationForm.trainingType.$error 
-                  && registrationForm.trainingType.$touched">
-            <div ng-message="required">Training Type is Required</div>
-        </div>     
-          </div>
-
-      </div>
-      <div class="row">
-    <div class="form-group col">
-        <label for="trainingMode">Mode of Training</label>
-        <select 
-              name="trainingMode"
-              ng-model="candidate.basic_info.mode_of_training"
-              required
-              id="trainingMode"
-              aria-placeholder="Mode of Training"                                
-              class="form-control"
-        >
-        <option ng-repeat="mode in TRAINING_MODES" 
-                value="{{mode}}">
-            {{mode}}
-        </option>
-        </select>
-          <div ng-messages="registrationForm.trainingMode.$error"
-                ng-if="registrationForm.trainingMode.$error &&
-                        registrationForm.trainingMode.$touched">
-        <div ng-message="required">Training mode is Required</div>
-          </div>   
-      </div>
-        <div class="form-group col">
-          <label for="inistituteType">Inistitute Type</label>
-          <select 
-                name="inistituteType"
-                ng-model="candidate.basic_info.institute_type"
-                required
-                id="inistituteType"
-                aria-placeholder="Inistitute Type"                                
-                class="form-control"
-          >
-          <option 
-                  ng-repeat="inist in INISTITUTE_TYPES" 
-                  value="{{inist}}"
-          >{{inist}}</option>
-          </select>
-            <div ng-messages="registrationForm.inistituteType.$error"
-                  ng-if="registrationForm.inistituteType.$error &&
-                          registrationForm.inistituteType.$touched">
-                <div ng-message="required">Inistitute Type is Required</div>
-           </div>   
-        </div>
-        </div>
-      <div class="row">
-        
-        <div class="form-group col">
-          <label for="trainingStart">Training Start (Year)</label>
-          <input
-                type="text"
-                ng-model="candidate.basic_info.training_start"
-                required
-                pattern="[0-9]{4}"
-                name="trainingStart"
-                id="trainingStart"
-                placeholder="Training Start"
-                class="form-control"                          
-          >
-        </div>
-          <div class="form-group col">
-            <label for="trainingEnd">Training End (Year)</label>
-            <input
-                  type="text"
-                  ng-model="candidate.basic_info.training_end"
-                  required
-                  pattern="[0-9]{4}"
-                  name="trainingEnd"
-                  id="trainingEnd"
-                  placeholder="trainingEnd"
-                  class="form-control"
-            >
-          </div>
-        </div>
+<div class="p-3 mb-5 bg-white container">
     <div class="row">
-      <div class="form-group col">
-          <label for="trainingCenter">Cooperative Training Center</label>
-          <input
-                type="text"
-                required
-                ng-model="candidate.basic_info.cooprative_training_center"
-                name="trainingCenter"
-                id="trainingCenter"
-                placeholder="Cooperative Training Center"
-                class="form-control"
-          >
-        </div>
-        <div class="form-group col">
-            <label for="trainingCenterStatus">Cooperative Training Center Status</label>
-            <input
-                  type="text"
-                  required
-                  ng-model="candidate.basic_info.status_of_cooprative_center"
-                  name="trainingCenterStatus"
-                  id="trainingCenterStatus"
-                  placeholder="Cooperative Training Center Status"
-                  class="form-control"
-          >
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col">
-            <label for="currentLevel">Current Level</label>
-            <select 
-                  name="currentLevel"
-                  ng-model="candidate.basic_info.current_level"
-                  required
-                  id="currentLevel"
-                  aria-placeholder="Current Level"                                
-                  class="form-control"
-            >
-            <option 
-                    ng-repeat="clevel in LEVELS" 
-                    value="{{clevel}}"
-            >{{clevel}}</option>
-            </select>
-                  
-          </div>
-            <div class="form-group col">
-              <label for="graduatedLevel">Graduated Level</label>
-              <select 
-                    name="graduatedLevel"
-                    ng-model="candidate.basic_info.graduated_level"
-                    required
-                    id="graduatedLevel"
-                    aria-placeholder="Inistitute Type"                                
-                    class="form-control"
-              >
-              <option 
-                      ng-repeat="glevel in LEVELS" 
-                      value="{{glevel}}"
-              >{{glevel}}</option>
-              </select>
-                    
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.inistituteName.$valid, 'input-error' : registrationForm.inistituteName.$error }">
+            <label for="inistituteName">Inistitute Name</label>
+            <input type="text" ng-model="candidate.basic_info.institute_name" required name="inistituteName" id="inistituteName" class="form-control"
+                placeholder="Inistitute Name">
+            <div ng-messages="registrationForm.inistituteName.$error" ng-if="registrationForm.inistituteName.$error">
+                <div ng-message="required"> Inistitute Name is Required</div>
             </div>
-          </div>
-      
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.eduacationBackground.$valid, 'input-error' : registrationForm.eduacationBackground.$error }">
+            <label for="eduacationBackground">Education Background</label>
+            <input type="text" name="eduacationBackground" id="eduacationBackground" class="form-control" required ng-model="candidate.basic_info.education_background"
+                placeholder="Education Background">
+            <div ng-messages="registrationForm.eduacationBackground.$error">
+                <div ng-message="required"> Education Background is Required</div>
+            </div>
+        </div>
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingType.$valid, 'input-error' : registrationForm.trainingType.$error }">
+            <label for="trainingType">Type of Training</label>
+            <select name="trainingType" ng-model="candidate.basic_info.type_of_training" required id="trainingType" aria-placeholder="Training Type"
+                class="form-control">
+                <option ng-repeat="type in TRAINING_TYPES" value="{{type}}">{{type}}</option>
+            </select>
+            <div ng-messages="registrationForm.trainingType.$error">
+                <div ng-message="required">Training Type is Required</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingMode.$valid, 'input-error' : registrationForm.trainingMode.$error }">
+            <label for="trainingMode">Mode of Training</label>
+            <select name="trainingMode" ng-model="candidate.basic_info.mode_of_training" required id="trainingMode" aria-placeholder="Mode of Training"
+                class="form-control">
+                <option ng-repeat="mode in TRAINING_MODES" value="{{mode}}">
+                    {{mode}}
+                </option>
+            </select>
+            <div ng-messages="registrationForm.trainingMode.$error">
+                <div ng-message="required">Training mode is Required</div>
+            </div>
+        </div>
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.inistituteType.$valid, 'input-error' : registrationForm.inistituteType.$error }">
+            <label for="inistituteType">Inistitute Type</label>
+            <select name="inistituteType" ng-model="candidate.basic_info.institute_type" required id="inistituteType" aria-placeholder="Inistitute Type"
+                class="form-control">
+                <option ng-repeat="inist in INISTITUTE_TYPES" value="{{inist}}">{{inist}}</option>
+            </select>
+            <div ng-messages="registrationForm.inistituteType.$error">
+                <div ng-message="required">Inistitute Type is Required</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingStart.$valid, 'input-error' : registrationForm.trainingStart.$error }">
+            <label for="trainingStart">Training Start (Year)</label>
+            <input type="text" ng-model="candidate.basic_info.training_start" required pattern="[0-9]{4}" name="trainingStart" id="trainingStart"
+                placeholder="Training Start" class="form-control">
+                <div ng-messages="registrationForm.trainingStart.$error">
+                        <div ng-message="required">Training Start is Required</div>
+                        <div ng-message="pattern">Valid Year Should Contain four digits</div>
+                </div>
+        </div>
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingEnd.$valid, 'input-error' : registrationForm.trainingEnd.$error }">
+            <label for="trainingEnd">Training End (Year)</label>
+            <input type="text" ng-model="candidate.basic_info.training_end" required pattern="[0-9]{4}" name="trainingEnd" id="trainingEnd"
+                placeholder="trainingEnd" class="form-control">
+                <div ng-messages="registrationForm.trainingEnd.$error">
+                        <div ng-message="required">Training End is Required</div>
+                        <div ng-message="pattern">Valid Year Should Contain four digits</div>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingCenter.$valid, 'input-error' : registrationForm.trainingCenter.$error }">
+            <label for="trainingCenter">Cooperative Training Center</label>
+            <input type="text" required ng-model="candidate.basic_info.cooprative_training_center" name="trainingCenter" id="trainingCenter"
+                placeholder="Cooperative Training Center" class="form-control">
+                <div ng-messages="registrationForm.trainingCenter.$error">
+                        <div ng-message="required">Cooperative Training Center Name is required is Required</div>                        
+                </div>
+        </div>
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingCenterStatus.$valid, 'input-error' : registrationForm.trainingCenterStatus.$error }">
+            <label for="trainingCenterStatus">Cooperative Training Center Status</label>
+            <input type="text" required ng-model="candidate.basic_info.status_of_cooprative_center" name="trainingCenterStatus" id="trainingCenterStatus"
+                placeholder="Cooperative Training Center Status" class="form-control">
+                <div ng-messages="registrationForm.trainingCenterStatus.$error">
+                        <div ng-message="required">Training Center Status is Required</div>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.currentLevel.$valid, 'input-error' : registrationForm.currentLevel.$error }">
+            <label for="currentLevel">Current Level</label>
+            <select name="currentLevel" ng-model="candidate.basic_info.current_level" required id="currentLevel" aria-placeholder="Current Level"
+                class="form-control">
+                <option ng-repeat="clevel in LEVELS" value="{{clevel}}">{{clevel}}</option>
+            </select>
+            <div ng-messages="registrationForm.currentLevel.$error">
+                    <div ng-message="required">Current Level is Required</div>
+            </div>
+        </div>
+        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.graduatedLevel.$valid, 'input-error' : registrationForm.graduatedLevel.$error }">
+            <label for="graduatedLevel">Graduated Level</label>
+            <select name="graduatedLevel" ng-model="candidate.basic_info.graduated_level" required id="graduatedLevel" aria-placeholder="Inistitute Type"
+                class="form-control">
+                <option ng-repeat="glevel in LEVELS" value="{{glevel}}">{{glevel}}</option>
+            </select>
+            <div ng-messages="registrationForm.graduatedLevel.$error">
+                    <div ng-message="required">Graduated Level is Required</div>
+            </div>
+
+        </div>
+    </div>
+
 
 </div>

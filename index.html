@@ -34,7 +34,30 @@
 
   body { background-color: rgb(111, 223, 126); }
 </style>
+<style type="text/css" media="print">
+ 
 
+  /* @page {size:landscape}  */ 
+  @media print {
+  
+      @page 
+            {
+              size: A4 landscape;
+              max-height:100%; 
+              max-width:100%; margin:0; padding: 0;}
+  
+      /* use width if in portrait (use the smaller size to try 
+         and prevent image from overflowing page... */
+  /*
+  body{width:100%;
+      height:100%;
+      padding: 0;
+      margin: 0%;
+      -webkit-transform: rotate(-90deg) scale(.68,.68); 
+      -moz-transform:rotate(-90deg) scale(.58,.58) }    }
+  */
+  </style>
+  
 <body ng-controller="mainController as main" ng-cloak>
 
   <nav class="d-print-none" ng-if="isLogged()">
