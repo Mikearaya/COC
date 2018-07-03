@@ -1,90 +1,87 @@
 <div class="p-3 mb-5 bg-white container">
     <div class="row">
-        <div class="form-group col"   ng-class="{ 'valid-input' : registrationForm.fullName.$valid, 'input-error' : registrationForm.fullName.$error }">
-            <label for="fullName"></label>
-            <input type="text" 
-                    name="fullName" 
-                    id="fullName" 
-                    class="form-control" 
-                    required 
-                    placeholder="Full Name" 
-                    ng-model="candidate.basic_info.full_name">
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+            <label>Full Name</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.full_name"></span>
+        </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.fullName.$valid, 'input-error' : registrationForm.fullName.$error }">
+            <label for="fullName">Full Name</label>
+            <input type="text" name="fullName" id="fullName" pattern="([a-Z]?[ ][a-Z]? ) " class="form-control" required placeholder="Full Name"
+                ng-model="candidate.basic_info.full_name">
             <div ng-messages="registrationForm.fullName.$error" role="alert">
                 <div ng-message="required">Candidate full Name is Required!!!</div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.gender.$valid, 'input-error' : registrationForm.gender.$error }">
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+            <label>Gender</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.sex"></span>
+        </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.gender.$valid, 'input-error' : registrationForm.gender.$error }">
             <label for="gender">Gender</label>
-            <select name="gender" 
-                    ng-model="candidate.basic_info.sex" 
-                    required 
-                    id="gender" 
-                    aria-placeholder="Gender" class="form-control">
+            <select name="gender" ng-model="candidate.basic_info.sex" required id="gender" aria-placeholder="Gender" class="form-control">
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
-            <div ng-messages="registrationForm.gender.$error"  >
+            <div ng-messages="registrationForm.gender.$error">
                 <div ng-message="required">Sex is required!!!</div>
             </div>
-
         </div>
     </div>
     <div class="row">
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.birthdate.$valid, 'input-error' : registrationForm.birthdate.$error }" >
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+            <label>Birthdate</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.age"></span>
+        </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.birthdate.$valid, 'input-error' : registrationForm.birthdate.$error }">
             <label for="age">Age</label>
-            <input  type="text" 
-                    required 
-                    ng-model="candidate.basic_info.age" 
-                    name="birthdate" 
-                    pattern="[0-9]{2}" 
-                    id="birthdate" 
-                    class="form-control"
-                    placeholder="Age"
-                >
-            <div ng-messages="registrationForm.birthdate.$error" >
-                <div ng-message="pattern" >Birthdate should be only digit</div>
-                <div ng-message="required" > Brithdate is required</div>
+            <input type="text" required ng-model="candidate.basic_info.age" name="birthdate" pattern="[0-9]{2}" id="birthdate" class="form-control"
+                placeholder="Age">
+            <div ng-messages="registrationForm.birthdate.$error">
+                <div ng-message="pattern">Birthdate should be only digit</div>
+                <div ng-message="required"> Brithdate is required</div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.maritalStatus.$valid, 'input-error' : registrationForm.maritalStatus.$error }">
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+            <label>Marital Status</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.marital_status"></span>
+        </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.maritalStatus.$valid, 'input-error' : registrationForm.maritalStatus.$error }">
             <label for="maritalStatus">Marital Status</label>
             <select name="maritalStatus" ng-model="candidate.basic_info.marital_status" required id="maritalStatus" aria-placeholder="Marital Status"
                 class="form-control">
                 <option ng-repeat="status in MARITAL_STATUS" value="{{status}}">{{status}}</option>
             </select>
             <div ng-messages="registrationForm.maritalStatus.$error">
-            <div ng-message="required">Marital Status is Required</div>
+                <div ng-message="required">Marital Status is Required</div>
             </div>
         </div>
     </div>
-    
     <div class="row">
-        <div class="form-check form-check-inline">
-            <button type="button" class="btn btn-default" 
-                    ng-click="candidate.basic_info.disablity = !candidate.basic_info.disablity">
-                    <i class="fa fa-wheelchair  fa-lg"> </i>
-                    Has Disablity</button>
-                <hr>
-             
-           
-            
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+            <label>Has Disablity</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.disablity"></span>
+        </div>
+        <div class="form-check form-check-inline" ng-if="!EXISTING_CANDIDATE">
+            <button type="button" class="btn btn-default" ng-click="candidate.basic_info.disablity = !candidate.basic_info.disablity">
+                <i class="fa fa-wheelchair  fa-lg"> </i>
+                Has Disablity</button>
+            <hr>
         </div>
     </div>
     <div class="row">
-        <div class="form-group col" uib-collapse="!candidate.basic_info.disablity" >
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+            <label>Disablity Nature</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.disablity_nature"></span>
+        </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" uib-collapse="!candidate.basic_info.disablity">
             <label for="disablityNature">Disablity Nature</label>
-            <textarea ng-disabled="!candidate.basic_info.disablity" 
-                        class="form-control" 
-                        name="disablityNature" 
-                        id="disablityNature"
-                        rows="3" 
-                        ng-model="candidate.disablity_nature">                        
-
+            <textarea ng-disabled="!candidate.basic_info.disablity" class="form-control" name="disablityNature" id="disablityNature"
+                rows="3" ng-model="candidate.disablity_nature">                        
             </textarea>
-        </div>       
+        </div>
     </div>
 </div>

@@ -1,6 +1,10 @@
 <div class="p-3 mb-5 bg-white container">
     <div class="row">
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.inistituteName.$valid, 'input-error' : registrationForm.inistituteName.$error }">
+            <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                    <label>Inistitute Name</label>
+                <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.institute_name" ></span>
+            </div>
+        <div ng-if="!EXISTING_CANDIDATE" class="form-group col" ng-class="{ 'valid-input' : registrationForm.inistituteName.$valid, 'input-error' : registrationForm.inistituteName.$error }">
             <label for="inistituteName">Inistitute Name</label>
             <input type="text" ng-model="candidate.basic_info.institute_name" required name="inistituteName" id="inistituteName" class="form-control"
                 placeholder="Inistitute Name">
@@ -10,7 +14,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.eduacationBackground.$valid, 'input-error' : registrationForm.eduacationBackground.$error }">
+            <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                    <label>Gender</label>
+                <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.education_background" ></span>
+            </div>
+        <div ng-if="!EXISTING_CANDIDATE" class="form-group col" ng-class="{ 'valid-input' : registrationForm.eduacationBackground.$valid, 'input-error' : registrationForm.eduacationBackground.$error }">
             <label for="eduacationBackground">Education Background</label>
             <input type="text" name="eduacationBackground" id="eduacationBackground" class="form-control" required ng-model="candidate.basic_info.education_background"
                 placeholder="Education Background">
@@ -18,7 +26,11 @@
                 <div ng-message="required"> Education Background is Required</div>
             </div>
         </div>
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingType.$valid, 'input-error' : registrationForm.trainingType.$error }">
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                <label>Type of Training</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.type_of_training" ></span>
+        </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.trainingType.$valid, 'input-error' : registrationForm.trainingType.$error }">
             <label for="trainingType">Type of Training</label>
             <select name="trainingType" ng-model="candidate.basic_info.type_of_training" required id="trainingType" aria-placeholder="Training Type"
                 class="form-control">
@@ -31,7 +43,11 @@
 
     </div>
     <div class="row">
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingMode.$valid, 'input-error' : registrationForm.trainingMode.$error }">
+            <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                    <label>Mode of Training</label>
+                <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.mode_of_training" ></span>
+            </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.trainingMode.$valid, 'input-error' : registrationForm.trainingMode.$error }">
             <label for="trainingMode">Mode of Training</label>
             <select name="trainingMode" ng-model="candidate.basic_info.mode_of_training" required id="trainingMode" aria-placeholder="Mode of Training"
                 class="form-control">
@@ -43,7 +59,11 @@
                 <div ng-message="required">Training mode is Required</div>
             </div>
         </div>
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.inistituteType.$valid, 'input-error' : registrationForm.inistituteType.$error }">
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                <label>Institute Type</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.institute_type" ></span>
+        </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.inistituteType.$valid, 'input-error' : registrationForm.inistituteType.$error }">
             <label for="inistituteType">Inistitute Type</label>
             <select name="inistituteType" ng-model="candidate.basic_info.institute_type" required id="inistituteType" aria-placeholder="Inistitute Type"
                 class="form-control">
@@ -55,8 +75,11 @@
         </div>
     </div>
     <div class="row">
-
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingStart.$valid, 'input-error' : registrationForm.trainingStart.$error }">
+            <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                    <label>Training Start (Year)</label>
+                <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.training_start" ></span>
+            </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.trainingStart.$valid, 'input-error' : registrationForm.trainingStart.$error }">
             <label for="trainingStart">Training Start (Year)</label>
             <input type="text" ng-model="candidate.basic_info.training_start" required pattern="[0-9]{4}" name="trainingStart" id="trainingStart"
                 placeholder="Training Start" class="form-control">
@@ -65,7 +88,11 @@
                         <div ng-message="pattern">Valid Year Should Contain four digits</div>
                 </div>
         </div>
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingEnd.$valid, 'input-error' : registrationForm.trainingEnd.$error }">
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                <label>Training End (Year)</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.training_end" ></span>
+        </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.trainingEnd.$valid, 'input-error' : registrationForm.trainingEnd.$error }">
             <label for="trainingEnd">Training End (Year)</label>
             <input type="text" ng-model="candidate.basic_info.training_end" required pattern="[0-9]{4}" name="trainingEnd" id="trainingEnd"
                 placeholder="trainingEnd" class="form-control">
@@ -76,7 +103,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingCenter.$valid, 'input-error' : registrationForm.trainingCenter.$error }">
+            <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                    <label>Cooperative Training Center</label>
+                <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.cooprative_training_center" ></span>
+            </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.trainingCenter.$valid, 'input-error' : registrationForm.trainingCenter.$error }">
             <label for="trainingCenter">Cooperative Training Center</label>
             <input type="text" required ng-model="candidate.basic_info.cooprative_training_center" name="trainingCenter" id="trainingCenter"
                 placeholder="Cooperative Training Center" class="form-control">
@@ -84,7 +115,11 @@
                         <div ng-message="required">Cooperative Training Center Name is required is Required</div>                        
                 </div>
         </div>
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.trainingCenterStatus.$valid, 'input-error' : registrationForm.trainingCenterStatus.$error }">
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                <label>Cooperative Training Center Status</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.status_of_cooprative_center" ></span>
+        </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.trainingCenterStatus.$valid, 'input-error' : registrationForm.trainingCenterStatus.$error }">
             <label for="trainingCenterStatus">Cooperative Training Center Status</label>
             <input type="text" required ng-model="candidate.basic_info.status_of_cooprative_center" name="trainingCenterStatus" id="trainingCenterStatus"
                 placeholder="Cooperative Training Center Status" class="form-control">
@@ -94,7 +129,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.currentLevel.$valid, 'input-error' : registrationForm.currentLevel.$error }">
+            <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                    <label>Current level</label>
+                <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.current_level" ></span>
+            </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.currentLevel.$valid, 'input-error' : registrationForm.currentLevel.$error }">
             <label for="currentLevel">Current Level</label>
             <select name="currentLevel" ng-model="candidate.basic_info.current_level" required id="currentLevel" aria-placeholder="Current Level"
                 class="form-control">
@@ -104,7 +143,11 @@
                     <div ng-message="required">Current Level is Required</div>
             </div>
         </div>
-        <div class="form-group col" ng-class="{ 'valid-input' : registrationForm.graduatedLevel.$valid, 'input-error' : registrationForm.graduatedLevel.$error }">
+        <div class="col form-group" ng-if="EXISTING_CANDIDATE">
+                <label>Graduated Level</label>
+            <span class="form-group form-control" ng-disabled="true" ng-bind="candidate.basic_info.graduated_level" ></span>
+        </div>
+        <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.graduatedLevel.$valid, 'input-error' : registrationForm.graduatedLevel.$error }">
             <label for="graduatedLevel">Graduated Level</label>
             <select name="graduatedLevel" ng-model="candidate.basic_info.graduated_level" required id="graduatedLevel" aria-placeholder="Inistitute Type"
                 class="form-control">

@@ -15,17 +15,13 @@ app.factory("transporter", function () {
 
     var data = undefined;
 
-    function set(transport) {
-        data = transport;
-    }
+    function set(transport) {  data = transport;   }
 
-    function get() {
-        return data;
-    }
+    function get() { return data;  }
 
     return {
-        set: set,
-        get: get
+      set: set,
+    get: get
     };
 
 });
@@ -59,16 +55,9 @@ app.factory("session", ["$http", 'Notification', '$location', function ($http, N
         loged_in = true;
     }
 
-    function getUserName() {
-        return focal_person_name;
-    }
-
-    function getCenterName() {
-        return center_name;
-    }
-    function getCenterId() {
-        return center_code;
-    }
+    function getUserName() { return focal_person_name; }
+    function getCenterName() {  return center_name;  }
+    function getCenterId() {   return center_code;   }
 
     function destroySession() {
 
@@ -87,9 +76,7 @@ app.factory("session", ["$http", 'Notification', '$location', function ($http, N
 
     }
 
-    function isLoggedIn() {
-        return loged_in;
-    }
+    function isLoggedIn() { return loged_in;  }
 
     function refresh() {
 
@@ -126,16 +113,8 @@ app.factory("session", ["$http", 'Notification', '$location', function ($http, N
 
 app.controller("mainController", ["$scope", "session",
     function ($scope, session) {
-
-        $scope.isLogged = function () {
-            return session.isLoggedIn();
-        };
-
-
-        $scope.logOut = function () {
-            session.destroy();
-        };
-
+        $scope.isLogged = function () {   return session.isLoggedIn();   };
+        $scope.logOut = function () {  session.destroy();  };
 
     }]);
 
@@ -163,7 +142,6 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
 //result detail controller
 app.controller('resultDetailController', ["$scope", "$http", "$route", function ($scope, $http, $route) {
     var groupId = $route.current.params.groupId;
-    console.log(groupId);
     $scope.ASSESSMENT_RESULTS = [];
     $scope.CENTER = '';
     $scope.OCCUPATION = '';
@@ -186,9 +164,7 @@ app.controller('resultDetailController', ["$scope", "$http", "$route", function 
 
     });
 
-    $scope.print = function () {
-        window.print();
-    }
+    $scope.print = function () { window.print();  }
 
 }]);
 
@@ -217,9 +193,7 @@ app.controller('scheduleDetailController', ['$scope', '$http', '$route', functio
         $scope.OCC_CODE = response.data[0].occ_code;
 
     });
-    $scope.print = function () {
-        window.print();
-    };
+    $scope.print = function () {  window.print();  };
 
 
 }]);
@@ -239,7 +213,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
         };
         // $('#mobile').mask('000-0-00-00-00');
         //$('#homePhone').mask('000-0-00-00-00');
-
+        $scope.EXISTING_CANDIDATE = false;
         $scope.MARITAL_STATUS = [];
         $scope.TRAINING_MODES = [];
         $scope.TRAINING_TYPES = [];
@@ -256,7 +230,7 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
             backdrop: 'static'
         });
         $('#phoneModal').on('shown.bs.modal', function () {
-            $('#candidatePhone').trigger('focus');
+                 $('#candidatePhone').trigger('focus');
         });
 
         //initialize select controls with data from server
@@ -284,9 +258,11 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
                 method: "GET",
                 url: "backend/index.php/api/candidate/has_account/" + $scope.phoneNumber
             }).then(function (response) {
-                console.log(response.data);
                 if (response.data) {
+                    $scope.EXISTING_CANDIDATE = true;
                     $scope.candidate.basic_info = response.data;
+                } else {
+                    $scope.EXISTING_CANDIDATE = false;
                 }
                 $("#phoneModal").modal('hide');
             });
@@ -298,7 +274,6 @@ app.controller("registrationController", ["$scope", "$http", "$httpParamSerializ
         $scope.UCS = [];
         $scope.APPLICATION_FEE = 0;
         $scope.ucCheck = function (val) {
-            console.log(val);
             if (val && $scope.OCCUPATION_FEE.amount_for_uc) {
                 $scope.candidate.assessment.amount_paid = $scope.OCCUPATION_FEE.amount_for_uc;
             } else if (val == false && $scope.OCCUPATION_FEE.amount_for_knowledge) {
@@ -387,9 +362,7 @@ app.controller("homeController", ["$scope", "$http", "session", "$location", fun
         $location.path('/logIn');
     }
 
-    $scope.isLogged = function () {
-        return session.isLoggedIn();
-    };
+    $scope.isLogged = function () {  return session.isLoggedIn();   };
 
 }]);
 
