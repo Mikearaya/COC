@@ -33,7 +33,8 @@
                     </tbody>
                 </table>
 
-                <ul uib-pagination total-items="totalItems" max-size="15" ng-model="currentPage" ng-change="pageChanged()"></ul>
+                <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="10" 
+                boundary-links="true" ng-change="pageChanged()" class="pagination-sm" items-per-page="20"  boundary-link-numbers="true"  rotate="false"></ul>
             </div>
         </div>
     </div>

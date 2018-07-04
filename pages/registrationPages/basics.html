@@ -6,7 +6,7 @@
         </div>
         <div class="form-group col" ng-if="!EXISTING_CANDIDATE" ng-class="{ 'valid-input' : registrationForm.fullName.$valid, 'input-error' : registrationForm.fullName.$error }">
             <label for="fullName">Full Name</label>
-            <input type="text" name="fullName" id="fullName" pattern="([a-Z]?[ ][a-Z]? ) " class="form-control" required placeholder="Full Name"
+            <input type="text" name="fullName" id="fullName" class="form-control" required placeholder="Full Name"
                 ng-model="candidate.basic_info.full_name">
             <div ng-messages="registrationForm.fullName.$error" role="alert">
                 <div ng-message="required">Candidate full Name is Required!!!</div>

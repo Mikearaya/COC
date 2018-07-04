@@ -14,7 +14,7 @@
 			$this->db->join('candidate_group','candidate_group.exam_id = assessment.exam_id');
 			$this->db->join('schedule','schedule.group_no = candidate_group.gr_id');
             $this->db->join('center','assessment.center_code = center.center_code');
-            $this->db->where('assessment.center_code', $this->session->userdata('center_code'));
+          $this->db->where('assessment.center_code', $this->session->userdata('center_code'));
 			$this->db->group_by('schedule.sch_id');
 			
 

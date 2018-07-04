@@ -387,7 +387,6 @@ app.controller("paymentController", ["$scope", "$http", "$httpParamSerializerJQL
                 if (paymentInfo.amount_paid) {
                     $scope.payment.totalAmount = $scope.payment.totalAmount + parseInt(paymentInfo.amount_paid);
                 }
-                console.log(paymentInfo);
             })
         })
 
@@ -412,7 +411,6 @@ app.controller("admissionSlipController", ["$scope", "transporter", function ($s
     $scope.CANDIDATES = [];
     if (transporter.get()) {
         $scope.CANDIDATES = transporter.get();
-        console.log($scope.CANDIDATES);
     }
 
     $scope.printAdmissions = function () {
@@ -468,12 +466,7 @@ app.controller("scheduleController", ["$scope", "$http", function ($scope, $http
             });
     }
 
-    $scope.loadSchedules(1, 15);
-    /*
-        $http.get('backend/index.php/api/schedule')
-                    .then(function (response) { if (response.data) {  $scope.AVAILABLE_SCHEDULES = response.data;  }
-        });
-    */
+    $scope.loadSchedules(1, 20);
 
     $scope.currentPage = 0;
 
@@ -493,7 +486,7 @@ app.controller("scheduleController", ["$scope", "$http", function ($scope, $http
 //result viewing page controller
 app.controller("resultController", ["$scope", "$http", function ($scope, $http) {
     $scope.AVAILABLE_RESULTS = [];
-    $scope.totalItems = 0;
+    $scope.totalItems;
     $scope.loadResults = function (a_offset, a_limit) {
         return $http.get('backend/index.php/api/result/',
             { params: { 'limit-offset': a_offset, 'limit': a_limit } })
@@ -503,22 +496,18 @@ app.controller("resultController", ["$scope", "$http", function ($scope, $http) 
             });
     }
 
-    $scope.loadResults(1, 15);
+    $scope.loadResults(1, 20);
 
 
-    $scope.currentPage = 1;
+    $scope.currentPage = 0;
 
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
     };
 
-    $scope.pageChanged = function () {
-        $scope.loadResults($scope.currentPage, 15);
-        console.log('Page changed to: ' + $scope.currentPage);
-    };
+    $scope.pageChanged = function () {  $scope.loadResults($scope.currentPage, 20);   };
 
 
-    $scope.maxSize = 5;
 }]);
 
 
